@@ -53,13 +53,37 @@
       <DependentUpon>categories.cs</DependentUpon>
     </Compile>
     <Compile Include="Connection.cs" />
+    <Compile Include="CustHistory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CustHistory.Designer.cs">
+      <DependentUpon>CustHistory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Customers.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Customers.Designer.cs">
+      <DependentUpon>Customers.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dashboard.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Dashboard.Designer.cs">
       <DependentUpon>Dashboard.cs</DependentUpon>
     </Compile>
+    <Compile Include="deliveryboy.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="deliveryboy.Designer.cs">
+      <DependentUpon>deliveryboy.cs</DependentUpon>
+    </Compile>
     <Compile Include="Detail.cs" />
+    <Compile Include="disocunts.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="disocunts.Designer.cs">
+      <DependentUpon>disocunts.cs</DependentUpon>
+    </Compile>
     <Compile Include="Incredients.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -98,6 +122,24 @@
     <Compile Include="Quantity.Designer.cs">
       <DependentUpon>Quantity.cs</DependentUpon>
     </Compile>
+    <Compile Include="reports.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="reports.Designer.cs">
+      <DependentUpon>reports.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SecretKey.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SecretKey.Designer.cs">
+      <DependentUpon>SecretKey.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SelectDiscount.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SelectDiscount.Designer.cs">
+      <DependentUpon>SelectDiscount.cs</DependentUpon>
+    </Compile>
     <Compile Include="select_table.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -110,11 +152,29 @@
     <Compile Include="Tables.Designer.cs">
       <DependentUpon>Tables.cs</DependentUpon>
     </Compile>
+    <Compile Include="Users.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Users.Designer.cs">
+      <DependentUpon>Users.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="categories.resx">
       <DependentUpon>categories.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="CustHistory.resx">
+      <DependentUpon>CustHistory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Customers.resx">
+      <DependentUpon>Customers.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dashboard.resx">
       <DependentUpon>Dashboard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="deliveryboy.resx">
+      <DependentUpon>deliveryboy.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="disocunts.resx">
+      <DependentUpon>disocunts.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Incredients.resx">
       <DependentUpon>Incredients.cs</DependentUpon>
@@ -144,11 +204,23 @@
     <EmbeddedResource Include="Quantity.resx">
       <DependentUpon>Quantity.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="reports.resx">
+      <DependentUpon>reports.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SecretKey.resx">
+      <DependentUpon>SecretKey.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SelectDiscount.resx">
+      <DependentUpon>SelectDiscount.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="select_table.resx">
       <DependentUpon>select_table.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Tables.resx">
       <DependentUpon>Tables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Users.resx">
+      <DependentUpon>Users.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -189,6 +261,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Office__2851_29.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\logo.JPG" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

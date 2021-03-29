@@ -54,9 +54,9 @@ namespace rmsid2
                 if (inven_id != 0)
                 {
                     Connection conn = new Connection();
-                    if (conn.updatecat(inven_id, textBoxname.Text, Int16.Parse(textBoxqty.Text)))
+                    if (conn.updateinven(inven_id, textBoxname.Text, Int16.Parse(textBoxqty.Text)))
                     {
-                        //    MessageBox.Show("updated");
+                     //  MessageBox.Show("updated");
                     }
                     clear();
                     getinv();
@@ -107,7 +107,7 @@ namespace rmsid2
         private void InventextBox_TextChanged(object sender, EventArgs e)
         {
             Connection conn = new Connection();
-            SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM inventory where Inven_Name'"+InventextBox.Text+"'", ConnectionString);
+            SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM inventory where Inven_Name like'" + InventextBox.Text+"%'", ConnectionString);
             DataSet ds = new DataSet();
             da.Fill(ds, "inventory");
             InventorydataGridView.DataSource = ds.Tables["inventory"].DefaultView;
@@ -130,5 +130,7 @@ namespace rmsid2
                
             }
         }
+
+        
     }
 }

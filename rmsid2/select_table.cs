@@ -18,6 +18,12 @@ namespace rmsid2
         {
             InitializeComponent();
         }
+        Detail dt = new Detail();
+        public select_table(string ordertype)
+        {
+            InitializeComponent();
+            dt.Ordertype = ordertype;
+        }
         string ConnectionString = "Data Source=DESKTOP-C27B91F;Initial Catalog=rmsid;Integrated Security=True";
         int table_id = 0;
         Connection conn = new Connection();
@@ -42,10 +48,20 @@ namespace rmsid2
                 { btn.BackColor = Color.Red; }
                 btn.Tag = table.tableid;
                 tableflowLayoutPanel.Controls.Add(btn);
-                 //   btn.Click += CategoryButtonClick;
+                 btn.Click += TableButtonClick;
             }
         }
-        public ArrayList RetrieveTables()
+        void TableButtonClick(object sender, EventArgs e)
+        {
+            Button btn = (Button)sender;
+            string tablename = btn.Text;
+            Order ord = new Order("Dine In",tablename);
+            this.Hide();
+            ord.ShowDialog();
+            
+
+        }
+            public ArrayList RetrieveTables()
         {
             ArrayList ProductsList = new ArrayList();
 

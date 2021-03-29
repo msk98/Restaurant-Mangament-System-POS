@@ -20,6 +20,21 @@ namespace rmsid2
             InitializeComponent();
         }
         Detail det = new Detail();
+        public Order(string ordertype)
+        {
+            InitializeComponent();
+            det.Ordertype = ordertype;
+            det.table = "none";
+        }
+     
+        public Order( string ordertype, int c_id,int del_id,string tablename)
+        {
+            InitializeComponent();
+            det.Ordertype = ordertype;
+            det.custid = c_id;
+            det.deliverBoyId = del_id;
+            det.table = tablename;
+        }
         public Order(string ordertype,string tablename)
         {
             InitializeComponent();
@@ -103,28 +118,17 @@ namespace rmsid2
         void CategoryButtonClick(object sender, EventArgs e)
         {
             Productpanel.Controls.Clear();
-
             Button btn = (Button)sender;
-
             int CategoryID = Convert.ToInt32(btn.Tag);
-
-
             foreach (Detail Product in RetreiveProductsFromCategory(CategoryID))
             {
                 Button ProductButton = new Button();
                 ProductButton.Text = Product.Name;
                 ProductButton.Size = new System.Drawing.Size(60, 50);
                 ProductButton.ForeColor = Color.Black;
-
-
-
                 ProductButton.Tag = Product.ID;
-
                 Productpanel.Controls.Add(ProductButton);
-
                 ProductButton.Click += ProductButton_Click;
-
-
             }
         }
         void ProductButton_Click(Object sender, EventArgs e)
@@ -143,7 +147,7 @@ namespace rmsid2
                 connection.Open();
 
                 SqlDataReader reader = command.ExecuteReader();
-
+                bool flag = false;
                 if (reader.HasRows)
                 {
                     while (reader.Read())
@@ -151,7 +155,23 @@ namespace rmsid2
                         int ProductID = Int16.Parse((reader["p_id"].ToString()));
                         string ProductName = (reader["p_name"].ToString());
                         int ProductPrice = Int16.Parse((reader["p_price"].ToString()));
-                        productdataGridView.Rows.Add(ProductID, ProductName, ProductPrice, 1, ProductPrice * 1);
+
+                        if(productdataGridView.Rows.Count>0)
+                        {
+                            foreach(DataGridViewRow row in productdataGridView.Rows)
+                            {
+                                if (Int16.Parse(row.Cells[0].Value.ToString())==ProductID)
+                                {
+                                    row.Cells[3].Value = Convert.ToString(1 + Int16.Parse(row.Cells[3].Value.ToString()));
+                                    row.Cells[4].Value = Convert.ToString(ProductPrice + Int16.Parse(row.Cells[4].Value.ToString()));
+                                    flag = true;
+                                }
+                            }
+
+                        }
+                       
+                        if(flag!=true)
+                            productdataGridView.Rows.Add(ProductID, ProductName, ProductPrice, 1, ProductPrice * 1);
                         totalamount();
                     }
                 }
@@ -259,15 +279,58 @@ namespace rmsid2
 
         private void kotprintDocument_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
         {
+            int OrderId=0;
             int y = 0;
-        
             Connection conn = new Connection();
-            if(conn.inserttempOrders(Int16.Parse(textBoxTotalAmount.Text), det.Ordertype, det.table))
+            if(conn.checkstatustable(det.table)==0  && det.Ordertype == "Dine In" )
             {
+                MessageBox.Show("update");
+                OrderId= conn.getOrderNo(det.table);
+                conn.updatebill(det.table, Int16.Parse(textBoxTotalAmount.Text));
+                for (int i = 0; i < productdataGridView.Rows.Count; i++)
+                {
+                    conn.inserttempOrdersItems(Convert.ToString(productdataGridView.Rows[i].Cells[1].Value), Int16.Parse(productdataGridView.Rows[i].Cells[2].Value.ToString()), Int16.Parse(productdataGridView.Rows[i].Cells[3].Value.ToString()), Int16.Parse(productdataGridView.Rows[i].Cells[4].Value.ToString()), OrderId, Int16.Parse(productdataGridView.Rows[i].Cells[0].Value.ToString()));
+                }
+            }
+            else if (conn.checkstatustable(det.table) == 1 && det.Ordertype == "Dine In" )
+            {
+                MessageBox.Show("insert");
+
+                conn.updatetablestatus(det.table);
+                conn.inserttempOrders(Int16.Parse(textBoxTotalAmount.Text), det.Ordertype, det.table);
+                OrderId = getorderno();
+                for (int i = 0; i < productdataGridView.Rows.Count; i++)
+                {
+                    conn.inserttempOrdersItems(Convert.ToString(productdataGridView.Rows[i].Cells[1].Value), Int16.Parse(productdataGridView.Rows[i].Cells[2].Value.ToString()), Int16.Parse(productdataGridView.Rows[i].Cells[3].Value.ToString()), Int16.Parse(productdataGridView.Rows[i].Cells[4].Value.ToString()), OrderId, Int16.Parse(productdataGridView.Rows[i].Cells[0].Value.ToString()));
+                }
+            }
+            else if(det.table=="none" && det.Ordertype=="Delivery")
+            {
+                conn.inserttempOrders(Int16.Parse(textBoxTotalAmount.Text), det.Ordertype, det.table);
+                OrderId = getorderno();
+                for (int i = 0; i < productdataGridView.Rows.Count; i++)
+                {
+                    conn.inserttempOrdersItems(Convert.ToString(productdataGridView.Rows[i].Cells[1].Value), Int16.Parse(productdataGridView.Rows[i].Cells[2].Value.ToString()), Int16.Parse(productdataGridView.Rows[i].Cells[3].Value.ToString()), Int16.Parse(productdataGridView.Rows[i].Cells[4].Value.ToString()), OrderId, Int16.Parse(productdataGridView.Rows[i].Cells[0].Value.ToString()));
+                }
+                conn.insertCustomerOrder(det.custid,OrderId);
+                conn.insertdeliverorder(det.deliverBoyId, OrderId);
+            }
+            else if (det.table == "none" && det.Ordertype == "Take Away")
+            {
+                
+                conn.inserttempOrders(Int16.Parse(textBoxTotalAmount.Text), det.Ordertype, det.table);
+                OrderId = getorderno();
+                for (int i = 0; i <productdataGridView.Rows.Count; i++)
+                {
+                   
+                    conn.inserttempOrdersItems(Convert.ToString(productdataGridView.Rows[i].Cells[1].Value), Int16.Parse(productdataGridView.Rows[i].Cells[2].Value.ToString()), Int16.Parse(productdataGridView.Rows[i].Cells[3].Value.ToString()), Int16.Parse(productdataGridView.Rows[i].Cells[4].Value.ToString()), OrderId, Int16.Parse(productdataGridView.Rows[i].Cells[0].Value.ToString()));
+                }
                
             }
-            
-            int OrderId = getorderno();
+
+
+
+
             e.Graphics.DrawString("Kitchen Slip", new Font("monospaced sans serif", 16, FontStyle.Bold), Brushes.Black, new Point(60, y += 20));
             e.Graphics.DrawString("Order Id", new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(5, y += 30));
             e.Graphics.DrawString(OrderId.ToString(), new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(150, y));
@@ -280,15 +343,15 @@ namespace rmsid2
             for (int i = 0; i < productdataGridView.Rows.Count; i++)
 
             {
-                MessageBox.Show(OrderId.ToString());
-             conn.inserttempOrdersItems(Convert.ToString(productdataGridView.Rows[i].Cells[1].Value),Int16.Parse(productdataGridView.Rows[i].Cells[2].Value.ToString()),Int16.Parse(productdataGridView.Rows[i].Cells[3].Value.ToString()),Int16.Parse(productdataGridView.Rows[i].Cells[4].Value.ToString()),OrderId);
+              
+          //   conn.inserttempOrdersItems(Convert.ToString(productdataGridView.Rows[i].Cells[1].Value),Int16.Parse(productdataGridView.Rows[i].Cells[2].Value.ToString()),Int16.Parse(productdataGridView.Rows[i].Cells[3].Value.ToString()),Int16.Parse(productdataGridView.Rows[i].Cells[4].Value.ToString()),OrderId);
                 y = y + 20;
-                string productid = Convert.ToString(productdataGridView.Rows[i].Cells[0].Value);
-                string name = Convert.ToString(productdataGridView.Rows[i].Cells[1].Value);
-                string quantity = Convert.ToString(productdataGridView.Rows[i].Cells[3].Value);
+             //   string productid = Convert.ToString(productdataGridView.Rows[i].Cells[0].Value);
+          //      string name = Convert.ToString(productdataGridView.Rows[i].Cells[1].Value);
+             //   string quantity = Convert.ToString(productdataGridView.Rows[i].Cells[3].Value);
 
-                e.Graphics.DrawString(name, new Font("monospaced sans serif", 8, FontStyle.Regular), Brushes.Black, new Point(5, y));
-                e.Graphics.DrawString(quantity, new Font("monospaced sans serif", 8, FontStyle.Regular), Brushes.Black, new Point(150, y));
+                e.Graphics.DrawString(Convert.ToString(productdataGridView.Rows[i].Cells[1].Value), new Font("monospaced sans serif", 8, FontStyle.Regular), Brushes.Black, new Point(5, y));
+                e.Graphics.DrawString(Convert.ToString(productdataGridView.Rows[i].Cells[3].Value), new Font("monospaced sans serif", 8, FontStyle.Regular), Brushes.Black, new Point(150, y));
 
             }
         }
@@ -321,7 +384,7 @@ namespace rmsid2
             {
               //  kotprintPreviewDialog.Document =kotprintDocument;
                 kotprintDocument.DefaultPageSettings.PaperSize = new System.Drawing.Printing.PaperSize("prnm", 285, 600);
-                kotprintDocument.Print();
+                kotprintDocument.Print();         
                 this.Hide();
 
             }

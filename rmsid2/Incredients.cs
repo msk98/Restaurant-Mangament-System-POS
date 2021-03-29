@@ -29,7 +29,7 @@ namespace rmsid2
         public void getinc()
         {
             Connection conn = new Connection();
-            SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM incredients", ConnectionString);
+            SqlDataAdapter da = new SqlDataAdapter("select incr.inc_id as incredientID, p.p_name as productName,c.C_name as Cat_Name,inven.Inven_Name as ItemName,incr.qty as quantity from products p inner join incredients incr on incr.p_id=p.p_id inner join categories c on c.C_id=incr.C_id inner join inventory inven on inven.Inven_id=incr.Inven_id;", ConnectionString);
             DataSet ds = new DataSet();
             da.Fill(ds, "Incredients");
             IncredientdataGridView.DataSource = ds.Tables["Incredients"].DefaultView;
@@ -147,33 +147,16 @@ namespace rmsid2
         {
             if (e.RowIndex >= 0)
             {
-                DataGridViewRow row = IncredientdataGridView.Rows[e.RowIndex];
+               DataGridViewRow row = IncredientdataGridView.Rows[e.RowIndex];
                 ing_id = Int16.Parse(row.Cells[0].Value.ToString());
-                SqlConnection conn = new SqlConnection(ConnectionString);
-                string sqlquery = "select *  from inventory where Inven_id='" + Int16.Parse(row.Cells[1].Value.ToString()) + "'";
-                conn.Open();
-                SqlCommand cmd = new SqlCommand(sqlquery, conn);
-
-                SqlDataReader dr = cmd.ExecuteReader();
-                string xyz = "";
-                while (dr.Read())
-                {
-                    xyz = (dr["Inven_Name"].ToString());
-
-                }
-                
-                    int index = comboBoxIncredients.FindString(xyz);
+                int index = comboBoxIncredients.FindString(row.Cells[3].Value.ToString());
                 comboBoxIncredients.SelectedIndex = index;
-                conn.Close();
-                xyz = getct(Int16.Parse(row.Cells[2].Value.ToString()));
-
-                index = CatcomboBox.FindString(xyz);
-                CatcomboBox.SelectedIndex = index;
-                getprod();
-                xyz = getprod(Int16.Parse(row.Cells[3].Value.ToString()));
-                index = comboBoxproduct.FindString(xyz);
+                index = comboBoxproduct.FindString(row.Cells[1].Value.ToString());
                 comboBoxproduct.SelectedIndex = index;
+                index = CatcomboBox.FindString(row.Cells[2].Value.ToString());
+                CatcomboBox.SelectedIndex = index;
                 textBoxIncredient.Text = row.Cells[4].Value.ToString();
+            
             }
 
         }
@@ -214,10 +197,7 @@ namespace rmsid2
             return xyz;
         }
 
-        private void cattextBox_TextChanged(object sender, EventArgs e)
-        {
-           
-        }
+     
 
         private void buttonClose_Click(object sender, EventArgs e)
         {

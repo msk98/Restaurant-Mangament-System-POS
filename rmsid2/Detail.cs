@@ -27,6 +27,21 @@ namespace rmsid2
 
         public string Ordertype;
         public string table;
-        
+
+        public int custid;
+
+        public int deliverBoyId;
+        public string deliveryBoy_Name;
+
+        public string user_privelage;
+        public string username;
+        public int userid;
+
+        public DateTime StartDate;
+        public DateTime EndDate;
+
+        public float totalamnt;
+
+        public int orderid;
     }
 }
