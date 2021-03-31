@@ -43,5 +43,32 @@ namespace rmsid2
         public float totalamnt;
 
         public int orderid;
+
+
+        public string cust_name;
+        public string cust_phone;
+        public string address;
+
+        public int startregister;
+
+
+        public string invenname;
+        public int invenqty;
+
+        public string DiscountType;
+        public int DiscountAmount;
+
+        public int Taxes;
+        public int servicecharges;
+
+        public int Orders;
+        public int netsale;
+        public string OrderType;
+
+        public int p_qty;
+        public string p_name;
+
+        public DateTime startreg;
+        public DateTime endreg;
     }
 }

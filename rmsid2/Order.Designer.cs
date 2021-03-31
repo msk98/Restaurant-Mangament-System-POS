@@ -51,11 +51,12 @@ namespace rmsid2
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.textBoxTotalAmount = new System.Windows.Forms.TextBox();
             this.labelTotalAmount = new System.Windows.Forms.Label();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.buttonOrder = new System.Windows.Forms.Button();
             this.buttonKOT = new System.Windows.Forms.Button();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.kotprintDocument = new System.Drawing.Printing.PrintDocument();
             this.kotprintPreviewDialog = new System.Windows.Forms.PrintPreviewDialog();
+            this.buttonClose = new System.Windows.Forms.Button();
             this.flowLayoutPanel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -319,6 +320,20 @@ namespace rmsid2
             this.labelTotalAmount.TabIndex = 0;
             this.labelTotalAmount.Text = "Total Amount";
             // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.buttonOrder);
+            this.groupBox5.Controls.Add(this.buttonClose);
+            this.groupBox5.Controls.Add(this.buttonKOT);
+            this.groupBox5.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.groupBox5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox5.Location = new System.Drawing.Point(561, 535);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(579, 131);
+            this.groupBox5.TabIndex = 5;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Actions";
+            // 
             // buttonOrder
             // 
             this.buttonOrder.Location = new System.Drawing.Point(27, 50);
@@ -331,26 +346,13 @@ namespace rmsid2
             // 
             // buttonKOT
             // 
-            this.buttonKOT.Location = new System.Drawing.Point(137, 50);
+            this.buttonKOT.Location = new System.Drawing.Point(146, 50);
             this.buttonKOT.Name = "buttonKOT";
             this.buttonKOT.Size = new System.Drawing.Size(104, 30);
             this.buttonKOT.TabIndex = 6;
             this.buttonKOT.Text = "KOT";
             this.buttonKOT.UseVisualStyleBackColor = true;
             this.buttonKOT.Click += new System.EventHandler(this.buttonKOT_Click);
-            // 
-            // groupBox5
-            // 
-            this.groupBox5.Controls.Add(this.buttonOrder);
-            this.groupBox5.Controls.Add(this.buttonKOT);
-            this.groupBox5.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.groupBox5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox5.Location = new System.Drawing.Point(561, 535);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(579, 131);
-            this.groupBox5.TabIndex = 5;
-            this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "Actions";
             // 
             // kotprintDocument
             // 
@@ -365,6 +367,16 @@ namespace rmsid2
             this.kotprintPreviewDialog.Icon = ((System.Drawing.Icon)(resources.GetObject("kotprintPreviewDialog.Icon")));
             this.kotprintPreviewDialog.Name = "kotprintPreviewDialog";
             this.kotprintPreviewDialog.Visible = false;
+            // 
+            // buttonClose
+            // 
+            this.buttonClose.Location = new System.Drawing.Point(259, 50);
+            this.buttonClose.Name = "buttonClose";
+            this.buttonClose.Size = new System.Drawing.Size(104, 30);
+            this.buttonClose.TabIndex = 6;
+            this.buttonClose.Text = "Close";
+            this.buttonClose.UseVisualStyleBackColor = true;
+            this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
             // 
             // Order
             // 
@@ -418,5 +430,6 @@ namespace rmsid2
         private System.Windows.Forms.Button buttonKOT;
         private System.Drawing.Printing.PrintDocument kotprintDocument;
         private System.Windows.Forms.PrintPreviewDialog kotprintPreviewDialog;
+        private System.Windows.Forms.Button buttonClose;
     }
 }

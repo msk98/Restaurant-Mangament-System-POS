@@ -40,7 +40,6 @@ namespace rmsid2
             this.textBoxpercen = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.comboBoxpromo = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.buttoncancel = new System.Windows.Forms.Button();
             this.buttonClose = new System.Windows.Forms.Button();
@@ -50,6 +49,7 @@ namespace rmsid2
             this.textBoxDiscountPrice = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.textBoxTotalPrice = new System.Windows.Forms.TextBox();
+            this.comboBoxpromo = new System.Windows.Forms.ComboBox();
             this.groupBoxselect.SuspendLayout();
             this.groupBoxcash.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -170,15 +170,6 @@ namespace rmsid2
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             // 
-            // comboBoxpromo
-            // 
-            this.comboBoxpromo.FormattingEnabled = true;
-            this.comboBoxpromo.Location = new System.Drawing.Point(128, 19);
-            this.comboBoxpromo.Name = "comboBoxpromo";
-            this.comboBoxpromo.Size = new System.Drawing.Size(133, 24);
-            this.comboBoxpromo.TabIndex = 1;
-            this.comboBoxpromo.SelectedIndexChanged += new System.EventHandler(this.comboBoxpromo_SelectedIndexChanged);
-            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -262,6 +253,15 @@ namespace rmsid2
             this.textBoxTotalPrice.TabIndex = 1;
             this.textBoxTotalPrice.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
             // 
+            // comboBoxpromo
+            // 
+            this.comboBoxpromo.FormattingEnabled = true;
+            this.comboBoxpromo.Location = new System.Drawing.Point(183, 23);
+            this.comboBoxpromo.Name = "comboBoxpromo";
+            this.comboBoxpromo.Size = new System.Drawing.Size(121, 24);
+            this.comboBoxpromo.TabIndex = 0;
+            this.comboBoxpromo.SelectedIndexChanged += new System.EventHandler(this.comboBoxpromo_SelectedIndexChanged_1);
+            // 
             // SelectDiscount
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -312,7 +312,6 @@ namespace rmsid2
         private System.Windows.Forms.TextBox textBoxpercen;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.ComboBox comboBoxpromo;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button buttoncancel;
         private System.Windows.Forms.Button buttonClose;
@@ -322,5 +321,6 @@ namespace rmsid2
         private System.Windows.Forms.TextBox textBoxDiscountPrice;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox textBoxTotalPrice;
+        private System.Windows.Forms.ComboBox comboBoxpromo;
     }
 }

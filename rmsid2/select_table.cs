@@ -19,10 +19,11 @@ namespace rmsid2
             InitializeComponent();
         }
         Detail dt = new Detail();
-        public select_table(string ordertype)
+        public select_table(string ordertype,int userid)
         {
             InitializeComponent();
             dt.Ordertype = ordertype;
+            dt.userid = userid;
         }
         string ConnectionString = "Data Source=DESKTOP-C27B91F;Initial Catalog=rmsid;Integrated Security=True";
         int table_id = 0;
@@ -55,7 +56,7 @@ namespace rmsid2
         {
             Button btn = (Button)sender;
             string tablename = btn.Text;
-            Order ord = new Order("Dine In",tablename);
+            Order ord = new Order("Dine In",tablename,dt.userid);
             this.Hide();
             ord.ShowDialog();
             

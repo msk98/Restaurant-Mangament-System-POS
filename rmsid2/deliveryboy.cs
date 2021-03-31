@@ -14,11 +14,12 @@ namespace rmsid2
 {
     public partial class deliveryboy : Form
     {
-        public deliveryboy(string ordertype,int custid)
+        public deliveryboy(string ordertype,int custid,int userid)
         {
             InitializeComponent();
             dt.Ordertype = ordertype;
             dt.custid = custid;
+            dt.userid = userid;
         }
         
         string ConnectionString = "Data Source=DESKTOP-C27B91F;Initial Catalog=rmsid;Integrated Security=True";
@@ -74,7 +75,7 @@ namespace rmsid2
         {
             Button btn = (Button)sender;
             int del_id = Convert.ToInt32(btn.Tag);
-            Order ord = new Order("Delivery",dt.custid, del_id,"none");
+            Order ord = new Order("Delivery",dt.custid, del_id,"none",dt.userid);
             ord.ShowDialog();
             this.Hide();
         }

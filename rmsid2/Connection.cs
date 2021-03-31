@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -1171,6 +1172,7 @@ namespace rmsid2
             string query = "INSERT INTO users (username,user_pass,user_privelage) VALUES(@username,@userpass,@privileges)";
             SqlCommand cmd = new SqlCommand(query, con);
             //Pass values to Parameters
+
             cmd.Parameters.AddWithValue("@username", username);
             cmd.Parameters.AddWithValue("@userpass", userpass);
             cmd.Parameters.AddWithValue("@privileges", privileges);
@@ -1306,6 +1308,444 @@ namespace rmsid2
                 CloseConnection();
 
             }
+
         }
+        public bool insertcrpayment(int orderid, int CardAmount)
+        {
+            OpenConection();
+            string query = "INSERT INTO CardAmount (orderid,CardAmount) VALUES(@orderid,@CardAmount)";
+            SqlCommand cmd = new SqlCommand(query, con);
+            //Pass values to Parameters
+            cmd.Parameters.AddWithValue("@orderid", orderid);
+            cmd.Parameters.AddWithValue("@CardAmount", CardAmount);
+            try
+            {
+                OpenConection();
+                cmd.ExecuteNonQuery();
+
+                return true;
+            }
+            catch (SqlException e)
+            {
+                string err = "Error Generated. Details: " + e.ToString();
+                MessageBox.Show(err);
+
+                return false;
+            }
+            finally
+            {
+                CloseConnection();
+
+            }
+        }
+        public bool inserttax(int orderid, int taxAmount)
+        {
+            OpenConection();
+            string query = "INSERT INTO taxAmount (order_id,taxAmount) VALUES(@orderid,@taxAmount)";
+            SqlCommand cmd = new SqlCommand(query, con);
+            //Pass values to Parameters
+            cmd.Parameters.AddWithValue("@orderid", orderid);
+            cmd.Parameters.AddWithValue("@taxAmount", taxAmount);
+            try
+            {
+                OpenConection();
+                cmd.ExecuteNonQuery();
+
+                return true;
+            }
+            catch (SqlException e)
+            {
+                string err = "Error Generated. Details: " + e.ToString();
+                MessageBox.Show(err);
+
+                return false;
+            }
+            finally
+            {
+                CloseConnection();
+
+            }
+        }
+        public bool insertservicetax(int orderid, int ServiceAmount)
+        {
+            OpenConection();
+            string query = "INSERT INTO serviceAmount (order_id,ServiceAmount) VALUES(@orderid,@ServiceAmount)";
+            SqlCommand cmd = new SqlCommand(query, con);
+            //Pass values to Parameters
+            cmd.Parameters.AddWithValue("@orderid", orderid);
+            cmd.Parameters.AddWithValue("@ServiceAmount", ServiceAmount);
+            try
+            {
+                OpenConection();
+                cmd.ExecuteNonQuery();
+
+                return true;
+            }
+            catch (SqlException e)
+            {
+                string err = "Error Generated. Details: " + e.ToString();
+                MessageBox.Show(err);
+
+                return false;
+            }
+            finally
+            {
+                CloseConnection();
+
+            }
+        }
+
+        public bool startregister(int userid,int Startamount)
+        {
+            OpenConection();
+            string query = "INSERT INTO openregister (userid,Startamount) VALUES(@userid,@Startamount)";
+            SqlCommand cmd = new SqlCommand(query, con);
+            //Pass values to Parameters
+            cmd.Parameters.AddWithValue("@userid", userid);
+            cmd.Parameters.AddWithValue("@Startamount", Startamount);
+            try
+            {
+                OpenConection();
+                cmd.ExecuteNonQuery();
+
+                return true;
+            }
+            catch (SqlException e)
+            {
+                string err = "Error Generated. Details: " + e.ToString();
+                MessageBox.Show(err);
+
+                return false;
+            }
+            finally
+            {
+                CloseConnection();
+
+            }
+        }
+        public bool endregister(int userid)
+        {
+            OpenConection();
+            string query = "INSERT INTO openregister (userid,closeregister) VALUES(@userid,CURRENT_TIMESTAMP)";
+            SqlCommand cmd = new SqlCommand(query, con);
+            //Pass values to Parameters
+            cmd.Parameters.AddWithValue("@userid", userid);
+         
+            try
+            {
+                OpenConection();
+                cmd.ExecuteNonQuery();
+
+                return true;
+            }
+            catch (SqlException e)
+            {
+                string err = "Error Generated. Details: " + e.ToString();
+                MessageBox.Show(err);
+
+                return false;
+            }
+            finally
+            {
+                CloseConnection();
+
+            }
+        }
+        public bool insertuserorders(int userid, int orderid)
+        {
+            OpenConection();
+            string query = "INSERT INTO userord (user_id,order_id) VALUES(@userid,@orderid)";
+            SqlCommand cmd = new SqlCommand(query, con);
+            //Pass values to Parameters
+            cmd.Parameters.AddWithValue("@userid", userid);
+            cmd.Parameters.AddWithValue("@orderid", orderid);
+            try
+            {
+                OpenConection();
+                cmd.ExecuteNonQuery();
+
+                return true;
+            }
+            catch (SqlException e)
+            {
+                string err = "Error Generated. Details: " + e.ToString();
+                MessageBox.Show(err);
+
+                return false;
+            }
+            finally
+            {
+                CloseConnection();
+
+            }
+        }
+        public bool deluserorders(int userid, int orderid)
+        {
+            OpenConection();
+            string query = "delete from  usersOrders where user_id=@userid and order_id=@orderid)";
+            SqlCommand cmd = new SqlCommand(query, con);
+            //Pass values to Parameters
+            cmd.Parameters.AddWithValue("@userid", userid);
+            cmd.Parameters.AddWithValue("@orderid", orderid);
+            try
+            {
+                OpenConection();
+                cmd.ExecuteNonQuery();
+
+                return true;
+            }
+            catch (SqlException e)
+            {
+                string err = "Error Generated. Details: " + e.ToString();
+                MessageBox.Show(err);
+
+                return false;
+            }
+            finally
+            {
+                CloseConnection();
+
+            }
+        }
+        public bool Insertcountinven(int OrderId)
+        {
+            OpenConection();
+            string query = "insert into inven_count(incrd_id,incr_qty,order_id)  select incredients.inc_id,incredients.qty*temp_orderitems.t_iqty,temp_orderitems.t_Oid from incredients join products on products.p_id=incredients.p_id join temp_orderitems on temp_orderitems.t_Oid=@OrderId";
+            SqlCommand cmd = new SqlCommand(query, con);
+            //Pass values to Parameters
+            cmd.Parameters.AddWithValue("@OrderId", OrderId);
+            try
+            {
+                OpenConection();
+                cmd.ExecuteNonQuery();
+
+                return true;
+            }
+            catch (SqlException e)
+            {
+                string err = "Error Generated. Details: " + e.ToString();
+                MessageBox.Show(err);
+
+                return false;
+            }
+            finally
+            {
+                CloseConnection();
+
+            }
+        }
+        public ArrayList retrieveUsedInventory(DateTime startdate,DateTime enddate ,int user_id)
+        {
+            ArrayList inventorylist = new ArrayList();
+
+            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            {
+                SqlCommand command = new SqlCommand("select inventory.Inven_Name as InventoryName,sum(inven_count.incr_qty)/5 as Invenqty from inven_count join  incredients on inven_count.incrd_id=incredients.inc_id  join inventory on incredients.Inven_id=inventory.Inven_id join OrderItems  on  OrderItems.p_id= incredients.p_id join Orders on Orders.t_Oid= OrderItems.t_Oid 	join userord usr on usr.order_id = Orders.t_Oid 	where (Orders.Dateorder between @startdate and @enddate) and   usr.user_id =@user_id group by inventory.Inven_Name;", connection);
+                command.Parameters.AddWithValue("@startdate", startdate);
+                command.Parameters.AddWithValue("@enddate", enddate);
+                command.Parameters.AddWithValue("@user_id", user_id);
+                connection.Open();
+
+                SqlDataReader reader = command.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        inventorylist.Add(new Detail() { invenname = reader["InventoryName"].ToString(), invenqty = Int16.Parse((reader["Invenqty"].ToString())) });
+                    }
+                }
+                connection.Close();
+
+                return inventorylist;
+            }
+        }
+        public ArrayList retrievediscounts(DateTime startdate, DateTime enddate, int user_id)
+        {
+            ArrayList discountList = new ArrayList();
+
+            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            {
+                SqlCommand command = new SqlCommand("select sum(discoutAmount.discountAmount) as DiscountAmount, DiscountType from discoutAmount inner join Orders on Orders.t_Oid=discoutAmount.order_id join userord usr on usr.order_id = Orders.t_Oid 	where (Orders.Dateorder between @startdate and @enddate) and   usr.user_id =@user_id  group by discountType;", connection);
+                command.Parameters.AddWithValue("@startdate", startdate);
+                command.Parameters.AddWithValue("@enddate", enddate);
+                command.Parameters.AddWithValue("@user_id", user_id);
+
+                connection.Open();
+
+                SqlDataReader reader = command.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        discountList.Add(new Detail() { DiscountAmount = Int16.Parse(reader["DiscountAmount"].ToString()), DiscountType = (reader["DiscountType"].ToString()) });
+                    }
+                }
+                connection.Close();
+
+                return discountList;
+            }
+        }
+
+        public ArrayList retrievedProducts(DateTime startdate, DateTime enddate,int user_id)
+        {
+            ArrayList productslist = new ArrayList();
+
+            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            {
+                SqlCommand command = new SqlCommand("SELECT OrderItems.t_iName as ItemName, sum(OrderItems.t_iqty) as qty from OrderItems inner join Orders on Orders.t_Oid= OrderItems.t_Oid  join userord usr on usr.order_id = Orders.t_Oid 	where (Orders.Dateorder between @startdate and @enddate) and   usr.user_id =@user_id  group by OrderItems.t_iName;", connection);
+                command.Parameters.AddWithValue("@startdate", startdate);
+                command.Parameters.AddWithValue("@enddate", enddate);
+                command.Parameters.AddWithValue("@user_id", user_id);
+
+                connection.Open();
+
+                SqlDataReader reader = command.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        productslist.Add(new Detail() { p_qty = Int16.Parse(reader["p_qty"].ToString()), p_name = (reader["ItemName"].ToString()) });
+                    }
+                }
+                connection.Close();
+
+                return productslist;
+            }
+        }
+
+        public ArrayList retrievedOrders(DateTime startdate, DateTime enddate,int user_id)
+        {
+            ArrayList OrderList = new ArrayList();
+
+            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            {
+                SqlCommand command = new SqlCommand("SELECT count(t_ordertype) as Orders,sum(Orders.t_netamnt) as netsale,t_ordertype as OrderType from Orders join userord usr on usr.order_id = Orders.t_Oid 	where (Orders.Dateorder between @startdate and @enddate) and   usr.user_id =@user_id  group by t_ordertype;", connection);
+                command.Parameters.AddWithValue("@startdate", startdate);
+                command.Parameters.AddWithValue("@enddate", enddate);
+                command.Parameters.AddWithValue("@user_id", user_id);
+                connection.Open();
+
+                SqlDataReader reader = command.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        OrderList.Add(new Detail() { Orders = Int16.Parse(reader["Orders"].ToString()), OrderType = (reader["OrderType"].ToString()), netsale = Int16.Parse(reader["netsale"].ToString()), });
+                    }
+                }
+                connection.Close();
+
+                return OrderList;
+            }
+        }
+      
+        public int retrievedtaxes(DateTime startdate, DateTime enddate,int user_id)
+        {
+            int Taxes = 0;
+
+            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            {
+                SqlCommand command = new SqlCommand("select sum(taxAmount) as Taxes from taxAmount inner join Orders on Orders.t_Oid=taxAmount.order_id join userord usr on usr.order_id = Orders.t_Oid 	where (Orders.Dateorder between @startdate and @enddate) and   usr.user_id =@user_id ;", connection);
+                command.Parameters.AddWithValue("@startdate", startdate);
+                command.Parameters.AddWithValue("@enddate", enddate);
+                command.Parameters.AddWithValue("@user_id", user_id);
+                connection.Open();
+
+                SqlDataReader reader = command.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        Taxes = Int16.Parse(reader["Taxes"].ToString());
+                    }
+                }
+                connection.Close();
+
+                return Taxes;
+            }
+        }
+        public int calculatesercharge(DateTime startdate, DateTime enddate,int user_id)
+        {
+            int servicecharges = 0;
+
+            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            {
+                SqlCommand command = new SqlCommand("select sum(serviceAmount) as serviceAmount from serviceAmount inner join Orders on Orders.t_Oid=serviceAmount.order_id join userord usr on usr.order_id = Orders.t_Oid 	where (Orders.Dateorder between @startdate and @enddate) and   usr.user_id =@user_id", connection);
+                command.Parameters.AddWithValue("@startdate", startdate);
+                command.Parameters.AddWithValue("@enddate", enddate);
+                command.Parameters.AddWithValue("@user_id", user_id);
+                connection.Open();
+
+                SqlDataReader reader = command.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        servicecharges = Int16.Parse(reader["Taxes"].ToString());
+                    }
+                }
+                connection.Close();
+
+                return servicecharges;
+            }
+        }
+        public int calculatenetsale(DateTime startdate, DateTime enddate, int user_id)
+        {
+            int servicecharges = 0;
+
+            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            {
+                SqlCommand command = new SqlCommand("select sum(t_netamnt) as totalamount from Orders  join userord usr on usr.order_id = Orders.t_Oid 	where (Orders.Dateorder between @startdate and @enddate) and   usr.user_id =@user_id", connection);
+                command.Parameters.AddWithValue("@startdate", startdate);
+                command.Parameters.AddWithValue("@enddate", enddate);
+                command.Parameters.AddWithValue("@user_id", user_id);
+                connection.Open();
+
+                SqlDataReader reader = command.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        servicecharges = Int16.Parse(reader["totalamount"].ToString());
+                    }
+                }
+                connection.Close();
+
+                return servicecharges;
+            }
+        }
+        public DateTime getregtime(int user_id)
+        {
+            DateTime regtime = DateTime.Now;
+
+            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            {
+                SqlCommand command = new SqlCommand(" select top 1 openregister from openregister where userid=@user_id order by openregister desc ;", connection);
+                
+                command.Parameters.AddWithValue("@user_id", user_id);
+                connection.Open();
+
+                SqlDataReader reader = command.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        regtime = DateTime.Parse(reader["openregister"].ToString());
+                    }
+                }
+                connection.Close();
+
+                return regtime;
+            }
+        }
+
     }
 }

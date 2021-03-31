@@ -103,6 +103,8 @@ namespace rmsid2
             this.button1 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.TakeAwayprintDocument = new System.Drawing.Printing.PrintDocument();
+            this.printRegisterDcoumentDocument = new System.Drawing.Printing.PrintDocument();
             this.tableLayoutPanel1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewOrderlist)).BeginInit();
@@ -215,41 +217,41 @@ namespace rmsid2
             // menuItemsToolStripMenuItem
             // 
             this.menuItemsToolStripMenuItem.Name = "menuItemsToolStripMenuItem";
-            this.menuItemsToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
+            this.menuItemsToolStripMenuItem.Size = new System.Drawing.Size(155, 24);
             this.menuItemsToolStripMenuItem.Text = "Menu Items";
             this.menuItemsToolStripMenuItem.Click += new System.EventHandler(this.menuItemsToolStripMenuItem_Click);
             // 
             // incredientsToolStripMenuItem
             // 
             this.incredientsToolStripMenuItem.Name = "incredientsToolStripMenuItem";
-            this.incredientsToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
+            this.incredientsToolStripMenuItem.Size = new System.Drawing.Size(155, 24);
             this.incredientsToolStripMenuItem.Text = "Incredients";
             this.incredientsToolStripMenuItem.Click += new System.EventHandler(this.incredientsToolStripMenuItem_Click);
             // 
             // categoriesToolStripMenuItem
             // 
             this.categoriesToolStripMenuItem.Name = "categoriesToolStripMenuItem";
-            this.categoriesToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
+            this.categoriesToolStripMenuItem.Size = new System.Drawing.Size(155, 24);
             this.categoriesToolStripMenuItem.Text = "Categories";
             this.categoriesToolStripMenuItem.Click += new System.EventHandler(this.categoriesToolStripMenuItem_Click);
             // 
             // inventoryToolStripMenuItem
             // 
             this.inventoryToolStripMenuItem.Name = "inventoryToolStripMenuItem";
-            this.inventoryToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
+            this.inventoryToolStripMenuItem.Size = new System.Drawing.Size(155, 24);
             this.inventoryToolStripMenuItem.Text = "Inventory";
             this.inventoryToolStripMenuItem.Click += new System.EventHandler(this.inventoryToolStripMenuItem_Click);
             // 
             // discountToolStripMenuItem
             // 
             this.discountToolStripMenuItem.Name = "discountToolStripMenuItem";
-            this.discountToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
+            this.discountToolStripMenuItem.Size = new System.Drawing.Size(155, 24);
             this.discountToolStripMenuItem.Text = "Discounts";
             // 
             // incredientsToolStripMenuItem1
             // 
             this.incredientsToolStripMenuItem1.Name = "incredientsToolStripMenuItem1";
-            this.incredientsToolStripMenuItem1.Size = new System.Drawing.Size(180, 24);
+            this.incredientsToolStripMenuItem1.Size = new System.Drawing.Size(155, 24);
             this.incredientsToolStripMenuItem1.Text = "Incredients";
             this.incredientsToolStripMenuItem1.Click += new System.EventHandler(this.incredientsToolStripMenuItem1_Click);
             // 
@@ -291,8 +293,9 @@ namespace rmsid2
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(142, 88);
             this.button7.TabIndex = 0;
-            this.button7.Text = "Close Register";
+            this.button7.Text = "Open Register";
             this.button7.UseVisualStyleBackColor = false;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // buttonDelivery
             // 
@@ -319,7 +322,7 @@ namespace rmsid2
             this.dataGridViewOrderlist.Location = new System.Drawing.Point(0, 94);
             this.dataGridViewOrderlist.Name = "dataGridViewOrderlist";
             this.dataGridViewOrderlist.ReadOnly = true;
-            this.dataGridViewOrderlist.Size = new System.Drawing.Size(395, 587);
+            this.dataGridViewOrderlist.Size = new System.Drawing.Size(441, 587);
             this.dataGridViewOrderlist.TabIndex = 0;
             this.dataGridViewOrderlist.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewOrderlist_CellClick);
             // 
@@ -334,7 +337,7 @@ namespace rmsid2
             this.dataGridViewOrderItems.Location = new System.Drawing.Point(0, 0);
             this.dataGridViewOrderItems.Name = "dataGridViewOrderItems";
             this.dataGridViewOrderItems.ReadOnly = true;
-            this.dataGridViewOrderItems.Size = new System.Drawing.Size(281, 470);
+            this.dataGridViewOrderItems.Size = new System.Drawing.Size(235, 473);
             this.dataGridViewOrderItems.TabIndex = 0;
             // 
             // timerfunc
@@ -445,7 +448,7 @@ namespace rmsid2
             // 
             this.textBoxcreditcardpayment.Enabled = false;
             this.textBoxcreditcardpayment.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxcreditcardpayment.Location = new System.Drawing.Point(9, 53);
+            this.textBoxcreditcardpayment.Location = new System.Drawing.Point(9, 56);
             this.textBoxcreditcardpayment.Name = "textBoxcreditcardpayment";
             this.textBoxcreditcardpayment.Size = new System.Drawing.Size(174, 20);
             this.textBoxcreditcardpayment.TabIndex = 1;
@@ -455,7 +458,7 @@ namespace rmsid2
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(9, 35);
+            this.label12.Location = new System.Drawing.Point(10, 37);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(85, 13);
             this.label12.TabIndex = 2;
@@ -959,9 +962,9 @@ namespace rmsid2
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.panel1.Location = new System.Drawing.Point(395, 571);
+            this.panel1.Location = new System.Drawing.Point(447, 571);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(293, 110);
+            this.panel1.Size = new System.Drawing.Size(241, 110);
             this.panel1.TabIndex = 3;
             // 
             // panel2
@@ -969,10 +972,18 @@ namespace rmsid2
             this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel2.Controls.Add(this.dataGridViewOrderItems);
-            this.panel2.Location = new System.Drawing.Point(401, 100);
+            this.panel2.Location = new System.Drawing.Point(447, 97);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(281, 470);
+            this.panel2.Size = new System.Drawing.Size(235, 473);
             this.panel2.TabIndex = 4;
+            // 
+            // TakeAwayprintDocument
+            // 
+            this.TakeAwayprintDocument.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.TakeAwayprintDocument_PrintPage);
+            // 
+            // printRegisterDcoumentDocument
+            // 
+            this.printRegisterDcoumentDocument.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printRegisterDcoumentDocument_PrintPage);
             // 
             // Dashboard
             // 
@@ -1085,5 +1096,7 @@ namespace rmsid2
         private System.Windows.Forms.CheckBox checkBoxcard;
         private System.Windows.Forms.TextBox textBoxcreditcardpayment;
         private System.Windows.Forms.Label label12;
+        private System.Drawing.Printing.PrintDocument TakeAwayprintDocument;
+        private System.Drawing.Printing.PrintDocument printRegisterDcoumentDocument;
     }
 }

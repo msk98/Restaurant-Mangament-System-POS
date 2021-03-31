@@ -78,13 +78,14 @@ namespace rmsid2
         private void buttonClose_Click(object sender, EventArgs e)
         {
             Connection conn = new Connection();
-            if((radioButtoncash.Checked || radioButtonCode.Checked || radioButtonpercentage.Checked) && textBoxDiscountPrice.Text!="")
+           
+            if ((radioButtoncash.Checked || radioButtonCode.Checked || radioButtonpercentage.Checked) && textBoxDiscountPrice.Text!="")
             if (radioButtoncash.Checked)
                 conn.insertdisamnt(dt.orderid, Int16.Parse(textBoxDiscountPrice.Text), "Cash Discount");
             else if(radioButtonpercentage.Checked)
                 conn.insertdisamnt(dt.orderid, Int16.Parse(textBoxDiscountPrice.Text), "Percentage Discount");
             else
-                conn.insertdisamnt(dt.orderid, Int16.Parse(textBoxDiscountPrice.Text), comboBoxpromo.SelectedItem.ToString());
+                conn.insertdisamnt(dt.orderid, Int16.Parse(textBoxDiscountPrice.Text), dt.DiscountType);
             this.Close();
         }
         public void getdiscounts()
@@ -104,26 +105,7 @@ namespace rmsid2
 
        
 
-        private void comboBoxpromo_SelectedIndexChanged(object sender, EventArgs e)
-        {
-         int disc = 0;
-           if (comboBoxpromo.SelectedIndex != -1 && count!=0)
-           {
-              SqlConnection conn = new SqlConnection(ConnectionString);
-              string sqlquery = "select discount_percentage from discounts where discount_id=@dis_id";
-              conn.Open();
-              SqlCommand cmd = new SqlCommand(sqlquery, conn);
-              cmd.Parameters.AddWithValue("@dis_id", Int16.Parse(comboBoxpromo.SelectedValue.ToString()));
-              SqlDataReader dr = cmd.ExecuteReader();
-            while (dr.Read())
-               {
-                   disc = Int16.Parse(dr["discount_percentage"].ToString());
-               }
-                textBoxDiscountPrice.Text =(dt.totalamnt* disc/100.0).ToString();
-                textBoxprice.Text= (float.Parse(textBoxTotalPrice.Text) - (dt.totalamnt * disc / 100.0)).ToString();
-                conn.Close();
-           }
-        }
+       
         public string afterdiscount
         {
             get { return textBoxprice.Text; }
@@ -156,6 +138,30 @@ namespace rmsid2
             {
                 textBoxDiscountPrice.Text = (dt.totalamnt * (float.Parse(textBoxpercen.Text)/100.0)).ToString();
                 textBoxprice.Text = (float.Parse(textBoxTotalPrice.Text) -(dt.totalamnt * (float.Parse(textBoxpercen.Text) / 100.0))).ToString();
+            }
+        }
+
+        private void comboBoxpromo_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+            int disc = 0;
+            if (comboBoxpromo.SelectedIndex != -1 && count != 0)
+            {
+
+                SqlConnection conn = new SqlConnection(ConnectionString);
+                string sqlquery = "select discount_percentage,discount_name from discounts where discount_id=@dis_id";
+                conn.Open();
+                SqlCommand cmd = new SqlCommand(sqlquery, conn);
+                cmd.Parameters.AddWithValue("@dis_id", Int16.Parse(comboBoxpromo.SelectedValue.ToString()));
+                SqlDataReader dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    disc = Int16.Parse(dr["discount_percentage"].ToString());
+                    dt.DiscountType = (dr["discount_name"].ToString());
+
+                }
+                textBoxDiscountPrice.Text = (dt.totalamnt * disc / 100.0).ToString();
+                textBoxprice.Text = (float.Parse(textBoxTotalPrice.Text) - (dt.totalamnt * disc / 100.0)).ToString();
+                conn.Close();
             }
         }
     }

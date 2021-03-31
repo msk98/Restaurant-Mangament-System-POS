@@ -13,10 +13,13 @@ namespace rmsid2
 {
     public partial class Customers : Form
     {
-        public Customers()
+        public Customers(int userid)
         {
             InitializeComponent();
+            dt.userid = userid;
         }
+        Detail dt = new Detail(); 
+
         int c_id = 0;
         string ConnectionString = "Data Source=DESKTOP-C27B91F;Initial Catalog=rmsid;Integrated Security=True";
         private void buttonAdd_Click(object sender, EventArgs e)
@@ -133,7 +136,7 @@ namespace rmsid2
         {
             if(c_id>0)
             {
-                deliveryboy db = new deliveryboy("Delivery",c_id);
+                deliveryboy db = new deliveryboy("Delivery",c_id, dt.userid);
                db.ShowDialog();
                 this.Hide();
 

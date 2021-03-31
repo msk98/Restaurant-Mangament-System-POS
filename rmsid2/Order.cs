@@ -20,26 +20,29 @@ namespace rmsid2
             InitializeComponent();
         }
         Detail det = new Detail();
-        public Order(string ordertype)
+        public Order(string ordertype,int userid)
         {
             InitializeComponent();
             det.Ordertype = ordertype;
             det.table = "none";
+            det.userid = userid;
         }
      
-        public Order( string ordertype, int c_id,int del_id,string tablename)
+        public Order( string ordertype, int c_id,int del_id,string tablename, int userid)
         {
             InitializeComponent();
             det.Ordertype = ordertype;
             det.custid = c_id;
             det.deliverBoyId = del_id;
             det.table = tablename;
+            det.userid = userid;
         }
-        public Order(string ordertype,string tablename)
+        public Order(string ordertype,string tablename,int userid)
         {
             InitializeComponent();
             det.Ordertype = ordertype;
             det.table = tablename;
+            det.userid = userid;
         }
         string ConnectionString = "Data Source=DESKTOP-C27B91F;Initial Catalog=rmsid;Integrated Security=True";
         int row;
@@ -205,7 +208,6 @@ namespace rmsid2
             if (row > 0)
             {
                 productdataGridView.Rows[row].Selected = false;
-
                 productdataGridView.Rows[--row].Selected = true;
             }
         }
@@ -225,9 +227,7 @@ namespace rmsid2
             {
                 productdataGridView.Rows[row].Selected = false;
                 productdataGridView.Rows[productdataGridView.Rows.Count - 1].Selected = true;
-
                 row = productdataGridView.Rows.Count - 1;
-
             }
         }
 
@@ -299,6 +299,7 @@ namespace rmsid2
                 conn.updatetablestatus(det.table);
                 conn.inserttempOrders(Int16.Parse(textBoxTotalAmount.Text), det.Ordertype, det.table);
                 OrderId = getorderno();
+                conn.insertuserorders(det.userid, OrderId);
                 for (int i = 0; i < productdataGridView.Rows.Count; i++)
                 {
                     conn.inserttempOrdersItems(Convert.ToString(productdataGridView.Rows[i].Cells[1].Value), Int16.Parse(productdataGridView.Rows[i].Cells[2].Value.ToString()), Int16.Parse(productdataGridView.Rows[i].Cells[3].Value.ToString()), Int16.Parse(productdataGridView.Rows[i].Cells[4].Value.ToString()), OrderId, Int16.Parse(productdataGridView.Rows[i].Cells[0].Value.ToString()));
@@ -308,6 +309,7 @@ namespace rmsid2
             {
                 conn.inserttempOrders(Int16.Parse(textBoxTotalAmount.Text), det.Ordertype, det.table);
                 OrderId = getorderno();
+                conn.insertuserorders(det.userid, OrderId);
                 for (int i = 0; i < productdataGridView.Rows.Count; i++)
                 {
                     conn.inserttempOrdersItems(Convert.ToString(productdataGridView.Rows[i].Cells[1].Value), Int16.Parse(productdataGridView.Rows[i].Cells[2].Value.ToString()), Int16.Parse(productdataGridView.Rows[i].Cells[3].Value.ToString()), Int16.Parse(productdataGridView.Rows[i].Cells[4].Value.ToString()), OrderId, Int16.Parse(productdataGridView.Rows[i].Cells[0].Value.ToString()));
@@ -316,50 +318,40 @@ namespace rmsid2
                 conn.insertdeliverorder(det.deliverBoyId, OrderId);
             }
             else if (det.table == "none" && det.Ordertype == "Take Away")
-            {
-                
+            {                
                 conn.inserttempOrders(Int16.Parse(textBoxTotalAmount.Text), det.Ordertype, det.table);
                 OrderId = getorderno();
+                conn.insertuserorders(det.userid, OrderId);
                 for (int i = 0; i <productdataGridView.Rows.Count; i++)
                 {
-                   
-                    conn.inserttempOrdersItems(Convert.ToString(productdataGridView.Rows[i].Cells[1].Value), Int16.Parse(productdataGridView.Rows[i].Cells[2].Value.ToString()), Int16.Parse(productdataGridView.Rows[i].Cells[3].Value.ToString()), Int16.Parse(productdataGridView.Rows[i].Cells[4].Value.ToString()), OrderId, Int16.Parse(productdataGridView.Rows[i].Cells[0].Value.ToString()));
+                   conn.inserttempOrdersItems(Convert.ToString(productdataGridView.Rows[i].Cells[1].Value), Int16.Parse(productdataGridView.Rows[i].Cells[2].Value.ToString()), Int16.Parse(productdataGridView.Rows[i].Cells[3].Value.ToString()), Int16.Parse(productdataGridView.Rows[i].Cells[4].Value.ToString()), OrderId, Int16.Parse(productdataGridView.Rows[i].Cells[0].Value.ToString()));
                 }
                
             }
-
-
-
-
             e.Graphics.DrawString("Kitchen Slip", new Font("monospaced sans serif", 16, FontStyle.Bold), Brushes.Black, new Point(60, y += 20));
             e.Graphics.DrawString("Order Id", new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(5, y += 30));
             e.Graphics.DrawString(OrderId.ToString(), new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(150, y));
             e.Graphics.DrawString("---------------------------------------------------------------------------------", new Font("Arial", 11, FontStyle.Regular), Brushes.Black, new Point(0, y += 20));
-
             e.Graphics.DrawString("Item-Name", new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(5, y += 20));
             e.Graphics.DrawString("Qty", new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(150, y));
             e.Graphics.DrawString("---------------------------------------------------------------------------------", new Font("Arial", 11, FontStyle.Regular), Brushes.Black, new Point(0, y += 20));
 
             for (int i = 0; i < productdataGridView.Rows.Count; i++)
-
             {
-              
-          //   conn.inserttempOrdersItems(Convert.ToString(productdataGridView.Rows[i].Cells[1].Value),Int16.Parse(productdataGridView.Rows[i].Cells[2].Value.ToString()),Int16.Parse(productdataGridView.Rows[i].Cells[3].Value.ToString()),Int16.Parse(productdataGridView.Rows[i].Cells[4].Value.ToString()),OrderId);
+             //   conn.inserttempOrdersItems(Convert.ToString(productdataGridView.Rows[i].Cells[1].Value),Int16.Parse(productdataGridView.Rows[i].Cells[2].Value.ToString()),Int16.Parse(productdataGridView.Rows[i].Cells[3].Value.ToString()),Int16.Parse(productdataGridView.Rows[i].Cells[4].Value.ToString()),OrderId);
                 y = y + 20;
              //   string productid = Convert.ToString(productdataGridView.Rows[i].Cells[0].Value);
-          //      string name = Convert.ToString(productdataGridView.Rows[i].Cells[1].Value);
+             //      string name = Convert.ToString(productdataGridView.Rows[i].Cells[1].Value);
              //   string quantity = Convert.ToString(productdataGridView.Rows[i].Cells[3].Value);
 
                 e.Graphics.DrawString(Convert.ToString(productdataGridView.Rows[i].Cells[1].Value), new Font("monospaced sans serif", 8, FontStyle.Regular), Brushes.Black, new Point(5, y));
                 e.Graphics.DrawString(Convert.ToString(productdataGridView.Rows[i].Cells[3].Value), new Font("monospaced sans serif", 8, FontStyle.Regular), Brushes.Black, new Point(150, y));
-
-            }
+             }
         }
         
         public int getorderno()
         {
             SqlConnection conn = new SqlConnection(ConnectionString);
-
             string sqlquery = "SELECT TOP 1 t_Oid FROM  temp_orders Order by t_Oid desc ";
             conn.Open();
             SqlCommand cmd = new SqlCommand(sqlquery, conn);
@@ -369,8 +361,6 @@ namespace rmsid2
                 int orderId = Int16.Parse(dr["t_Oid"].ToString());
                 conn.Close();
                 return orderId;
-
-
             }
             else
             {
@@ -386,8 +376,12 @@ namespace rmsid2
                 kotprintDocument.DefaultPageSettings.PaperSize = new System.Drawing.Printing.PaperSize("prnm", 285, 600);
                 kotprintDocument.Print();         
                 this.Hide();
-
             }
+        }
+
+        private void buttonClose_Click(object sender, EventArgs e)
+        {
+            this.Hide();
         }
     }
 }

@@ -70,7 +70,7 @@ namespace rmsid2
             this.groupBoxaddProducts.Size = new System.Drawing.Size(435, 339);
             this.groupBoxaddProducts.TabIndex = 6;
             this.groupBoxaddProducts.TabStop = false;
-            this.groupBoxaddProducts.Text = "Add Incredient";
+            this.groupBoxaddProducts.Text = "Add Ingredient";
             // 
             // buttonClose
             // 
@@ -179,18 +179,18 @@ namespace rmsid2
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(36, 202);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(110, 17);
+            this.label3.Size = new System.Drawing.Size(111, 17);
             this.label3.TabIndex = 0;
-            this.label3.Text = "Incredient Qty";
+            this.label3.Text = "Ingredient Qty";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(37, 93);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(126, 17);
+            this.label1.Size = new System.Drawing.Size(127, 17);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Incredient Name";
+            this.label1.Text = "Ingredient Name";
             // 
             // IncredientdataGridView
             // 
@@ -213,7 +213,7 @@ namespace rmsid2
             this.groupBox1.Size = new System.Drawing.Size(340, 55);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Search Incredients By Product";
+            this.groupBox1.Text = "Search Ingredients By Product";
             // 
             // cattextBox
             // 
