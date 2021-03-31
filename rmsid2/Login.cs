@@ -38,7 +38,9 @@ namespace rmsid2
                     MessageBox.Show("error");
             }
             else
-                MessageBox.Show("login");
+                MessageBox.Show("Incorrect username or password");
         }
+
+       
     }
 }

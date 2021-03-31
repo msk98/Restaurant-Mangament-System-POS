@@ -36,6 +36,10 @@ namespace rmsid2
             this.label2 = new System.Windows.Forms.Label();
             this.buttonLogin = new System.Windows.Forms.Button();
             this.buttonExit = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.labelcontact = new System.Windows.Forms.Label();
+            this.poweredbylabel = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // rmslabel
@@ -104,12 +108,45 @@ namespace rmsid2
             this.buttonExit.UseVisualStyleBackColor = true;
             this.buttonExit.Click += new System.EventHandler(this.buttonExit_Click);
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::rmsid2.Properties.Resources.logo;
+            this.pictureBox1.Location = new System.Drawing.Point(15, 326);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(115, 58);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 2;
+            this.pictureBox1.TabStop = false;
+            // 
+            // labelcontact
+            // 
+            this.labelcontact.AutoSize = true;
+            this.labelcontact.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelcontact.Location = new System.Drawing.Point(449, 363);
+            this.labelcontact.Name = "labelcontact";
+            this.labelcontact.Size = new System.Drawing.Size(177, 15);
+            this.labelcontact.TabIndex = 1;
+            this.labelcontact.Text = "Contact Us: 0337-3161567";
+            // 
+            // poweredbylabel
+            // 
+            this.poweredbylabel.AutoSize = true;
+            this.poweredbylabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.poweredbylabel.Location = new System.Drawing.Point(447, 345);
+            this.poweredbylabel.Name = "poweredbylabel";
+            this.poweredbylabel.Size = new System.Drawing.Size(226, 17);
+            this.poweredbylabel.TabIndex = 0;
+            this.poweredbylabel.Text = "Powered By Innovative Ducks ";
+            // 
             // Login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(678, 396);
+            this.Controls.Add(this.labelcontact);
+            this.Controls.Add(this.poweredbylabel);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.buttonExit);
             this.Controls.Add(this.buttonLogin);
             this.Controls.Add(this.label2);
@@ -117,12 +154,14 @@ namespace rmsid2
             this.Controls.Add(this.textBoxpassword);
             this.Controls.Add(this.textBoxusername);
             this.Controls.Add(this.rmslabel);
+            this.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "Login";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Login";
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -136,6 +175,9 @@ namespace rmsid2
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button buttonLogin;
         private System.Windows.Forms.Button buttonExit;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label labelcontact;
+        private System.Windows.Forms.Label poweredbylabel;
     }
 }
 

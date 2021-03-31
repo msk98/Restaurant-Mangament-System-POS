@@ -1,7 +1,7 @@
 ﻿
 namespace rmsid2
 {
-    partial class Inventory
+    partial class disocunts
     {
         /// <summary>
         /// Required designer variable.
@@ -34,15 +34,15 @@ namespace rmsid2
             this.buttonDelete = new System.Windows.Forms.Button();
             this.buttonAdd = new System.Windows.Forms.Button();
             this.buttonUpdate = new System.Windows.Forms.Button();
-            this.textBoxname = new System.Windows.Forms.TextBox();
-            this.textBoxqty = new System.Windows.Forms.TextBox();
+            this.textBoxdisname = new System.Windows.Forms.TextBox();
+            this.textBoxdispercent = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.InventorydataGridView = new System.Windows.Forms.DataGridView();
+            this.label2 = new System.Windows.Forms.Label();
+            this.discountsdataGridView = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.InventextBox = new System.Windows.Forms.TextBox();
+            this.disnametextBox = new System.Windows.Forms.TextBox();
             this.groupBoxaddProducts.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.InventorydataGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.discountsdataGridView)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -52,17 +52,17 @@ namespace rmsid2
             this.groupBoxaddProducts.Controls.Add(this.buttonDelete);
             this.groupBoxaddProducts.Controls.Add(this.buttonAdd);
             this.groupBoxaddProducts.Controls.Add(this.buttonUpdate);
-            this.groupBoxaddProducts.Controls.Add(this.textBoxname);
-            this.groupBoxaddProducts.Controls.Add(this.textBoxqty);
+            this.groupBoxaddProducts.Controls.Add(this.textBoxdisname);
+            this.groupBoxaddProducts.Controls.Add(this.textBoxdispercent);
             this.groupBoxaddProducts.Controls.Add(this.label3);
-            this.groupBoxaddProducts.Controls.Add(this.label1);
+            this.groupBoxaddProducts.Controls.Add(this.label2);
             this.groupBoxaddProducts.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBoxaddProducts.Location = new System.Drawing.Point(575, 39);
+            this.groupBoxaddProducts.Location = new System.Drawing.Point(567, 20);
             this.groupBoxaddProducts.Name = "groupBoxaddProducts";
             this.groupBoxaddProducts.Size = new System.Drawing.Size(435, 339);
-            this.groupBoxaddProducts.TabIndex = 9;
+            this.groupBoxaddProducts.TabIndex = 12;
             this.groupBoxaddProducts.TabStop = false;
-            this.groupBoxaddProducts.Text = "Add Inventory";
+            this.groupBoxaddProducts.Text = "Add Discount";
             // 
             // buttonClose
             // 
@@ -112,91 +112,93 @@ namespace rmsid2
             this.buttonUpdate.UseVisualStyleBackColor = false;
             this.buttonUpdate.Click += new System.EventHandler(this.buttonUpdate_Click);
             // 
-            // textBoxname
+            // textBoxdisname
             // 
-            this.textBoxname.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBoxname.Location = new System.Drawing.Point(168, 96);
-            this.textBoxname.Name = "textBoxname";
-            this.textBoxname.Size = new System.Drawing.Size(240, 23);
-            this.textBoxname.TabIndex = 1;
+            this.textBoxdisname.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBoxdisname.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxdisname.Location = new System.Drawing.Point(168, 88);
+            this.textBoxdisname.Name = "textBoxdisname";
+            this.textBoxdisname.Size = new System.Drawing.Size(240, 26);
+            this.textBoxdisname.TabIndex = 1;
             // 
-            // textBoxqty
+            // textBoxdispercent
             // 
-            this.textBoxqty.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBoxqty.Location = new System.Drawing.Point(167, 139);
-            this.textBoxqty.Name = "textBoxqty";
-            this.textBoxqty.Size = new System.Drawing.Size(240, 23);
-            this.textBoxqty.TabIndex = 1;
+            this.textBoxdispercent.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBoxdispercent.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxdispercent.Location = new System.Drawing.Point(172, 136);
+            this.textBoxdispercent.Name = "textBoxdispercent";
+            this.textBoxdispercent.Size = new System.Drawing.Size(240, 26);
+            this.textBoxdispercent.TabIndex = 1;
+            this.textBoxdispercent.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxdispercent_KeyPress);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(36, 145);
+            this.label3.Location = new System.Drawing.Point(19, 141);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(69, 17);
+            this.label3.Size = new System.Drawing.Size(150, 17);
             this.label3.TabIndex = 0;
-            this.label3.Text = "Quantity";
+            this.label3.Text = "Discount In Percent";
             // 
-            // label1
+            // label2
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(36, 100);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(49, 17);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Name";
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(27, 91);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(49, 17);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "Name";
             // 
-            // InventorydataGridView
+            // discountsdataGridView
             // 
-            this.InventorydataGridView.AllowUserToAddRows = false;
-            this.InventorydataGridView.AllowUserToDeleteRows = false;
-            this.InventorydataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.InventorydataGridView.Location = new System.Drawing.Point(26, 95);
-            this.InventorydataGridView.Name = "InventorydataGridView";
-            this.InventorydataGridView.ReadOnly = true;
-            this.InventorydataGridView.Size = new System.Drawing.Size(494, 283);
-            this.InventorydataGridView.TabIndex = 8;
-            this.InventorydataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.InventorydataGridView_CellClick);
+            this.discountsdataGridView.AllowUserToAddRows = false;
+            this.discountsdataGridView.AllowUserToDeleteRows = false;
+            this.discountsdataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.discountsdataGridView.Location = new System.Drawing.Point(18, 76);
+            this.discountsdataGridView.Name = "discountsdataGridView";
+            this.discountsdataGridView.ReadOnly = true;
+            this.discountsdataGridView.Size = new System.Drawing.Size(494, 283);
+            this.discountsdataGridView.TabIndex = 11;
+            this.discountsdataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.discountsdataGridView_CellClick);
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.InventextBox);
+            this.groupBox1.Controls.Add(this.disnametextBox);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(86, 34);
+            this.groupBox1.Location = new System.Drawing.Point(78, 15);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(340, 55);
-            this.groupBox1.TabIndex = 7;
+            this.groupBox1.TabIndex = 10;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Search Inventory  By Name";
+            this.groupBox1.Text = "Search Discounts  By Name";
             // 
-            // InventextBox
+            // disnametextBox
             // 
-            this.InventextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.InventextBox.Location = new System.Drawing.Point(11, 22);
-            this.InventextBox.Name = "InventextBox";
-            this.InventextBox.Size = new System.Drawing.Size(320, 23);
-            this.InventextBox.TabIndex = 1;
-            this.InventextBox.TextChanged += new System.EventHandler(this.InventextBox_TextChanged);
+            this.disnametextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.disnametextBox.Location = new System.Drawing.Point(11, 22);
+            this.disnametextBox.Name = "disnametextBox";
+            this.disnametextBox.Size = new System.Drawing.Size(320, 23);
+            this.disnametextBox.TabIndex = 1;
+            this.disnametextBox.TextChanged += new System.EventHandler(this.disnametextBox_TextChanged);
             // 
-            // Inventory
+            // disocunts
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1036, 413);
+            this.ClientSize = new System.Drawing.Size(1020, 374);
             this.Controls.Add(this.groupBoxaddProducts);
-            this.Controls.Add(this.InventorydataGridView);
+            this.Controls.Add(this.discountsdataGridView);
             this.Controls.Add(this.groupBox1);
-            this.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(4);
-            this.Name = "Inventory";
+            this.Name = "disocunts";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Inventory";
-            this.Load += new System.EventHandler(this.Inventory_Load);
+            this.Text = "disocunts";
+            this.Load += new System.EventHandler(this.disocunts_Load);
             this.groupBoxaddProducts.ResumeLayout(false);
             this.groupBoxaddProducts.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.InventorydataGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.discountsdataGridView)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
@@ -210,12 +212,12 @@ namespace rmsid2
         private System.Windows.Forms.Button buttonDelete;
         private System.Windows.Forms.Button buttonAdd;
         private System.Windows.Forms.Button buttonUpdate;
-        private System.Windows.Forms.TextBox textBoxqty;
+        private System.Windows.Forms.TextBox textBoxdispercent;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.DataGridView InventorydataGridView;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.DataGridView discountsdataGridView;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.TextBox InventextBox;
-        private System.Windows.Forms.TextBox textBoxname;
+        private System.Windows.Forms.TextBox disnametextBox;
+        private System.Windows.Forms.TextBox textBoxdisname;
     }
 }

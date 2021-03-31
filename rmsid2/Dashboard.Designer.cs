@@ -30,6 +30,7 @@ namespace rmsid2
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Dashboard));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.buttonHome = new System.Windows.Forms.Button();
             this.buttonTakeAway = new System.Windows.Forms.Button();
@@ -41,7 +42,7 @@ namespace rmsid2
             this.categoriesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.inventoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.discountToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.incredientsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.deliveryBoyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.button5 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
@@ -71,6 +72,7 @@ namespace rmsid2
             this.checkBoxservicecharges = new System.Windows.Forms.CheckBox();
             this.checkBoxtax = new System.Windows.Forms.CheckBox();
             this.textBoxdiscount = new System.Windows.Forms.TextBox();
+            this.buttonLogout = new System.Windows.Forms.Button();
             this.buttonundoDis = new System.Windows.Forms.Button();
             this.buttonDISCOUNT = new System.Windows.Forms.Button();
             this.textBoxtax = new System.Windows.Forms.TextBox();
@@ -102,9 +104,13 @@ namespace rmsid2
             this.button11 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.labelcontact = new System.Windows.Forms.Label();
+            this.poweredbylabel = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.TakeAwayprintDocument = new System.Drawing.Printing.PrintDocument();
             this.printRegisterDcoumentDocument = new System.Drawing.Printing.PrintDocument();
+            this.buttonriders = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewOrderlist)).BeginInit();
@@ -114,6 +120,8 @@ namespace rmsid2
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDowntax)).BeginInit();
+            this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -207,7 +215,7 @@ namespace rmsid2
             this.categoriesToolStripMenuItem,
             this.inventoryToolStripMenuItem,
             this.discountToolStripMenuItem,
-            this.incredientsToolStripMenuItem1});
+            this.deliveryBoyToolStripMenuItem});
             this.menuToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.menuToolStripMenuItem.Name = "menuToolStripMenuItem";
             this.menuToolStripMenuItem.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -217,43 +225,42 @@ namespace rmsid2
             // menuItemsToolStripMenuItem
             // 
             this.menuItemsToolStripMenuItem.Name = "menuItemsToolStripMenuItem";
-            this.menuItemsToolStripMenuItem.Size = new System.Drawing.Size(155, 24);
+            this.menuItemsToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
             this.menuItemsToolStripMenuItem.Text = "Menu Items";
             this.menuItemsToolStripMenuItem.Click += new System.EventHandler(this.menuItemsToolStripMenuItem_Click);
             // 
             // incredientsToolStripMenuItem
             // 
             this.incredientsToolStripMenuItem.Name = "incredientsToolStripMenuItem";
-            this.incredientsToolStripMenuItem.Size = new System.Drawing.Size(155, 24);
-            this.incredientsToolStripMenuItem.Text = "Incredients";
+            this.incredientsToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
+            this.incredientsToolStripMenuItem.Text = "Ingredients";
             this.incredientsToolStripMenuItem.Click += new System.EventHandler(this.incredientsToolStripMenuItem_Click);
             // 
             // categoriesToolStripMenuItem
             // 
             this.categoriesToolStripMenuItem.Name = "categoriesToolStripMenuItem";
-            this.categoriesToolStripMenuItem.Size = new System.Drawing.Size(155, 24);
+            this.categoriesToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
             this.categoriesToolStripMenuItem.Text = "Categories";
             this.categoriesToolStripMenuItem.Click += new System.EventHandler(this.categoriesToolStripMenuItem_Click);
             // 
             // inventoryToolStripMenuItem
             // 
             this.inventoryToolStripMenuItem.Name = "inventoryToolStripMenuItem";
-            this.inventoryToolStripMenuItem.Size = new System.Drawing.Size(155, 24);
+            this.inventoryToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
             this.inventoryToolStripMenuItem.Text = "Inventory";
             this.inventoryToolStripMenuItem.Click += new System.EventHandler(this.inventoryToolStripMenuItem_Click);
             // 
             // discountToolStripMenuItem
             // 
             this.discountToolStripMenuItem.Name = "discountToolStripMenuItem";
-            this.discountToolStripMenuItem.Size = new System.Drawing.Size(155, 24);
+            this.discountToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
             this.discountToolStripMenuItem.Text = "Discounts";
+            this.discountToolStripMenuItem.Click += new System.EventHandler(this.discountToolStripMenuItem_Click);
             // 
-            // incredientsToolStripMenuItem1
+            // deliveryBoyToolStripMenuItem
             // 
-            this.incredientsToolStripMenuItem1.Name = "incredientsToolStripMenuItem1";
-            this.incredientsToolStripMenuItem1.Size = new System.Drawing.Size(155, 24);
-            this.incredientsToolStripMenuItem1.Text = "Incredients";
-            this.incredientsToolStripMenuItem1.Click += new System.EventHandler(this.incredientsToolStripMenuItem1_Click);
+            this.deliveryBoyToolStripMenuItem.Name = "deliveryBoyToolStripMenuItem";
+            this.deliveryBoyToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
             // 
             // button5
             // 
@@ -349,9 +356,9 @@ namespace rmsid2
             // ButtonOrdernow
             // 
             this.ButtonOrdernow.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ButtonOrdernow.Location = new System.Drawing.Point(371, 538);
+            this.ButtonOrdernow.Location = new System.Drawing.Point(364, 149);
             this.ButtonOrdernow.Name = "ButtonOrdernow";
-            this.ButtonOrdernow.Size = new System.Drawing.Size(95, 28);
+            this.ButtonOrdernow.Size = new System.Drawing.Size(120, 28);
             this.ButtonOrdernow.TabIndex = 1;
             this.ButtonOrdernow.Text = "Order Confirm";
             this.ButtonOrdernow.UseVisualStyleBackColor = true;
@@ -379,6 +386,8 @@ namespace rmsid2
             this.groupBox1.Controls.Add(this.checkBoxservicecharges);
             this.groupBox1.Controls.Add(this.checkBoxtax);
             this.groupBox1.Controls.Add(this.textBoxdiscount);
+            this.groupBox1.Controls.Add(this.buttonLogout);
+            this.groupBox1.Controls.Add(this.buttonriders);
             this.groupBox1.Controls.Add(this.ButtonOrdernow);
             this.groupBox1.Controls.Add(this.buttonundoDis);
             this.groupBox1.Controls.Add(this.buttonDISCOUNT);
@@ -644,6 +653,17 @@ namespace rmsid2
             this.textBoxdiscount.Size = new System.Drawing.Size(100, 23);
             this.textBoxdiscount.TabIndex = 3;
             this.textBoxdiscount.Text = "0.0";
+            // 
+            // buttonLogout
+            // 
+            this.buttonLogout.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonLogout.Location = new System.Drawing.Point(406, 550);
+            this.buttonLogout.Name = "buttonLogout";
+            this.buttonLogout.Size = new System.Drawing.Size(78, 25);
+            this.buttonLogout.TabIndex = 1;
+            this.buttonLogout.Text = "Logout";
+            this.buttonLogout.UseVisualStyleBackColor = true;
+            this.buttonLogout.Click += new System.EventHandler(this.buttonLogout_Click);
             // 
             // buttonundoDis
             // 
@@ -962,10 +982,42 @@ namespace rmsid2
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.panel1.Controls.Add(this.pictureBox1);
+            this.panel1.Controls.Add(this.labelcontact);
+            this.panel1.Controls.Add(this.poweredbylabel);
             this.panel1.Location = new System.Drawing.Point(447, 571);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(241, 110);
             this.panel1.TabIndex = 3;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::rmsid2.Properties.Resources.logo;
+            this.pictureBox1.Location = new System.Drawing.Point(67, 10);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(100, 50);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 2;
+            this.pictureBox1.TabStop = false;
+            // 
+            // labelcontact
+            // 
+            this.labelcontact.AutoSize = true;
+            this.labelcontact.Location = new System.Drawing.Point(47, 87);
+            this.labelcontact.Name = "labelcontact";
+            this.labelcontact.Size = new System.Drawing.Size(135, 13);
+            this.labelcontact.TabIndex = 1;
+            this.labelcontact.Text = "Contact Us: 0337-3161567";
+            // 
+            // poweredbylabel
+            // 
+            this.poweredbylabel.AutoSize = true;
+            this.poweredbylabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.poweredbylabel.Location = new System.Drawing.Point(8, 66);
+            this.poweredbylabel.Name = "poweredbylabel";
+            this.poweredbylabel.Size = new System.Drawing.Size(226, 17);
+            this.poweredbylabel.TabIndex = 0;
+            this.poweredbylabel.Text = "Powered By Innovative Ducks ";
             // 
             // panel2
             // 
@@ -985,6 +1037,17 @@ namespace rmsid2
             // 
             this.printRegisterDcoumentDocument.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printRegisterDcoumentDocument_PrintPage);
             // 
+            // buttonriders
+            // 
+            this.buttonriders.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonriders.Location = new System.Drawing.Point(237, 547);
+            this.buttonriders.Name = "buttonriders";
+            this.buttonriders.Size = new System.Drawing.Size(120, 28);
+            this.buttonriders.TabIndex = 1;
+            this.buttonriders.Text = "Riders";
+            this.buttonriders.UseVisualStyleBackColor = true;
+            this.buttonriders.Click += new System.EventHandler(this.buttonriders_Click);
+            // 
             // Dashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -996,10 +1059,12 @@ namespace rmsid2
             this.Controls.Add(this.dataGridViewOrderlist);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Dashboard";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Dashboard";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Dashboard_FormClosing);
             this.Load += new System.EventHandler(this.Dashboard_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
@@ -1016,6 +1081,9 @@ namespace rmsid2
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDowntax)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -1091,12 +1159,17 @@ namespace rmsid2
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Button buttonundoDis;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.ToolStripMenuItem incredientsToolStripMenuItem1;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.CheckBox checkBoxcard;
         private System.Windows.Forms.TextBox textBoxcreditcardpayment;
         private System.Windows.Forms.Label label12;
         private System.Drawing.Printing.PrintDocument TakeAwayprintDocument;
         private System.Drawing.Printing.PrintDocument printRegisterDcoumentDocument;
+        private System.Windows.Forms.Button buttonLogout;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label labelcontact;
+        private System.Windows.Forms.Label poweredbylabel;
+        private System.Windows.Forms.ToolStripMenuItem deliveryBoyToolStripMenuItem;
+        private System.Windows.Forms.Button buttonriders;
     }
 }

@@ -44,7 +44,7 @@ namespace rmsid2
         private void textBoxSearchNumber_TextChanged(object sender, EventArgs e)
         {
             Connection conn = new Connection();
-            SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM customer where cust_phone='" + textBoxPhoneno.Text + "%'", ConnectionString);
+            SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM customer where cust_phone like '" + textBoxPhoneno.Text + "'%", ConnectionString);
             DataSet ds = new DataSet();
             da.Fill(ds, "customers");
             dataGridViewCustomers.DataSource = ds.Tables["customers"].DefaultView;

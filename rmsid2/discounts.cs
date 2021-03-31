@@ -34,26 +34,29 @@ namespace rmsid2
             {
                 conn.insertdiscounts(textBoxdisname.Text, Int16.Parse(textBoxdispercent.Text));
                 clear();
+                getdiscounts();
             }
         }
 
         private void buttonUpdate_Click(object sender, EventArgs e)
         {
             Connection conn = new Connection();
-            if (disId!=0 && textBoxdisname.Text.Length > 0 && textBoxdispercent.Text.Length > 0)
+            if (disId != 0 && textBoxdisname.Text != "" && textBoxdispercent.Text != "")
             {
                 conn.updatedis(disId, textBoxdisname.Text, Int16.Parse(textBoxdispercent.Text));
                 clear();
+                getdiscounts();
             }
         }
 
         private void buttonDelete_Click(object sender, EventArgs e)
         {
             Connection conn = new Connection();
-            if (disId != 0 && textBoxdisname.Text.Length > 0 && textBoxdispercent.Text.Length > 0)
+            if (disId != 0 )
             {
                 conn.delDiss(disId);
                 clear();
+                getdiscounts();
             }
         }
 
@@ -85,7 +88,20 @@ namespace rmsid2
 
         private void discountsdataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (e.RowIndex >= 0)
+            {
+                //  settnullValue();
+                DataGridViewRow row = discountsdataGridView.Rows[e.RowIndex];
+                disId = Int16.Parse(row.Cells[0].Value.ToString());
+                textBoxdisname.Text = (row.Cells[1].Value.ToString());
+                textBoxdispercent.Text = row.Cells[2].Value.ToString();
 
+            }
+        }
+
+        private void buttonClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

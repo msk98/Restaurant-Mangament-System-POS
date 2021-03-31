@@ -211,10 +211,11 @@ namespace rmsid2
             // 
             // buttonSearch
             // 
+            this.buttonSearch.Enabled = false;
             this.buttonSearch.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.buttonSearch.Location = new System.Drawing.Point(183, 29);
             this.buttonSearch.Name = "buttonSearch";
-            this.buttonSearch.Size = new System.Drawing.Size(119, 30);
+            this.buttonSearch.Size = new System.Drawing.Size(140, 30);
             this.buttonSearch.TabIndex = 2;
             this.buttonSearch.Text = "Search by Phone";
             this.buttonSearch.UseVisualStyleBackColor = true;

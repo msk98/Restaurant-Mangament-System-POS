@@ -99,6 +99,13 @@ namespace rmsid2
             this.Hide();
         }
 
-       
+        private void tabletextBox_TextChanged(object sender, EventArgs e)
+        {
+            Connection conn = new Connection();
+            SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM tables where t_name like'" + tabletextBox.Text + "'%", ConnectionString);
+            DataSet ds = new DataSet();
+            da.Fill(ds, "tables");
+            TablesdataGridView.DataSource = ds.Tables["tables"].DefaultView;
+        }
     }
 }

@@ -167,7 +167,7 @@ namespace rmsid2
         private void ProdtextBox_TextChanged(object sender, EventArgs e)
         {
             Connection conn = new Connection();
-            SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM products where p_name='"+ ProdtextBox.Text+"'", ConnectionString);
+            SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM products where p_name like '"+ ProdtextBox.Text+"'%", ConnectionString);
             DataSet ds = new DataSet();
             da.Fill(ds, "products");
             ProductsdataGridView.DataSource = ds.Tables["products"].DefaultView;

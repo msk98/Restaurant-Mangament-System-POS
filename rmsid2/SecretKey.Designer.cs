@@ -312,6 +312,7 @@ namespace rmsid2
             this.Controls.Add(this.buttonok);
             this.Controls.Add(this.cancelbutton);
             this.Controls.Add(this.panel1);
+            this.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.Color.Black;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
@@ -321,6 +322,7 @@ namespace rmsid2
             this.Name = "SecretKey";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "SecretKey";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.SecretKey_FormClosed);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);

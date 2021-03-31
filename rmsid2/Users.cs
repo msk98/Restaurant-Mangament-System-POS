@@ -31,7 +31,7 @@ namespace rmsid2
         public void getusers()
         {
             Connection conn = new Connection();
-            SqlDataAdapter da = new SqlDataAdapter("select user_id as UserId ,username as UserName,user_pass,user_lastlogin as LastLogin,user_lastlogout as LastLogout,user_privelage as privileges from users where username like'"+ usertextBox.Text+ "%';", ConnectionString);
+            SqlDataAdapter da = new SqlDataAdapter("select user_id as UserId ,username as UserName,user_pass,user_lastlogin as LastLogin,user_lastlogout as LastLogout,user_privelage as privileges from users where username like'"+ usertextBox.Text+ "'%;", ConnectionString);
             DataSet ds = new DataSet();
             da.Fill(ds, "Users");
             userssdataGridView.DataSource = ds.Tables["Users"].DefaultView;
@@ -44,6 +44,7 @@ namespace rmsid2
             {
                 conn.insertusers(textBoxname.Text,textBoxpass.Text,comboBoxpriv.SelectedItem.ToString());
                 clear();
+                getusers();
             }
         }
         public void clear()
@@ -60,6 +61,7 @@ namespace rmsid2
             {
                 conn.updateusers(User_id, textBoxname.Text, textBoxpass.Text, comboBoxpriv.SelectedItem.ToString());
                 clear();
+                getusers();
             }
         }
 
@@ -70,6 +72,7 @@ namespace rmsid2
             {
                 conn.delUsers(User_id);
                 clear();
+                getusers();
             }
         }
 

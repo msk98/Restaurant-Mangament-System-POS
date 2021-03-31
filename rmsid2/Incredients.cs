@@ -203,5 +203,14 @@ namespace rmsid2
         {
             this.Hide();
         }
+
+        private void cattextBox_TextChanged(object sender, EventArgs e)
+        {
+            Connection conn = new Connection();
+            SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM Products where p_name like'" + cattextBox.Text + "'%", ConnectionString);
+            DataSet ds = new DataSet();
+            da.Fill(ds, "Products");
+            IncredientdataGridView.DataSource = ds.Tables["Products"].DefaultView;
+        }
     }
 }

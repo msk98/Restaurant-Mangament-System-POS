@@ -120,5 +120,10 @@ namespace rmsid2
                 e.Handled = true;
             }
         }
+
+        private void buttonCancel_Click(object sender, EventArgs e)
+        {
+            textBoxQuantity.Text = "0";
+        }
     }
 }

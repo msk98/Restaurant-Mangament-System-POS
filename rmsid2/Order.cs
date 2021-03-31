@@ -245,7 +245,7 @@ namespace rmsid2
             }
             catch (InvalidOperationException ex)
             {
-
+                //MessageBox.Show(ex.ToString());
             }
         }
 

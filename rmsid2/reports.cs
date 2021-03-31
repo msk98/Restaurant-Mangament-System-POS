@@ -158,6 +158,18 @@ namespace rmsid2
         {
             SecretKey sk =new  SecretKey(StartDate, EndDate);
             sk.ShowDialog();
+            Connection conn = new Connection();
+            if(sk.textBox !="0")
+            {
+                if (conn.checkSecretKey(Int16.Parse(sk.textBox)) > 0)
+                {
+                    if (conn.deldateOrders(StartDate, EndDate))
+                    {
+                        MessageBox.Show("deleted");
+                    }
+                }
+            }
+         
             dataGridVieworderitems.Refresh();
             dataGridorders.Refresh();
         }

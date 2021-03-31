@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "rmsid2", "rmsid2\rmsid2.csproj", "{717536C8-F2B6-48AE-8981-726FAA2228E7}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "rmsidsetup", "rmsidsetup\rmsidsetup.vdproj", "{E751E1B0-92D3-44A8-B58D-5471D7D89802}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,8 @@ Global
 		{717536C8-F2B6-48AE-8981-726FAA2228E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{717536C8-F2B6-48AE-8981-726FAA2228E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{717536C8-F2B6-48AE-8981-726FAA2228E7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E751E1B0-92D3-44A8-B58D-5471D7D89802}.Debug|Any CPU.ActiveCfg = Debug
+		{E751E1B0-92D3-44A8-B58D-5471D7D89802}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

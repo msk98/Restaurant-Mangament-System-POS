@@ -30,6 +30,7 @@ namespace rmsid2
         private void InitializeComponent()
         {
             this.groupBoxaddProducts = new System.Windows.Forms.GroupBox();
+            this.checkBoxshow = new System.Windows.Forms.CheckBox();
             this.comboBoxpriv = new System.Windows.Forms.ComboBox();
             this.buttonClose = new System.Windows.Forms.Button();
             this.buttonDelete = new System.Windows.Forms.Button();
@@ -43,7 +44,6 @@ namespace rmsid2
             this.userssdataGridView = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.usertextBox = new System.Windows.Forms.TextBox();
-            this.checkBoxshow = new System.Windows.Forms.CheckBox();
             this.groupBoxaddProducts.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.userssdataGridView)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -69,6 +69,18 @@ namespace rmsid2
             this.groupBoxaddProducts.TabIndex = 12;
             this.groupBoxaddProducts.TabStop = false;
             this.groupBoxaddProducts.Text = "Add User";
+            // 
+            // checkBoxshow
+            // 
+            this.checkBoxshow.AutoSize = true;
+            this.checkBoxshow.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBoxshow.Location = new System.Drawing.Point(168, 136);
+            this.checkBoxshow.Name = "checkBoxshow";
+            this.checkBoxshow.Size = new System.Drawing.Size(53, 17);
+            this.checkBoxshow.TabIndex = 5;
+            this.checkBoxshow.Text = "Show";
+            this.checkBoxshow.UseVisualStyleBackColor = true;
+            this.checkBoxshow.CheckedChanged += new System.EventHandler(this.checkBoxshow_CheckedChanged);
             // 
             // comboBoxpriv
             // 
@@ -205,18 +217,6 @@ namespace rmsid2
             this.usertextBox.TabIndex = 1;
             this.usertextBox.TextChanged += new System.EventHandler(this.InventextBox_TextChanged);
             // 
-            // checkBoxshow
-            // 
-            this.checkBoxshow.AutoSize = true;
-            this.checkBoxshow.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBoxshow.Location = new System.Drawing.Point(168, 136);
-            this.checkBoxshow.Name = "checkBoxshow";
-            this.checkBoxshow.Size = new System.Drawing.Size(53, 17);
-            this.checkBoxshow.TabIndex = 5;
-            this.checkBoxshow.Text = "Show";
-            this.checkBoxshow.UseVisualStyleBackColor = true;
-            this.checkBoxshow.CheckedChanged += new System.EventHandler(this.checkBoxshow_CheckedChanged);
-            // 
             // Users
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -225,6 +225,7 @@ namespace rmsid2
             this.Controls.Add(this.groupBoxaddProducts);
             this.Controls.Add(this.userssdataGridView);
             this.Controls.Add(this.groupBox1);
+            this.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(4);

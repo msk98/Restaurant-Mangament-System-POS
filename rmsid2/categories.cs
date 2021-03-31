@@ -130,10 +130,10 @@ namespace rmsid2
         private void cattextBox_TextChanged(object sender, EventArgs e)
         {
             Connection conn = new Connection();
-            SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM categories where C_name='"+cattextBox.Text+"' ", ConnectionString);
+            SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM categories where C_name like'"+cattextBox.Text+"'% ", ConnectionString);
             DataSet ds = new DataSet();
-            da.Fill(ds, "products");
-            CatdataGridView.DataSource = ds.Tables["products"].DefaultView;
+            da.Fill(ds, "categories");
+            CatdataGridView.DataSource = ds.Tables["categories"].DefaultView;
         }
 
         private void buttonClose_Click(object sender, EventArgs e)

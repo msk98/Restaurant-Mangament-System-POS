@@ -1,7 +1,7 @@
 ﻿
 namespace rmsid2
 {
-    partial class disocunts
+    partial class deliveryboys
     {
         /// <summary>
         /// Required designer variable.
@@ -34,15 +34,15 @@ namespace rmsid2
             this.buttonDelete = new System.Windows.Forms.Button();
             this.buttonAdd = new System.Windows.Forms.Button();
             this.buttonUpdate = new System.Windows.Forms.Button();
-            this.textBoxdisname = new System.Windows.Forms.TextBox();
-            this.textBoxdispercent = new System.Windows.Forms.TextBox();
+            this.textBoxname = new System.Windows.Forms.TextBox();
+            this.textBoxphoneno = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.discountsdataGridView = new System.Windows.Forms.DataGridView();
+            this.label1 = new System.Windows.Forms.Label();
+            this.RidersdataGridView = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.disnametextBox = new System.Windows.Forms.TextBox();
+            this.RiderNametextBox = new System.Windows.Forms.TextBox();
             this.groupBoxaddProducts.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.discountsdataGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.RidersdataGridView)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -52,17 +52,17 @@ namespace rmsid2
             this.groupBoxaddProducts.Controls.Add(this.buttonDelete);
             this.groupBoxaddProducts.Controls.Add(this.buttonAdd);
             this.groupBoxaddProducts.Controls.Add(this.buttonUpdate);
-            this.groupBoxaddProducts.Controls.Add(this.textBoxdisname);
-            this.groupBoxaddProducts.Controls.Add(this.textBoxdispercent);
+            this.groupBoxaddProducts.Controls.Add(this.textBoxname);
+            this.groupBoxaddProducts.Controls.Add(this.textBoxphoneno);
             this.groupBoxaddProducts.Controls.Add(this.label3);
-            this.groupBoxaddProducts.Controls.Add(this.label2);
+            this.groupBoxaddProducts.Controls.Add(this.label1);
             this.groupBoxaddProducts.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBoxaddProducts.Location = new System.Drawing.Point(567, 20);
+            this.groupBoxaddProducts.Location = new System.Drawing.Point(575, 39);
             this.groupBoxaddProducts.Name = "groupBoxaddProducts";
             this.groupBoxaddProducts.Size = new System.Drawing.Size(435, 339);
             this.groupBoxaddProducts.TabIndex = 12;
             this.groupBoxaddProducts.TabStop = false;
-            this.groupBoxaddProducts.Text = "Add Discount";
+            this.groupBoxaddProducts.Text = "Add Rider";
             // 
             // buttonClose
             // 
@@ -74,6 +74,7 @@ namespace rmsid2
             this.buttonClose.TabIndex = 3;
             this.buttonClose.Text = "Close";
             this.buttonClose.UseVisualStyleBackColor = false;
+            this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
             // 
             // buttonDelete
             // 
@@ -111,93 +112,89 @@ namespace rmsid2
             this.buttonUpdate.UseVisualStyleBackColor = false;
             this.buttonUpdate.Click += new System.EventHandler(this.buttonUpdate_Click);
             // 
-            // textBoxdisname
+            // textBoxname
             // 
-            this.textBoxdisname.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBoxdisname.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxdisname.Location = new System.Drawing.Point(168, 88);
-            this.textBoxdisname.Name = "textBoxdisname";
-            this.textBoxdisname.Size = new System.Drawing.Size(240, 26);
-            this.textBoxdisname.TabIndex = 1;
+            this.textBoxname.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBoxname.Location = new System.Drawing.Point(168, 96);
+            this.textBoxname.Name = "textBoxname";
+            this.textBoxname.Size = new System.Drawing.Size(240, 23);
+            this.textBoxname.TabIndex = 1;
             // 
-            // textBoxdispercent
+            // textBoxphoneno
             // 
-            this.textBoxdispercent.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBoxdispercent.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxdispercent.Location = new System.Drawing.Point(172, 136);
-            this.textBoxdispercent.Name = "textBoxdispercent";
-            this.textBoxdispercent.Size = new System.Drawing.Size(240, 26);
-            this.textBoxdispercent.TabIndex = 1;
-            this.textBoxdispercent.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxdispercent_KeyPress);
+            this.textBoxphoneno.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBoxphoneno.Location = new System.Drawing.Point(167, 139);
+            this.textBoxphoneno.Name = "textBoxphoneno";
+            this.textBoxphoneno.Size = new System.Drawing.Size(240, 23);
+            this.textBoxphoneno.TabIndex = 1;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(19, 141);
+            this.label3.Location = new System.Drawing.Point(36, 145);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(150, 17);
+            this.label3.Size = new System.Drawing.Size(115, 17);
             this.label3.TabIndex = 0;
-            this.label3.Text = "Discount In Percent";
+            this.label3.Text = "Phone Number";
             // 
-            // label2
+            // label1
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(27, 91);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(49, 17);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Name";
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(36, 100);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(49, 17);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Name";
             // 
-            // discountsdataGridView
+            // RidersdataGridView
             // 
-            this.discountsdataGridView.AllowUserToAddRows = false;
-            this.discountsdataGridView.AllowUserToDeleteRows = false;
-            this.discountsdataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.discountsdataGridView.Location = new System.Drawing.Point(18, 76);
-            this.discountsdataGridView.Name = "discountsdataGridView";
-            this.discountsdataGridView.ReadOnly = true;
-            this.discountsdataGridView.Size = new System.Drawing.Size(494, 283);
-            this.discountsdataGridView.TabIndex = 11;
-            this.discountsdataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.discountsdataGridView_CellClick);
+            this.RidersdataGridView.AllowUserToAddRows = false;
+            this.RidersdataGridView.AllowUserToDeleteRows = false;
+            this.RidersdataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.RidersdataGridView.Location = new System.Drawing.Point(26, 95);
+            this.RidersdataGridView.Name = "RidersdataGridView";
+            this.RidersdataGridView.ReadOnly = true;
+            this.RidersdataGridView.Size = new System.Drawing.Size(494, 283);
+            this.RidersdataGridView.TabIndex = 11;
+            this.RidersdataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.RidersdataGridView_CellClick);
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.disnametextBox);
+            this.groupBox1.Controls.Add(this.RiderNametextBox);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(78, 15);
+            this.groupBox1.Location = new System.Drawing.Point(86, 34);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(340, 55);
             this.groupBox1.TabIndex = 10;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Search Discounts  By Name";
+            this.groupBox1.Text = "Search Rider  By Name";
             // 
-            // disnametextBox
+            // RiderNametextBox
             // 
-            this.disnametextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.disnametextBox.Location = new System.Drawing.Point(11, 22);
-            this.disnametextBox.Name = "disnametextBox";
-            this.disnametextBox.Size = new System.Drawing.Size(320, 23);
-            this.disnametextBox.TabIndex = 1;
-            this.disnametextBox.TextChanged += new System.EventHandler(this.disnametextBox_TextChanged);
+            this.RiderNametextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.RiderNametextBox.Location = new System.Drawing.Point(11, 22);
+            this.RiderNametextBox.Name = "RiderNametextBox";
+            this.RiderNametextBox.Size = new System.Drawing.Size(320, 23);
+            this.RiderNametextBox.TabIndex = 1;
             // 
-            // disocunts
+            // deliveryboys
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1020, 374);
+            this.ClientSize = new System.Drawing.Size(1036, 413);
             this.Controls.Add(this.groupBoxaddProducts);
-            this.Controls.Add(this.discountsdataGridView);
+            this.Controls.Add(this.RidersdataGridView);
             this.Controls.Add(this.groupBox1);
+            this.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(4);
-            this.Name = "disocunts";
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Name = "deliveryboys";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "disocunts";
-            this.Load += new System.EventHandler(this.disocunts_Load);
+            this.Text = "deliveryboys";
             this.groupBoxaddProducts.ResumeLayout(false);
             this.groupBoxaddProducts.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.discountsdataGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.RidersdataGridView)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
@@ -211,12 +208,12 @@ namespace rmsid2
         private System.Windows.Forms.Button buttonDelete;
         private System.Windows.Forms.Button buttonAdd;
         private System.Windows.Forms.Button buttonUpdate;
-        private System.Windows.Forms.TextBox textBoxdispercent;
+        private System.Windows.Forms.TextBox textBoxname;
+        private System.Windows.Forms.TextBox textBoxphoneno;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.DataGridView discountsdataGridView;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.DataGridView RidersdataGridView;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.TextBox disnametextBox;
-        private System.Windows.Forms.TextBox textBoxdisname;
+        private System.Windows.Forms.TextBox RiderNametextBox;
     }
 }

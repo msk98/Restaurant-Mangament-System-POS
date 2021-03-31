@@ -94,7 +94,7 @@ namespace rmsid2
         public bool insertlogintime(string username)
         {
             OpenConection();
-            string query = "update users set user_lastlogin=CURRENT_TIMESTAMP where username=@username";
+            string query = "update users set user_lastlogin=getDate(),user_lastlogout='' where username=@username";
             SqlCommand cmd = new SqlCommand(query, con);
             //Pass values to Parameters
             cmd.Parameters.AddWithValue("@username", username);
@@ -561,7 +561,7 @@ namespace rmsid2
         public bool inserttempOrders(int t_netamnt, string t_ordertype, string t_tablename)
         {
             OpenConection();
-            string query = "INSERT INTO temp_orders (t_netamnt,t_tablename,t_ordertype,Dateorder) VALUES(@t_netamnt,@t_tablename,@t_ordertype,CURRENT_TIMESTAMP)";
+            string query = "INSERT INTO temp_orders (t_netamnt,t_tablename,t_ordertype,Dateorder) VALUES(@t_netamnt,@t_tablename,@t_ordertype,getDate())";
             SqlCommand cmd = new SqlCommand(query, con);
             //Pass values to Parameters
             cmd.Parameters.AddWithValue("@t_netamnt",t_netamnt);
@@ -1426,7 +1426,7 @@ namespace rmsid2
         public bool endregister(int userid)
         {
             OpenConection();
-            string query = "INSERT INTO openregister (userid,closeregister) VALUES(@userid,CURRENT_TIMESTAMP)";
+            string query = "INSERT INTO closeregister (userid,closeregister) VALUES(@userid,getDate())";
             SqlCommand cmd = new SqlCommand(query, con);
             //Pass values to Parameters
             cmd.Parameters.AddWithValue("@userid", userid);
@@ -1463,6 +1463,34 @@ namespace rmsid2
             {
                 OpenConection();
                 cmd.ExecuteNonQuery();
+                MessageBox.Show("working");
+                return true;
+            }
+            catch (SqlException e)
+            {
+                string err = "Error Generated. Details: " + e.ToString();
+                MessageBox.Show(err);
+
+                return false;
+            }
+            finally
+            {
+                CloseConnection();
+
+            }
+        }
+
+        public bool updatelastlogin(string username)
+        {
+            OpenConection();
+            string query = "update users set user_lastlogout=getDate() where username=@username";
+            SqlCommand cmd = new SqlCommand(query, con);
+            //Pass values to Parameters
+            cmd.Parameters.AddWithValue("@username", username);
+            try
+            {
+                OpenConection();
+                cmd.ExecuteNonQuery();
 
                 return true;
             }
@@ -1478,6 +1506,7 @@ namespace rmsid2
                 CloseConnection();
 
             }
+         
         }
         public bool deluserorders(int userid, int orderid)
         {
@@ -1540,7 +1569,7 @@ namespace rmsid2
 
             using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
-                SqlCommand command = new SqlCommand("select inventory.Inven_Name as InventoryName,sum(inven_count.incr_qty)/5 as Invenqty from inven_count join  incredients on inven_count.incrd_id=incredients.inc_id  join inventory on incredients.Inven_id=inventory.Inven_id join OrderItems  on  OrderItems.p_id= incredients.p_id join Orders on Orders.t_Oid= OrderItems.t_Oid 	join userord usr on usr.order_id = Orders.t_Oid 	where (Orders.Dateorder between @startdate and @enddate) and   usr.user_id =@user_id group by inventory.Inven_Name;", connection);
+                SqlCommand command = new SqlCommand("select inventory.Inven_Name as InventoryName,isnull(sum(inven_count.incr_qty)/5,0) as Invenqty from inven_count join  incredients on inven_count.incrd_id=incredients.inc_id  join inventory on incredients.Inven_id=inventory.Inven_id join OrderItems  on  OrderItems.p_id= incredients.p_id join Orders on Orders.t_Oid= OrderItems.t_Oid 	join userord usr on usr.order_id = Orders.t_Oid 	where (Orders.Dateorder between @startdate and @enddate) and   usr.user_id =@user_id group by inventory.Inven_Name;", connection);
                 command.Parameters.AddWithValue("@startdate", startdate);
                 command.Parameters.AddWithValue("@enddate", enddate);
                 command.Parameters.AddWithValue("@user_id", user_id);
@@ -1566,7 +1595,7 @@ namespace rmsid2
 
             using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
-                SqlCommand command = new SqlCommand("select sum(discoutAmount.discountAmount) as DiscountAmount, DiscountType from discoutAmount inner join Orders on Orders.t_Oid=discoutAmount.order_id join userord usr on usr.order_id = Orders.t_Oid 	where (Orders.Dateorder between @startdate and @enddate) and   usr.user_id =@user_id  group by discountType;", connection);
+                SqlCommand command = new SqlCommand("select isnull(sum(discoutAmount.discountAmount),0) as DiscountAmount, DiscountType from discoutAmount inner join Orders on Orders.t_Oid=discoutAmount.order_id join userord usr on usr.order_id = Orders.t_Oid 	where (Orders.Dateorder between @startdate and @enddate) and   usr.user_id =@user_id  group by discountType;", connection);
                 command.Parameters.AddWithValue("@startdate", startdate);
                 command.Parameters.AddWithValue("@enddate", enddate);
                 command.Parameters.AddWithValue("@user_id", user_id);
@@ -1594,7 +1623,7 @@ namespace rmsid2
 
             using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
-                SqlCommand command = new SqlCommand("SELECT OrderItems.t_iName as ItemName, sum(OrderItems.t_iqty) as qty from OrderItems inner join Orders on Orders.t_Oid= OrderItems.t_Oid  join userord usr on usr.order_id = Orders.t_Oid 	where (Orders.Dateorder between @startdate and @enddate) and   usr.user_id =@user_id  group by OrderItems.t_iName;", connection);
+                SqlCommand command = new SqlCommand("SELECT OrderItems.t_iName as ItemName, isnull(sum(OrderItems.t_iqty),0) as qty from OrderItems inner join Orders on Orders.t_Oid= OrderItems.t_Oid  join userord usr on usr.order_id = Orders.t_Oid 	where (Orders.Dateorder between @startdate and @enddate) and   usr.user_id =@user_id  group by OrderItems.t_iName;", connection);
                 command.Parameters.AddWithValue("@startdate", startdate);
                 command.Parameters.AddWithValue("@enddate", enddate);
                 command.Parameters.AddWithValue("@user_id", user_id);
@@ -1622,7 +1651,7 @@ namespace rmsid2
 
             using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
-                SqlCommand command = new SqlCommand("SELECT count(t_ordertype) as Orders,sum(Orders.t_netamnt) as netsale,t_ordertype as OrderType from Orders join userord usr on usr.order_id = Orders.t_Oid 	where (Orders.Dateorder between @startdate and @enddate) and   usr.user_id =@user_id  group by t_ordertype;", connection);
+                SqlCommand command = new SqlCommand("SELECT count(t_ordertype) as Orders,isnull(sum(Orders.t_netamnt),0) as netsale,t_ordertype as OrderType from Orders join userord usr on usr.order_id = Orders.t_Oid 	where (Orders.Dateorder between @startdate and @enddate) and   usr.user_id =@user_id  group by t_ordertype;", connection);
                 command.Parameters.AddWithValue("@startdate", startdate);
                 command.Parameters.AddWithValue("@enddate", enddate);
                 command.Parameters.AddWithValue("@user_id", user_id);
@@ -1649,7 +1678,7 @@ namespace rmsid2
 
             using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
-                SqlCommand command = new SqlCommand("select sum(taxAmount) as Taxes from taxAmount inner join Orders on Orders.t_Oid=taxAmount.order_id join userord usr on usr.order_id = Orders.t_Oid 	where (Orders.Dateorder between @startdate and @enddate) and   usr.user_id =@user_id ;", connection);
+                SqlCommand command = new SqlCommand("select isnull(sum(taxAmount),0) as Taxes from taxAmount inner join Orders on Orders.t_Oid=taxAmount.order_id join userord usr on usr.order_id = Orders.t_Oid 	where (Orders.Dateorder between @startdate and @enddate) and   usr.user_id =@user_id ;", connection);
                 command.Parameters.AddWithValue("@startdate", startdate);
                 command.Parameters.AddWithValue("@enddate", enddate);
                 command.Parameters.AddWithValue("@user_id", user_id);
@@ -1675,7 +1704,7 @@ namespace rmsid2
 
             using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
-                SqlCommand command = new SqlCommand("select sum(serviceAmount) as serviceAmount from serviceAmount inner join Orders on Orders.t_Oid=serviceAmount.order_id join userord usr on usr.order_id = Orders.t_Oid 	where (Orders.Dateorder between @startdate and @enddate) and   usr.user_id =@user_id", connection);
+                SqlCommand command = new SqlCommand("select  isnull(sum(serviceAmount),0) as serviceAmount from serviceAmount inner join Orders on Orders.t_Oid=serviceAmount.order_id join userord usr on usr.order_id = Orders.t_Oid 	where (Orders.Dateorder between @startdate and @enddate) and   usr.user_id =@user_id", connection);
                 command.Parameters.AddWithValue("@startdate", startdate);
                 command.Parameters.AddWithValue("@enddate", enddate);
                 command.Parameters.AddWithValue("@user_id", user_id);
@@ -1687,7 +1716,7 @@ namespace rmsid2
                 {
                     while (reader.Read())
                     {
-                        servicecharges = Int16.Parse(reader["Taxes"].ToString());
+                        servicecharges = Int16.Parse(reader["serviceAmount"].ToString());
                     }
                 }
                 connection.Close();
@@ -1701,7 +1730,7 @@ namespace rmsid2
 
             using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
-                SqlCommand command = new SqlCommand("select sum(t_netamnt) as totalamount from Orders  join userord usr on usr.order_id = Orders.t_Oid 	where (Orders.Dateorder between @startdate and @enddate) and   usr.user_id =@user_id", connection);
+                SqlCommand command = new SqlCommand("select  isnull(sum(t_netamnt),0) as totalamount from Orders  join userord usr on usr.order_id = Orders.t_Oid 	where (Orders.Dateorder between @startdate and @enddate) and   usr.user_id =@user_id", connection);
                 command.Parameters.AddWithValue("@startdate", startdate);
                 command.Parameters.AddWithValue("@enddate", enddate);
                 command.Parameters.AddWithValue("@user_id", user_id);
@@ -1747,5 +1776,95 @@ namespace rmsid2
             }
         }
 
+        public bool insertrider(string name,string phonenum)
+        {
+            OpenConection();
+            string query = "INSERT INTO DeliveryBoys (d_name,d_phoneno) VALUES(@name,@phonenum)";
+            SqlCommand cmd = new SqlCommand(query, con);
+            //Pass values to Parameters
+            cmd.Parameters.AddWithValue("@name", name);
+            cmd.Parameters.AddWithValue("@phonenum", phonenum);
+            try
+            {
+                OpenConection();
+                cmd.ExecuteNonQuery();
+
+                return true;
+            }
+            catch (SqlException e)
+            {
+                string err = "Error Generated. Details: " + e.ToString();
+                MessageBox.Show(err);
+
+                return false;
+            }
+            finally
+            {
+                CloseConnection();
+
+            }
+        }
+
+        public bool updaterider(int del_id,string name,string phonenum)
+        {
+            OpenConection();
+            string query = "update DeliveryBoys set d_name=@name,d_phoneno=@phonenum where d_id=@del_id";
+            SqlCommand cmd = new SqlCommand(query, con);
+            //Pass values to Parameters
+            cmd.Parameters.AddWithValue("@name", name);
+            cmd.Parameters.AddWithValue("@phonenum", phonenum);
+            cmd.Parameters.AddWithValue("@del_id", del_id);
+
+            try
+            {
+                OpenConection();
+                cmd.ExecuteNonQuery();
+
+                return true;
+            }
+            catch (SqlException e)
+            {
+                string err = "Error Generated. Details: " + e.ToString();
+                MessageBox.Show(err);
+
+                return false;
+            }
+            finally
+            {
+                CloseConnection();
+
+            }
+
+        }
+        public bool deleterider(int del_id)
+        {
+            OpenConection();
+            string query = "delete from DeliveryBoys d_id=@del_id";
+            SqlCommand cmd = new SqlCommand(query, con);
+            //Pass values to Parameters
+          
+            cmd.Parameters.AddWithValue("@del_id", del_id);
+
+            try
+            {
+                OpenConection();
+                cmd.ExecuteNonQuery();
+
+                return true;
+            }
+            catch (SqlException e)
+            {
+                string err = "Error Generated. Details: " + e.ToString();
+                MessageBox.Show(err);
+
+                return false;
+            }
+            finally
+            {
+                CloseConnection();
+
+            }
+
+        }
     }
 }

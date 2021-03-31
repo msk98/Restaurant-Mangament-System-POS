@@ -189,6 +189,7 @@ namespace rmsid2
             this.Controls.Add(this.groupBoxaddcat);
             this.Controls.Add(this.CatdataGridView);
             this.Controls.Add(this.groupBoxCat);
+            this.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(4);

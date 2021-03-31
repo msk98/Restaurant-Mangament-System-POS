@@ -53,10 +53,10 @@ namespace rmsid2
             this.labelTotalAmount = new System.Windows.Forms.Label();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.buttonOrder = new System.Windows.Forms.Button();
+            this.buttonClose = new System.Windows.Forms.Button();
             this.buttonKOT = new System.Windows.Forms.Button();
             this.kotprintDocument = new System.Drawing.Printing.PrintDocument();
             this.kotprintPreviewDialog = new System.Windows.Forms.PrintPreviewDialog();
-            this.buttonClose = new System.Windows.Forms.Button();
             this.flowLayoutPanel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -344,6 +344,16 @@ namespace rmsid2
             this.buttonOrder.UseVisualStyleBackColor = true;
             this.buttonOrder.Click += new System.EventHandler(this.buttonOrder_Click);
             // 
+            // buttonClose
+            // 
+            this.buttonClose.Location = new System.Drawing.Point(259, 50);
+            this.buttonClose.Name = "buttonClose";
+            this.buttonClose.Size = new System.Drawing.Size(104, 30);
+            this.buttonClose.TabIndex = 6;
+            this.buttonClose.Text = "Close";
+            this.buttonClose.UseVisualStyleBackColor = true;
+            this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
+            // 
             // buttonKOT
             // 
             this.buttonKOT.Location = new System.Drawing.Point(146, 50);
@@ -368,22 +378,13 @@ namespace rmsid2
             this.kotprintPreviewDialog.Name = "kotprintPreviewDialog";
             this.kotprintPreviewDialog.Visible = false;
             // 
-            // buttonClose
-            // 
-            this.buttonClose.Location = new System.Drawing.Point(259, 50);
-            this.buttonClose.Name = "buttonClose";
-            this.buttonClose.Size = new System.Drawing.Size(104, 30);
-            this.buttonClose.TabIndex = 6;
-            this.buttonClose.Text = "Close";
-            this.buttonClose.UseVisualStyleBackColor = true;
-            this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
-            // 
             // Order
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1184, 681);
             this.Controls.Add(this.flowLayoutPanel1);
+            this.Cursor = System.Windows.Forms.Cursors.Hand;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Order";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;

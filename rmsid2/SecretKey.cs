@@ -25,6 +25,12 @@ namespace rmsid2
         }
         public Form reports
         { get; set; }
+        public string textBox
+        {
+            get { return textBoxsecretkey.Text; }
+            set { this.Text = textBoxsecretkey.Text; }
+
+        }
         private void button7_Click(object sender, EventArgs e)
         {
             textBoxsecretkey.Text += "7";
@@ -82,6 +88,7 @@ namespace rmsid2
 
         private void cancelbutton_Click(object sender, EventArgs e)
         {
+            textBoxsecretkey.Text = "0";
             this.Hide();
         }
 
@@ -94,15 +101,14 @@ namespace rmsid2
         private void buttonok_Click(object sender, EventArgs e)
         {
 
-            Connection conn = new Connection();
-            if (conn.checkSecretKey(Int16.Parse(textBoxsecretkey.Text)) > 0)
-            {
-                if (conn.deldateOrders(dt.StartDate, dt.EndDate))
-                {
-                    this.Hide();
-                }
-            }
+            this.Hide();
 
+        }
+
+        private void SecretKey_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            textBoxsecretkey.Text = "0";
+            this.Close();
         }
     }
 }

@@ -69,22 +69,35 @@ namespace rmsid2
 
         private void buttonDelivery_Click(object sender, EventArgs e)
         {
-            Customers cust = new Customers(dt.userid);
-            cust.ShowDialog();
-          
+            if (button7.Text != "Open Register")
+            {
+                Customers cust = new Customers(dt.userid);
+                cust.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Register is not Open");
+            }
         }
 
         private void buttonTakeAway_Click(object sender, EventArgs e)
         {
-            Order ord = new Order("Take Away",dt.userid);
-            ord.ShowDialog();
+            if (button7.Text != "Open Register")
+            {
+                Order ord = new Order("Take Away", dt.userid);
+                ord.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Register is not Open");
+            }
         }
 
        
         public void getOrders()
         {
             Connection conn = new Connection();
-            SqlDataAdapter da = new SqlDataAdapter("	SELECT t_Oid as OrderId,t_netamnt as TotalAmount ,t_tablename as Tables,Dateorder as Time,t_ordertype as OrderType FROM temp_orders tempord  join userord usr on usr.order_id = tempord.t_Oid where usr.user_id = '" + dt.userid + "'", ConnectionString);
+            SqlDataAdapter da = new SqlDataAdapter("SELECT t_Oid as OrderId,t_netamnt as TotalAmount ,t_tablename as Tables,t_ordertype as OrderType,Dateorder as Time FROM temp_orders tempord  join userord usr on usr.order_id = tempord.t_Oid where usr.user_id = '" + dt.userid + "'", ConnectionString);
             DataSet ds = new DataSet();
             da.Fill(ds, "temp_orders");
             dataGridViewOrderlist.DataSource = ds.Tables["temp_orders"].DefaultView;
@@ -111,9 +124,16 @@ namespace rmsid2
 
         private void button4_Click(object sender, EventArgs e)
         {
-            select_table st = new select_table("Dine In",dt.userid);
-            st.ShowDialog();
-        }
+            if (button7.Text != "Open Register")
+            {
+                select_table st = new select_table("Dine In", dt.userid);
+                st.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Register is not Open");
+            }
+         }
 
         private void timerfunc_Tick_1(object sender, EventArgs e)
         {
@@ -484,6 +504,7 @@ namespace rmsid2
             Connection conn = new Connection();
             dt.startreg=    conn.getregtime(dt.userid);
             conn.endregister(dt.userid);
+
             var bmp = new Bitmap(rmsid2.Properties.Resources.logo, new Size(180, 70));
             e.Graphics.DrawImage(bmp, new Point(50, y));
             e.Graphics.DrawString("PLOT GPC SHOP #1 GULSHAN E IQBAL BLOCK 4", new Font("monospaced sans serif", 8, FontStyle.Regular), Brushes.Black, new Point(5, y += 80));
@@ -543,6 +564,79 @@ namespace rmsid2
             }
             e.Graphics.DrawString("---------------------------------------------------------------------------------", new Font("Arial", 11, FontStyle.Regular), Brushes.Black, new Point(0, y += 20));
 
+        }
+
+        private void buttonLogout_Click(object sender, EventArgs e)
+        {
+            if(button7.Text == "Button Close")
+            {
+                if (MessageBox.Show("Do you Really want to Logout and Close Register?", "Message", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+
+                    calllastone();
+                    Login log = new Login();
+                    this.Hide();
+                    log.ShowDialog();
+
+                }
+            }
+            else
+            {
+                Login log = new Login();
+                this.Hide();
+                log.ShowDialog();
+            }
+
+            
+        }
+        public void calllastone()
+        {
+            Connection conn = new Connection();
+            conn.updatelastlogin(dt.username);
+
+            foreach (DataGridViewRow row in dataGridViewOrderlist.Rows)
+            {
+                conn.Insertcountinven(Int16.Parse(row.Cells[0].Value.ToString()));
+                conn.insertOrder(Int16.Parse(row.Cells[0].Value.ToString()));
+                conn.insertOrderItems(Int16.Parse(row.Cells[0].Value.ToString()));
+                conn.updatetablestats(row.Cells[2].Value.ToString());
+
+                conn.delorderItems(Int16.Parse(row.Cells[0].Value.ToString()));
+                conn.delorders(Int16.Parse(row.Cells[0].Value.ToString()));
+                conn.updateInventory(Int16.Parse(row.Cells[0].Value.ToString()));
+
+                //More code here
+            }
+            printRegisterDcoumentDocument.DefaultPageSettings.PaperSize = new System.Drawing.Printing.PaperSize("prnm", 285, 600);
+            printRegisterDcoumentDocument.Print();
+        }
+
+        private void Dashboard_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (button7.Text == "Button Close")
+            {
+                if (MessageBox.Show("Do you Really want to Logout and Close Register?", "Message", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+
+                    calllastone();
+                    this.Close();
+
+                }
+            }
+            
+         
+        }
+
+        private void discountToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            disocunts dis = new disocunts();
+            dis.ShowDialog();
+        }
+
+        private void buttonriders_Click(object sender, EventArgs e)
+        {
+            deliveryboys db = new deliveryboys();
+            db.ShowDialog();
         }
     }
 }
