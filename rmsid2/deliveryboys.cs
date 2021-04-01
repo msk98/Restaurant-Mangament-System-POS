@@ -65,6 +65,8 @@ namespace rmsid2
                 clear();
                 getriders();
             }
+            else
+                MessageBox.Show("fill the fields");
         }
 
         private void buttonDelete_Click(object sender, EventArgs e)
@@ -76,15 +78,27 @@ namespace rmsid2
                 clear();
                 getriders();
             }
+            else
+                MessageBox.Show("fill the fields");
         }
 
         public void getriders()
         {
             Connection conn = new Connection();
-            SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM DeliveryBoys where d_name like'" + RiderNametextBox.Text + "'%", ConnectionString);
+            SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM DeliveryBoys where d_name like'" + RiderNametextBox.Text + "%'", ConnectionString);
             DataSet ds = new DataSet();
             da.Fill(ds, "DeliveryBoys");
             RidersdataGridView.DataSource = ds.Tables["DeliveryBoys"].DefaultView;
+        }
+
+        private void deliveryboys_Load(object sender, EventArgs e)
+        {
+            getriders();
+        }
+
+        private void RiderNametextBox_TextChanged(object sender, EventArgs e)
+        {
+            getriders();
         }
     }
 }

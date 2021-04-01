@@ -52,7 +52,6 @@ namespace rmsid2
             this.textBoxTotalAmount = new System.Windows.Forms.TextBox();
             this.labelTotalAmount = new System.Windows.Forms.Label();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.buttonOrder = new System.Windows.Forms.Button();
             this.buttonClose = new System.Windows.Forms.Button();
             this.buttonKOT = new System.Windows.Forms.Button();
             this.kotprintDocument = new System.Drawing.Printing.PrintDocument();
@@ -322,7 +321,6 @@ namespace rmsid2
             // 
             // groupBox5
             // 
-            this.groupBox5.Controls.Add(this.buttonOrder);
             this.groupBox5.Controls.Add(this.buttonClose);
             this.groupBox5.Controls.Add(this.buttonKOT);
             this.groupBox5.FlatStyle = System.Windows.Forms.FlatStyle.System;
@@ -334,19 +332,9 @@ namespace rmsid2
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Actions";
             // 
-            // buttonOrder
-            // 
-            this.buttonOrder.Location = new System.Drawing.Point(27, 50);
-            this.buttonOrder.Name = "buttonOrder";
-            this.buttonOrder.Size = new System.Drawing.Size(104, 30);
-            this.buttonOrder.TabIndex = 5;
-            this.buttonOrder.Text = "Order Now";
-            this.buttonOrder.UseVisualStyleBackColor = true;
-            this.buttonOrder.Click += new System.EventHandler(this.buttonOrder_Click);
-            // 
             // buttonClose
             // 
-            this.buttonClose.Location = new System.Drawing.Point(259, 50);
+            this.buttonClose.Location = new System.Drawing.Point(140, 50);
             this.buttonClose.Name = "buttonClose";
             this.buttonClose.Size = new System.Drawing.Size(104, 30);
             this.buttonClose.TabIndex = 6;
@@ -356,7 +344,7 @@ namespace rmsid2
             // 
             // buttonKOT
             // 
-            this.buttonKOT.Location = new System.Drawing.Point(146, 50);
+            this.buttonKOT.Location = new System.Drawing.Point(27, 50);
             this.buttonKOT.Name = "buttonKOT";
             this.buttonKOT.Size = new System.Drawing.Size(104, 30);
             this.buttonKOT.TabIndex = 6;
@@ -427,7 +415,6 @@ namespace rmsid2
         private System.Windows.Forms.TextBox textBoxTotalAmount;
         private System.Windows.Forms.Label labelTotalAmount;
         private System.Windows.Forms.GroupBox groupBox5;
-        private System.Windows.Forms.Button buttonOrder;
         private System.Windows.Forms.Button buttonKOT;
         private System.Drawing.Printing.PrintDocument kotprintDocument;
         private System.Windows.Forms.PrintPreviewDialog kotprintPreviewDialog;

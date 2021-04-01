@@ -1254,7 +1254,7 @@ namespace rmsid2
             }
         }
 
-        public bool insertdisamnt(int orderid,int amnt,string distype)
+        public bool insertdisamnt(int orderid,float amnt,string distype)
         {
             OpenConection();
             string query = "INSERT INTO discoutAmount (order_id,discountAmount,discountType) VALUES(@orderid,@amnt,@distype)";
@@ -1310,7 +1310,7 @@ namespace rmsid2
             }
 
         }
-        public bool insertcrpayment(int orderid, int CardAmount)
+        public bool insertcrpayment(int orderid,int CardAmount)
         {
             OpenConection();
             string query = "INSERT INTO CardAmount (orderid,CardAmount) VALUES(@orderid,@CardAmount)";
@@ -1338,7 +1338,7 @@ namespace rmsid2
 
             }
         }
-        public bool inserttax(int orderid, int taxAmount)
+        public bool inserttax(int orderid, float taxAmount)
         {
             OpenConection();
             string query = "INSERT INTO taxAmount (order_id,taxAmount) VALUES(@orderid,@taxAmount)";
@@ -1839,7 +1839,7 @@ namespace rmsid2
         public bool deleterider(int del_id)
         {
             OpenConection();
-            string query = "delete from DeliveryBoys d_id=@del_id";
+            string query = "delete from DeliveryBoys where d_id=@del_id";
             SqlCommand cmd = new SqlCommand(query, con);
             //Pass values to Parameters
           

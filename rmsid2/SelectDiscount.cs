@@ -81,11 +81,11 @@ namespace rmsid2
            
             if ((radioButtoncash.Checked || radioButtonCode.Checked || radioButtonpercentage.Checked) && textBoxDiscountPrice.Text!="")
             if (radioButtoncash.Checked)
-                conn.insertdisamnt(dt.orderid, Int16.Parse(textBoxDiscountPrice.Text), "Cash Discount");
+                conn.insertdisamnt(dt.orderid, float.Parse(textBoxDiscountPrice.Text), "Cash Discount");
             else if(radioButtonpercentage.Checked)
-                conn.insertdisamnt(dt.orderid, Int16.Parse(textBoxDiscountPrice.Text), "Percentage Discount");
+                conn.insertdisamnt(dt.orderid, float.Parse(textBoxDiscountPrice.Text), "Percentage Discount");
             else
-                conn.insertdisamnt(dt.orderid, Int16.Parse(textBoxDiscountPrice.Text), dt.DiscountType);
+                conn.insertdisamnt(dt.orderid, float.Parse(textBoxDiscountPrice.Text), dt.DiscountType);
             this.Close();
         }
         public void getdiscounts()

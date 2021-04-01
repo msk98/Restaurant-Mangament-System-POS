@@ -25,6 +25,15 @@ namespace rmsid2
             getinc();
             getinven();
             getcat();
+            getprod();
+            clearall();
+        }
+        public void clearall()
+        {
+            comboBoxIncredients.SelectedIndex = -1;
+            comboBoxproduct.SelectedIndex = -1;
+            CatcomboBox.SelectedIndex = -1;
+            textBoxIncredient.Text = "";
         }
         public void getinc()
         {
@@ -66,7 +75,7 @@ namespace rmsid2
         public void getprod()
         {
             SqlConnection sqlcon = new SqlConnection(ConnectionString);
-            string sqlquery = "select * from products where C_id='" + Int16.Parse(CatcomboBox.SelectedValue.ToString()) + "'";
+            string sqlquery = "select * from products ";
             sqlcon.Open();
             SqlCommand sqlcom = new SqlCommand(sqlquery, sqlcon);
             SqlDataAdapter dr = new SqlDataAdapter(sqlcom);
@@ -86,10 +95,13 @@ namespace rmsid2
                 if (conn.insertingred(Int16.Parse(comboBoxIncredients.SelectedValue.ToString()), Int16.Parse(CatcomboBox.SelectedValue.ToString()), Int16.Parse(comboBoxproduct.SelectedValue.ToString()), Int16.Parse(textBoxIncredient.Text)))
                 {
                     getinc();
-                    clear();
+                    clearall();
+
                 }
 
             }
+            else
+                MessageBox.Show("fill the fields");
         }
 
         private void buttonUpdate_Click(object sender, EventArgs e)
@@ -101,11 +113,13 @@ namespace rmsid2
                     if (conn.updateingred(Int16.Parse(comboBoxIncredients.SelectedValue.ToString()), Int16.Parse(comboBoxIncredients.SelectedValue.ToString()), Int16.Parse(CatcomboBox.SelectedValue.ToString()), Int16.Parse(comboBoxproduct.SelectedValue.ToString()), Int16.Parse(textBoxIncredient.Text)))
                     {
                         getinc();
-                        clear();
+                        clearall();
                     }
 
                 }
             }
+            else
+                MessageBox.Show("fill the fields");
         }
 
         private void buttonDelete_Click(object sender, EventArgs e)
@@ -117,24 +131,16 @@ namespace rmsid2
                     if (conn.delinc(ing_id))
                     {
                         getinc();
-                        clear();
+                        clearall();
                     }
                 }
             }
+            else
+                MessageBox.Show("fill the fields");
         }
 
       
-        public void clear()
-            {
-           
-            comboBoxIncredients.SelectedIndex = -1;
-            comboBoxproduct.DataSource = null;
-            CatcomboBox.SelectedIndex = -1;
-            comboBoxIncredients.SelectedIndex = -1;
-
-
-        }
-
+     
         private void CatcomboBox_DropDownClosed(object sender, EventArgs e)
         {
 
@@ -207,7 +213,7 @@ namespace rmsid2
         private void cattextBox_TextChanged(object sender, EventArgs e)
         {
             Connection conn = new Connection();
-            SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM Products where p_name like'" + cattextBox.Text + "'%", ConnectionString);
+            SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM Products where p_name like'%" + cattextBox.Text + "%'", ConnectionString);
             DataSet ds = new DataSet();
             da.Fill(ds, "Products");
             IncredientdataGridView.DataSource = ds.Tables["Products"].DefaultView;

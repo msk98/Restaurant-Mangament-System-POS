@@ -146,7 +146,6 @@ namespace rmsid2
             this.CatcomboBox.Name = "CatcomboBox";
             this.CatcomboBox.Size = new System.Drawing.Size(240, 24);
             this.CatcomboBox.TabIndex = 2;
-            this.CatcomboBox.DropDownClosed += new System.EventHandler(this.CatcomboBox_DropDownClosed);
             // 
             // textBoxIncredient
             // 

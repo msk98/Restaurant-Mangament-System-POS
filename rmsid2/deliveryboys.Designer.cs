@@ -176,6 +176,7 @@ namespace rmsid2
             this.RiderNametextBox.Name = "RiderNametextBox";
             this.RiderNametextBox.Size = new System.Drawing.Size(320, 23);
             this.RiderNametextBox.TabIndex = 1;
+            this.RiderNametextBox.TextChanged += new System.EventHandler(this.RiderNametextBox_TextChanged);
             // 
             // deliveryboys
             // 
@@ -188,10 +189,11 @@ namespace rmsid2
             this.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "deliveryboys";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "deliveryboys";
+            this.Load += new System.EventHandler(this.deliveryboys_Load);
             this.groupBoxaddProducts.ResumeLayout(false);
             this.groupBoxaddProducts.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.RidersdataGridView)).EndInit();

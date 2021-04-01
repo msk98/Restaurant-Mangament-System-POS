@@ -32,9 +32,6 @@ namespace rmsid2
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Dashboard));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.buttonHome = new System.Windows.Forms.Button();
-            this.buttonTakeAway = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.menuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -42,11 +39,13 @@ namespace rmsid2
             this.categoriesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.inventoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.discountToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.deliveryBoyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.button5 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
             this.buttonDelivery = new System.Windows.Forms.Button();
+            this.buttonTakeAway = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button7 = new System.Windows.Forms.Button();
+            this.buttonriders = new System.Windows.Forms.Button();
             this.dataGridViewOrderlist = new System.Windows.Forms.DataGridView();
             this.dataGridViewOrderItems = new System.Windows.Forms.DataGridView();
             this.timerfunc = new System.Windows.Forms.Timer(this.components);
@@ -87,7 +86,6 @@ namespace rmsid2
             this.label5 = new System.Windows.Forms.Label();
             this.textBoxservicecharge = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBoxEnterAmnt = new System.Windows.Forms.TextBox();
             this.button19 = new System.Windows.Forms.Button();
             this.button16 = new System.Windows.Forms.Button();
             this.button10 = new System.Windows.Forms.Button();
@@ -110,7 +108,10 @@ namespace rmsid2
             this.panel2 = new System.Windows.Forms.Panel();
             this.TakeAwayprintDocument = new System.Drawing.Printing.PrintDocument();
             this.printRegisterDcoumentDocument = new System.Drawing.Printing.PrintDocument();
-            this.buttonriders = new System.Windows.Forms.Button();
+            this.printcustomerDocument = new System.Drawing.Printing.PrintDocument();
+            this.checkBoxcash = new System.Windows.Forms.CheckBox();
+            this.registerstart = new System.Windows.Forms.Label();
+            this.Username = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewOrderlist)).BeginInit();
@@ -136,14 +137,14 @@ namespace rmsid2
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
-            this.tableLayoutPanel1.Controls.Add(this.buttonHome, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.buttonTakeAway, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.button4, 4, 0);
             this.tableLayoutPanel1.Controls.Add(this.menuStrip1, 3, 0);
             this.tableLayoutPanel1.Controls.Add(this.button5, 5, 0);
             this.tableLayoutPanel1.Controls.Add(this.button6, 6, 0);
-            this.tableLayoutPanel1.Controls.Add(this.button7, 7, 0);
             this.tableLayoutPanel1.Controls.Add(this.buttonDelivery, 2, 0);
+            this.tableLayoutPanel1.Controls.Add(this.buttonTakeAway, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.button4, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.button7, 4, 0);
+            this.tableLayoutPanel1.Controls.Add(this.buttonriders, 7, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -152,47 +153,6 @@ namespace rmsid2
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 94F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1184, 94);
             this.tableLayoutPanel1.TabIndex = 0;
-            // 
-            // buttonHome
-            // 
-            this.buttonHome.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.buttonHome.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.buttonHome.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonHome.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonHome.Location = new System.Drawing.Point(3, 3);
-            this.buttonHome.Name = "buttonHome";
-            this.buttonHome.Size = new System.Drawing.Size(142, 88);
-            this.buttonHome.TabIndex = 0;
-            this.buttonHome.Text = "Home";
-            this.buttonHome.UseVisualStyleBackColor = false;
-            // 
-            // buttonTakeAway
-            // 
-            this.buttonTakeAway.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.buttonTakeAway.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.buttonTakeAway.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonTakeAway.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonTakeAway.Location = new System.Drawing.Point(151, 3);
-            this.buttonTakeAway.Name = "buttonTakeAway";
-            this.buttonTakeAway.Size = new System.Drawing.Size(142, 88);
-            this.buttonTakeAway.TabIndex = 0;
-            this.buttonTakeAway.Text = "Take Away";
-            this.buttonTakeAway.UseVisualStyleBackColor = false;
-            this.buttonTakeAway.Click += new System.EventHandler(this.buttonTakeAway_Click);
-            // 
-            // button4
-            // 
-            this.button4.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.button4.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button4.Location = new System.Drawing.Point(595, 3);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(142, 88);
-            this.button4.TabIndex = 0;
-            this.button4.Text = "Dine In";
-            this.button4.UseVisualStyleBackColor = false;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // menuStrip1
             // 
@@ -214,8 +174,7 @@ namespace rmsid2
             this.incredientsToolStripMenuItem,
             this.categoriesToolStripMenuItem,
             this.inventoryToolStripMenuItem,
-            this.discountToolStripMenuItem,
-            this.deliveryBoyToolStripMenuItem});
+            this.discountToolStripMenuItem});
             this.menuToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.menuToolStripMenuItem.Name = "menuToolStripMenuItem";
             this.menuToolStripMenuItem.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -225,42 +184,37 @@ namespace rmsid2
             // menuItemsToolStripMenuItem
             // 
             this.menuItemsToolStripMenuItem.Name = "menuItemsToolStripMenuItem";
-            this.menuItemsToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
+            this.menuItemsToolStripMenuItem.Size = new System.Drawing.Size(155, 24);
             this.menuItemsToolStripMenuItem.Text = "Menu Items";
             this.menuItemsToolStripMenuItem.Click += new System.EventHandler(this.menuItemsToolStripMenuItem_Click);
             // 
             // incredientsToolStripMenuItem
             // 
             this.incredientsToolStripMenuItem.Name = "incredientsToolStripMenuItem";
-            this.incredientsToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
+            this.incredientsToolStripMenuItem.Size = new System.Drawing.Size(155, 24);
             this.incredientsToolStripMenuItem.Text = "Ingredients";
             this.incredientsToolStripMenuItem.Click += new System.EventHandler(this.incredientsToolStripMenuItem_Click);
             // 
             // categoriesToolStripMenuItem
             // 
             this.categoriesToolStripMenuItem.Name = "categoriesToolStripMenuItem";
-            this.categoriesToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
+            this.categoriesToolStripMenuItem.Size = new System.Drawing.Size(155, 24);
             this.categoriesToolStripMenuItem.Text = "Categories";
             this.categoriesToolStripMenuItem.Click += new System.EventHandler(this.categoriesToolStripMenuItem_Click);
             // 
             // inventoryToolStripMenuItem
             // 
             this.inventoryToolStripMenuItem.Name = "inventoryToolStripMenuItem";
-            this.inventoryToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
+            this.inventoryToolStripMenuItem.Size = new System.Drawing.Size(155, 24);
             this.inventoryToolStripMenuItem.Text = "Inventory";
             this.inventoryToolStripMenuItem.Click += new System.EventHandler(this.inventoryToolStripMenuItem_Click);
             // 
             // discountToolStripMenuItem
             // 
             this.discountToolStripMenuItem.Name = "discountToolStripMenuItem";
-            this.discountToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
+            this.discountToolStripMenuItem.Size = new System.Drawing.Size(155, 24);
             this.discountToolStripMenuItem.Text = "Discounts";
             this.discountToolStripMenuItem.Click += new System.EventHandler(this.discountToolStripMenuItem_Click);
-            // 
-            // deliveryBoyToolStripMenuItem
-            // 
-            this.deliveryBoyToolStripMenuItem.Name = "deliveryBoyToolStripMenuItem";
-            this.deliveryBoyToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
             // 
             // button5
             // 
@@ -290,20 +244,6 @@ namespace rmsid2
             this.button6.UseVisualStyleBackColor = false;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
-            // button7
-            // 
-            this.button7.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.button7.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button7.Location = new System.Drawing.Point(1039, 3);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(142, 88);
-            this.button7.TabIndex = 0;
-            this.button7.Text = "Open Register";
-            this.button7.UseVisualStyleBackColor = false;
-            this.button7.Click += new System.EventHandler(this.button7_Click);
-            // 
             // buttonDelivery
             // 
             this.buttonDelivery.BackColor = System.Drawing.SystemColors.ButtonFace;
@@ -317,6 +257,59 @@ namespace rmsid2
             this.buttonDelivery.Text = "Delivery";
             this.buttonDelivery.UseVisualStyleBackColor = false;
             this.buttonDelivery.Click += new System.EventHandler(this.buttonDelivery_Click);
+            // 
+            // buttonTakeAway
+            // 
+            this.buttonTakeAway.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.buttonTakeAway.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonTakeAway.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonTakeAway.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonTakeAway.Location = new System.Drawing.Point(3, 3);
+            this.buttonTakeAway.Name = "buttonTakeAway";
+            this.buttonTakeAway.Size = new System.Drawing.Size(142, 88);
+            this.buttonTakeAway.TabIndex = 0;
+            this.buttonTakeAway.Text = "Take Away";
+            this.buttonTakeAway.UseVisualStyleBackColor = false;
+            this.buttonTakeAway.Click += new System.EventHandler(this.buttonTakeAway_Click);
+            // 
+            // button4
+            // 
+            this.button4.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.button4.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button4.Location = new System.Drawing.Point(151, 3);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(142, 88);
+            this.button4.TabIndex = 0;
+            this.button4.Text = "Dine In";
+            this.button4.UseVisualStyleBackColor = false;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // button7
+            // 
+            this.button7.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.button7.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button7.Location = new System.Drawing.Point(595, 3);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(142, 88);
+            this.button7.TabIndex = 0;
+            this.button7.Text = "Open Register";
+            this.button7.UseVisualStyleBackColor = false;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
+            // 
+            // buttonriders
+            // 
+            this.buttonriders.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonriders.Location = new System.Drawing.Point(1039, 3);
+            this.buttonriders.Name = "buttonriders";
+            this.buttonriders.Size = new System.Drawing.Size(142, 88);
+            this.buttonriders.TabIndex = 1;
+            this.buttonriders.Text = "Riders";
+            this.buttonriders.UseVisualStyleBackColor = true;
+            this.buttonriders.Click += new System.EventHandler(this.buttonriders_Click);
             // 
             // dataGridViewOrderlist
             // 
@@ -379,15 +372,16 @@ namespace rmsid2
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.groupBox4);
+            this.groupBox1.Controls.Add(this.textBoxreturn);
             this.groupBox1.Controls.Add(this.buttonTable);
             this.groupBox1.Controls.Add(this.groupBox3);
+            this.groupBox1.Controls.Add(this.label10);
             this.groupBox1.Controls.Add(this.groupBox2);
             this.groupBox1.Controls.Add(this.numericUpDowntax);
             this.groupBox1.Controls.Add(this.checkBoxservicecharges);
             this.groupBox1.Controls.Add(this.checkBoxtax);
             this.groupBox1.Controls.Add(this.textBoxdiscount);
             this.groupBox1.Controls.Add(this.buttonLogout);
-            this.groupBox1.Controls.Add(this.buttonriders);
             this.groupBox1.Controls.Add(this.ButtonOrdernow);
             this.groupBox1.Controls.Add(this.buttonundoDis);
             this.groupBox1.Controls.Add(this.buttonDISCOUNT);
@@ -403,7 +397,6 @@ namespace rmsid2
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.textBoxservicecharge);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.textBoxEnterAmnt);
             this.groupBox1.Controls.Add(this.button19);
             this.groupBox1.Controls.Add(this.button16);
             this.groupBox1.Controls.Add(this.button10);
@@ -461,6 +454,7 @@ namespace rmsid2
             this.textBoxcreditcardpayment.Name = "textBoxcreditcardpayment";
             this.textBoxcreditcardpayment.Size = new System.Drawing.Size(174, 20);
             this.textBoxcreditcardpayment.TabIndex = 1;
+            this.textBoxcreditcardpayment.TextChanged += new System.EventHandler(this.textBoxcreditcardpayment_TextChanged);
             this.textBoxcreditcardpayment.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxcaedpay_KeyPress);
             // 
             // label12
@@ -476,13 +470,12 @@ namespace rmsid2
             // groupBox3
             // 
             this.groupBox3.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.groupBox3.Controls.Add(this.checkBoxcash);
             this.groupBox3.Controls.Add(this.textBoxcashpaying);
-            this.groupBox3.Controls.Add(this.textBoxreturn);
             this.groupBox3.Controls.Add(this.label9);
-            this.groupBox3.Controls.Add(this.label10);
             this.groupBox3.Location = new System.Drawing.Point(233, 353);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(212, 123);
+            this.groupBox3.Size = new System.Drawing.Size(212, 106);
             this.groupBox3.TabIndex = 6;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Change";
@@ -490,26 +483,28 @@ namespace rmsid2
             // textBoxcashpaying
             // 
             this.textBoxcashpaying.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxcashpaying.Location = new System.Drawing.Point(10, 39);
+            this.textBoxcashpaying.Location = new System.Drawing.Point(11, 66);
             this.textBoxcashpaying.Name = "textBoxcashpaying";
             this.textBoxcashpaying.Size = new System.Drawing.Size(178, 20);
             this.textBoxcashpaying.TabIndex = 1;
+            this.textBoxcashpaying.TextChanged += new System.EventHandler(this.textBoxcashpaying_TextChanged);
             this.textBoxcashpaying.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxcashpaying_KeyPress);
             // 
             // textBoxreturn
             // 
             this.textBoxreturn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxreturn.Location = new System.Drawing.Point(10, 84);
+            this.textBoxreturn.Location = new System.Drawing.Point(238, 490);
             this.textBoxreturn.Name = "textBoxreturn";
             this.textBoxreturn.ReadOnly = true;
             this.textBoxreturn.Size = new System.Drawing.Size(178, 20);
             this.textBoxreturn.TabIndex = 1;
+            this.textBoxreturn.Text = "0";
             // 
             // label9
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(10, 22);
+            this.label9.Location = new System.Drawing.Point(10, 49);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(35, 13);
             this.label9.TabIndex = 2;
@@ -519,7 +514,7 @@ namespace rmsid2
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(11, 66);
+            this.label10.Location = new System.Drawing.Point(239, 472);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(59, 13);
             this.label10.TabIndex = 2;
@@ -558,20 +553,24 @@ namespace rmsid2
             // 
             this.textBoxcashpay.Enabled = false;
             this.textBoxcashpay.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxcashpay.Location = new System.Drawing.Point(8, 51);
+            this.textBoxcashpay.Location = new System.Drawing.Point(8, 50);
             this.textBoxcashpay.Name = "textBoxcashpay";
             this.textBoxcashpay.Size = new System.Drawing.Size(178, 23);
             this.textBoxcashpay.TabIndex = 1;
+            this.textBoxcashpay.MouseClick += new System.Windows.Forms.MouseEventHandler(this.textBoxcashpay_MouseClick);
+            this.textBoxcashpay.TextChanged += new System.EventHandler(this.textBoxcashpay_TextChanged);
             this.textBoxcashpay.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxcashpay_KeyPress);
             // 
             // textBoxcardpay
             // 
             this.textBoxcardpay.Enabled = false;
             this.textBoxcardpay.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxcardpay.Location = new System.Drawing.Point(10, 96);
+            this.textBoxcardpay.Location = new System.Drawing.Point(10, 98);
             this.textBoxcardpay.Name = "textBoxcardpay";
             this.textBoxcardpay.Size = new System.Drawing.Size(178, 23);
             this.textBoxcardpay.TabIndex = 1;
+            this.textBoxcardpay.MouseClick += new System.Windows.Forms.MouseEventHandler(this.textBoxcardpay_MouseClick);
+            this.textBoxcardpay.TextChanged += new System.EventHandler(this.textBoxcardpay_TextChanged);
             this.textBoxcardpay.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxcaedpay_KeyPress);
             // 
             // label7
@@ -598,7 +597,7 @@ namespace rmsid2
             // 
             this.numericUpDowntax.Enabled = false;
             this.numericUpDowntax.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numericUpDowntax.Location = new System.Drawing.Point(19, 266);
+            this.numericUpDowntax.Location = new System.Drawing.Point(19, 244);
             this.numericUpDowntax.Maximum = new decimal(new int[] {
             17,
             0,
@@ -623,7 +622,7 @@ namespace rmsid2
             // 
             this.checkBoxservicecharges.AutoSize = true;
             this.checkBoxservicecharges.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.checkBoxservicecharges.Location = new System.Drawing.Point(18, 297);
+            this.checkBoxservicecharges.Location = new System.Drawing.Point(18, 279);
             this.checkBoxservicecharges.Name = "checkBoxservicecharges";
             this.checkBoxservicecharges.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.checkBoxservicecharges.Size = new System.Drawing.Size(133, 21);
@@ -636,7 +635,7 @@ namespace rmsid2
             // 
             this.checkBoxtax.AutoSize = true;
             this.checkBoxtax.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.checkBoxtax.Location = new System.Drawing.Point(20, 237);
+            this.checkBoxtax.Location = new System.Drawing.Point(20, 215);
             this.checkBoxtax.Name = "checkBoxtax";
             this.checkBoxtax.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.checkBoxtax.Size = new System.Drawing.Size(48, 21);
@@ -786,7 +785,7 @@ namespace rmsid2
             // 
             this.textBoxservicecharge.Enabled = false;
             this.textBoxservicecharge.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxservicecharge.Location = new System.Drawing.Point(18, 321);
+            this.textBoxservicecharge.Location = new System.Drawing.Point(18, 307);
             this.textBoxservicecharge.Name = "textBoxservicecharge";
             this.textBoxservicecharge.Size = new System.Drawing.Size(178, 26);
             this.textBoxservicecharge.TabIndex = 1;
@@ -804,14 +803,6 @@ namespace rmsid2
             this.label1.TabIndex = 2;
             this.label1.Text = "SUB TOTAL";
             // 
-            // textBoxEnterAmnt
-            // 
-            this.textBoxEnterAmnt.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxEnterAmnt.Location = new System.Drawing.Point(17, 208);
-            this.textBoxEnterAmnt.Name = "textBoxEnterAmnt";
-            this.textBoxEnterAmnt.Size = new System.Drawing.Size(178, 26);
-            this.textBoxEnterAmnt.TabIndex = 1;
-            // 
             // button19
             // 
             this.button19.BackColor = System.Drawing.SystemColors.ControlLightLight;
@@ -822,6 +813,7 @@ namespace rmsid2
             this.button19.TabIndex = 0;
             this.button19.Text = "5000";
             this.button19.UseVisualStyleBackColor = false;
+            this.button19.Click += new System.EventHandler(this.button19_Click);
             // 
             // button16
             // 
@@ -831,8 +823,9 @@ namespace rmsid2
             this.button16.Name = "button16";
             this.button16.Size = new System.Drawing.Size(55, 32);
             this.button16.TabIndex = 0;
-            this.button16.Text = ".";
+            this.button16.Text = "x";
             this.button16.UseVisualStyleBackColor = false;
+            this.button16.Click += new System.EventHandler(this.button16_Click);
             // 
             // button10
             // 
@@ -844,6 +837,7 @@ namespace rmsid2
             this.button10.TabIndex = 0;
             this.button10.Text = "6";
             this.button10.UseVisualStyleBackColor = false;
+            this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
             // button15
             // 
@@ -855,6 +849,7 @@ namespace rmsid2
             this.button15.TabIndex = 0;
             this.button15.Text = "9";
             this.button15.UseVisualStyleBackColor = false;
+            this.button15.Click += new System.EventHandler(this.button15_Click);
             // 
             // button3
             // 
@@ -866,6 +861,7 @@ namespace rmsid2
             this.button3.TabIndex = 0;
             this.button3.Text = "3";
             this.button3.UseVisualStyleBackColor = false;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // button18
             // 
@@ -877,6 +873,7 @@ namespace rmsid2
             this.button18.TabIndex = 0;
             this.button18.Text = "1000";
             this.button18.UseVisualStyleBackColor = false;
+            this.button18.Click += new System.EventHandler(this.button18_Click);
             // 
             // button14
             // 
@@ -888,6 +885,7 @@ namespace rmsid2
             this.button14.TabIndex = 0;
             this.button14.Text = "00";
             this.button14.UseVisualStyleBackColor = false;
+            this.button14.Click += new System.EventHandler(this.button14_Click);
             // 
             // button9
             // 
@@ -899,6 +897,7 @@ namespace rmsid2
             this.button9.TabIndex = 0;
             this.button9.Text = "5";
             this.button9.UseVisualStyleBackColor = false;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
             // button13
             // 
@@ -910,6 +909,7 @@ namespace rmsid2
             this.button13.TabIndex = 0;
             this.button13.Text = "8";
             this.button13.UseVisualStyleBackColor = false;
+            this.button13.Click += new System.EventHandler(this.button13_Click);
             // 
             // button2
             // 
@@ -921,6 +921,7 @@ namespace rmsid2
             this.button2.TabIndex = 0;
             this.button2.Text = "2";
             this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button17
             // 
@@ -932,6 +933,7 @@ namespace rmsid2
             this.button17.TabIndex = 0;
             this.button17.Text = "500";
             this.button17.UseVisualStyleBackColor = false;
+            this.button17.Click += new System.EventHandler(this.button17_Click);
             // 
             // button12
             // 
@@ -943,6 +945,7 @@ namespace rmsid2
             this.button12.TabIndex = 0;
             this.button12.Text = "0";
             this.button12.UseVisualStyleBackColor = false;
+            this.button12.Click += new System.EventHandler(this.button12_Click);
             // 
             // button8
             // 
@@ -952,8 +955,9 @@ namespace rmsid2
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(55, 32);
             this.button8.TabIndex = 0;
-            this.button8.Text = "3";
+            this.button8.Text = "4";
             this.button8.UseVisualStyleBackColor = false;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
             // button11
             // 
@@ -965,6 +969,7 @@ namespace rmsid2
             this.button11.TabIndex = 0;
             this.button11.Text = "7";
             this.button11.UseVisualStyleBackColor = false;
+            this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
             // button1
             // 
@@ -976,16 +981,19 @@ namespace rmsid2
             this.button1.TabIndex = 0;
             this.button1.Text = "1";
             this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // panel1
             // 
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.panel1.Controls.Add(this.Username);
+            this.panel1.Controls.Add(this.registerstart);
             this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Controls.Add(this.labelcontact);
             this.panel1.Controls.Add(this.poweredbylabel);
-            this.panel1.Location = new System.Drawing.Point(447, 571);
+            this.panel1.Location = new System.Drawing.Point(447, 570);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(241, 110);
             this.panel1.TabIndex = 3;
@@ -1013,7 +1021,7 @@ namespace rmsid2
             // 
             this.poweredbylabel.AutoSize = true;
             this.poweredbylabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.poweredbylabel.Location = new System.Drawing.Point(8, 66);
+            this.poweredbylabel.Location = new System.Drawing.Point(7, 63);
             this.poweredbylabel.Name = "poweredbylabel";
             this.poweredbylabel.Size = new System.Drawing.Size(226, 17);
             this.poweredbylabel.TabIndex = 0;
@@ -1037,16 +1045,44 @@ namespace rmsid2
             // 
             this.printRegisterDcoumentDocument.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printRegisterDcoumentDocument_PrintPage);
             // 
-            // buttonriders
+            // printcustomerDocument
             // 
-            this.buttonriders.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonriders.Location = new System.Drawing.Point(237, 547);
-            this.buttonriders.Name = "buttonriders";
-            this.buttonriders.Size = new System.Drawing.Size(120, 28);
-            this.buttonriders.TabIndex = 1;
-            this.buttonriders.Text = "Riders";
-            this.buttonriders.UseVisualStyleBackColor = true;
-            this.buttonriders.Click += new System.EventHandler(this.buttonriders_Click);
+            this.printcustomerDocument.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printcustomerDocument_PrintPage);
+            // 
+            // checkBoxcash
+            // 
+            this.checkBoxcash.AutoSize = true;
+            this.checkBoxcash.Checked = true;
+            this.checkBoxcash.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxcash.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.checkBoxcash.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.checkBoxcash.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBoxcash.Location = new System.Drawing.Point(14, 22);
+            this.checkBoxcash.Name = "checkBoxcash";
+            this.checkBoxcash.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.checkBoxcash.Size = new System.Drawing.Size(92, 17);
+            this.checkBoxcash.TabIndex = 4;
+            this.checkBoxcash.Text = "Cash Payment";
+            this.checkBoxcash.UseVisualStyleBackColor = true;
+            this.checkBoxcash.CheckedChanged += new System.EventHandler(this.checkBoxcash_CheckedChanged);
+            // 
+            // registerstart
+            // 
+            this.registerstart.AutoSize = true;
+            this.registerstart.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.registerstart.Location = new System.Drawing.Point(190, 13);
+            this.registerstart.Name = "registerstart";
+            this.registerstart.Size = new System.Drawing.Size(0, 17);
+            this.registerstart.TabIndex = 3;
+            // 
+            // Username
+            // 
+            this.Username.AutoSize = true;
+            this.Username.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Username.Location = new System.Drawing.Point(189, 39);
+            this.Username.Name = "Username";
+            this.Username.Size = new System.Drawing.Size(0, 17);
+            this.Username.TabIndex = 3;
             // 
             // Dashboard
             // 
@@ -1092,7 +1128,6 @@ namespace rmsid2
         #endregion
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.Button buttonHome;
         private System.Windows.Forms.Button buttonTakeAway;
         private System.Windows.Forms.Button buttonDelivery;
         private System.Windows.Forms.Button button4;
@@ -1115,7 +1150,6 @@ namespace rmsid2
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox textBoxEnterAmnt;
         private System.Windows.Forms.Button button19;
         private System.Windows.Forms.Button button16;
         private System.Windows.Forms.Button button10;
@@ -1169,7 +1203,10 @@ namespace rmsid2
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label labelcontact;
         private System.Windows.Forms.Label poweredbylabel;
-        private System.Windows.Forms.ToolStripMenuItem deliveryBoyToolStripMenuItem;
         private System.Windows.Forms.Button buttonriders;
+        private System.Drawing.Printing.PrintDocument printcustomerDocument;
+        private System.Windows.Forms.CheckBox checkBoxcash;
+        private System.Windows.Forms.Label Username;
+        private System.Windows.Forms.Label registerstart;
     }
 }

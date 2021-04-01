@@ -272,11 +272,7 @@ namespace rmsid2
             textBoxTotalAmount.Text = sum.ToString();
         }
 
-        private void buttonOrder_Click(object sender, EventArgs e)
-        {
-
-        }
-
+       
         private void kotprintDocument_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
         {
             int OrderId=0;
