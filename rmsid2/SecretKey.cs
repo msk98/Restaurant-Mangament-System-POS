@@ -17,12 +17,12 @@ namespace rmsid2
             InitializeComponent();
         }
         Detail dt = new Detail();
-        public SecretKey(DateTime StartDate,DateTime EndDate)
-        {
-            InitializeComponent();
-            dt.StartDate = StartDate;
-            dt.EndDate = EndDate;
-        }
+    //    public SecretKey(DateTime StartDate,DateTime EndDate)
+     //   {
+     //       InitializeComponent();
+     //       dt.StartDate = StartDate;
+    //        dt.EndDate = EndDate;
+     //   }
         public Form reports
         { get; set; }
         public string textBox

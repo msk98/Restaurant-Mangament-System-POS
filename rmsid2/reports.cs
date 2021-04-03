@@ -54,7 +54,7 @@ namespace rmsid2
         {
             if(dataGridorders.Rows.Count>0)
             {
-                printReportDocument.DefaultPageSettings.PaperSize = new System.Drawing.Printing.PaperSize("prnm", 285, 600);
+                printReportDocument.DefaultPageSettings.PaperSize = new System.Drawing.Printing.PaperSize("prnm", 285, 900);
                 printReportDocument.Print();
             //    this.Hide();
             }
@@ -94,6 +94,20 @@ namespace rmsid2
             e.Graphics.DrawString("DATE From:" + StartDate, new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(20, y += 20));
             e.Graphics.DrawString("Date To:" + EndDate, new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(20, y += 20));
             e.Graphics.DrawString("---------------------------------------------------------------------------------", new Font("Arial", 11, FontStyle.Regular), Brushes.Black, new Point(0, y += 20));
+            e.Graphics.DrawString("Order Report", new Font("monospaced sans serif", 12, FontStyle.Bold), Brushes.Black, new Point(100, y += 20));
+            e.Graphics.DrawString("Order Id", new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(5, y += 20));
+            e.Graphics.DrawString("Total", new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(55, y));
+            e.Graphics.DrawString("OrderType", new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(100, y));
+            e.Graphics.DrawString("DateTime", new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(163, y));
+            foreach (DataGridViewRow row in dataGridorders.Rows)
+            {
+                e.Graphics.DrawString(row.Cells[0].Value.ToString(), new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(5, y += 20));
+                e.Graphics.DrawString(row.Cells[1].Value.ToString(), new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(55, y));
+                e.Graphics.DrawString(row.Cells[2].Value.ToString(), new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(100, y));
+                e.Graphics.DrawString(row.Cells[3].Value.ToString(), new Font("monospaced sans serif", 7, FontStyle.Bold), Brushes.Black, new Point(163, y));
+
+            }
+
             e.Graphics.DrawString("Total Sale: " + totalsale(), new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(5, y += 20));
             e.Graphics.DrawString("Total Orders: " + dataGridorders.Rows.Count, new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(100, y));
             e.Graphics.DrawString("---------------------------------------------------------------------------------", new Font("Arial", 11, FontStyle.Regular), Brushes.Black, new Point(0, y += 20));
@@ -156,7 +170,7 @@ namespace rmsid2
 
         private void buttonDelete_Click(object sender, EventArgs e)
         {
-            SecretKey sk =new  SecretKey(StartDate, EndDate);
+            SecretKey sk =new  SecretKey();
             sk.ShowDialog();
             Connection conn = new Connection();
             if(sk.textBox !="0")

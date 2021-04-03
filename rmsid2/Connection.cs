@@ -1398,7 +1398,7 @@ namespace rmsid2
         public bool startregister(int userid,int Startamount)
         {
             OpenConection();
-            string query = "INSERT INTO openregister (userid,Startamount) VALUES(@userid,@Startamount)";
+            string query = "INSERT INTO openregister (userid,openregister,Startamount) VALUES(@userid,getDate(),@Startamount)";
             SqlCommand cmd = new SqlCommand(query, con);
             //Pass values to Parameters
             cmd.Parameters.AddWithValue("@userid", userid);
@@ -1636,7 +1636,7 @@ namespace rmsid2
                 {
                     while (reader.Read())
                     {
-                        productslist.Add(new Detail() { p_qty = Int16.Parse(reader["p_qty"].ToString()), p_name = (reader["ItemName"].ToString()) });
+                        productslist.Add(new Detail() { p_qty = Int16.Parse(reader["qty"].ToString()), p_name = (reader["ItemName"].ToString()) });
                     }
                 }
                 connection.Close();
@@ -1865,6 +1865,34 @@ namespace rmsid2
 
             }
 
+        }
+
+        public bool CancelOrder(int OrderId)
+        {
+            OpenConection();
+            string query = "INSERT INTO cancelOrders(t_Oid, t_tablename,t_ordertype, Dateorder,cancelorder,t_netamnt) SELECT t_Oid, t_tablename,t_ordertype,Dateorder,getDate(),t_netamnt FROM  temp_orders WHERE   t_Oid =@OrderId";
+            SqlCommand cmd = new SqlCommand(query, con);
+            //Pass values to Parameters
+            cmd.Parameters.AddWithValue("@OrderId", OrderId);
+            try
+            {
+                OpenConection();
+                cmd.ExecuteNonQuery();
+
+                return true;
+            }
+            catch (SqlException e)
+            {
+                string err = "Error Generated. Details: " + e.ToString();
+                MessageBox.Show(err);
+
+                return false;
+            }
+            finally
+            {
+                CloseConnection();
+
+            }
         }
     }
 }

@@ -56,9 +56,10 @@ namespace rmsid2
             this.checkBoxcard = new System.Windows.Forms.CheckBox();
             this.textBoxcreditcardpayment = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.textBoxcashpaying = new System.Windows.Forms.TextBox();
             this.textBoxreturn = new System.Windows.Forms.TextBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.checkBoxcash = new System.Windows.Forms.CheckBox();
+            this.textBoxcashpaying = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -102,6 +103,8 @@ namespace rmsid2
             this.button11 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.Username = new System.Windows.Forms.Label();
+            this.registerstart = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.labelcontact = new System.Windows.Forms.Label();
             this.poweredbylabel = new System.Windows.Forms.Label();
@@ -109,9 +112,7 @@ namespace rmsid2
             this.TakeAwayprintDocument = new System.Drawing.Printing.PrintDocument();
             this.printRegisterDcoumentDocument = new System.Drawing.Printing.PrintDocument();
             this.printcustomerDocument = new System.Drawing.Printing.PrintDocument();
-            this.checkBoxcash = new System.Windows.Forms.CheckBox();
-            this.registerstart = new System.Windows.Forms.Label();
-            this.Username = new System.Windows.Forms.Label();
+            this.buttonCancelOrder = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewOrderlist)).BeginInit();
@@ -349,7 +350,7 @@ namespace rmsid2
             // ButtonOrdernow
             // 
             this.ButtonOrdernow.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ButtonOrdernow.Location = new System.Drawing.Point(364, 149);
+            this.ButtonOrdernow.Location = new System.Drawing.Point(364, 191);
             this.ButtonOrdernow.Name = "ButtonOrdernow";
             this.ButtonOrdernow.Size = new System.Drawing.Size(120, 28);
             this.ButtonOrdernow.TabIndex = 1;
@@ -360,7 +361,7 @@ namespace rmsid2
             // buttonTable
             // 
             this.buttonTable.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonTable.Location = new System.Drawing.Point(364, 24);
+            this.buttonTable.Location = new System.Drawing.Point(363, 72);
             this.buttonTable.Name = "buttonTable";
             this.buttonTable.Size = new System.Drawing.Size(126, 28);
             this.buttonTable.TabIndex = 1;
@@ -382,6 +383,7 @@ namespace rmsid2
             this.groupBox1.Controls.Add(this.checkBoxtax);
             this.groupBox1.Controls.Add(this.textBoxdiscount);
             this.groupBox1.Controls.Add(this.buttonLogout);
+            this.groupBox1.Controls.Add(this.buttonCancelOrder);
             this.groupBox1.Controls.Add(this.ButtonOrdernow);
             this.groupBox1.Controls.Add(this.buttonundoDis);
             this.groupBox1.Controls.Add(this.buttonDISCOUNT);
@@ -467,6 +469,16 @@ namespace rmsid2
             this.label12.TabIndex = 2;
             this.label12.Text = "Card Payment";
             // 
+            // textBoxreturn
+            // 
+            this.textBoxreturn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxreturn.Location = new System.Drawing.Point(238, 490);
+            this.textBoxreturn.Name = "textBoxreturn";
+            this.textBoxreturn.ReadOnly = true;
+            this.textBoxreturn.Size = new System.Drawing.Size(178, 20);
+            this.textBoxreturn.TabIndex = 1;
+            this.textBoxreturn.Text = "0";
+            // 
             // groupBox3
             // 
             this.groupBox3.BackColor = System.Drawing.SystemColors.ButtonHighlight;
@@ -480,6 +492,23 @@ namespace rmsid2
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Change";
             // 
+            // checkBoxcash
+            // 
+            this.checkBoxcash.AutoSize = true;
+            this.checkBoxcash.Checked = true;
+            this.checkBoxcash.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxcash.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.checkBoxcash.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.checkBoxcash.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBoxcash.Location = new System.Drawing.Point(14, 22);
+            this.checkBoxcash.Name = "checkBoxcash";
+            this.checkBoxcash.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.checkBoxcash.Size = new System.Drawing.Size(92, 17);
+            this.checkBoxcash.TabIndex = 4;
+            this.checkBoxcash.Text = "Cash Payment";
+            this.checkBoxcash.UseVisualStyleBackColor = true;
+            this.checkBoxcash.CheckedChanged += new System.EventHandler(this.checkBoxcash_CheckedChanged);
+            // 
             // textBoxcashpaying
             // 
             this.textBoxcashpaying.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -489,16 +518,6 @@ namespace rmsid2
             this.textBoxcashpaying.TabIndex = 1;
             this.textBoxcashpaying.TextChanged += new System.EventHandler(this.textBoxcashpaying_TextChanged);
             this.textBoxcashpaying.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxcashpaying_KeyPress);
-            // 
-            // textBoxreturn
-            // 
-            this.textBoxreturn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxreturn.Location = new System.Drawing.Point(238, 490);
-            this.textBoxreturn.Name = "textBoxreturn";
-            this.textBoxreturn.ReadOnly = true;
-            this.textBoxreturn.Size = new System.Drawing.Size(178, 20);
-            this.textBoxreturn.TabIndex = 1;
-            this.textBoxreturn.Text = "0";
             // 
             // label9
             // 
@@ -667,7 +686,7 @@ namespace rmsid2
             // buttonundoDis
             // 
             this.buttonundoDis.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonundoDis.Location = new System.Drawing.Point(364, 103);
+            this.buttonundoDis.Location = new System.Drawing.Point(363, 151);
             this.buttonundoDis.Name = "buttonundoDis";
             this.buttonundoDis.Size = new System.Drawing.Size(126, 28);
             this.buttonundoDis.TabIndex = 1;
@@ -678,7 +697,7 @@ namespace rmsid2
             // buttonDISCOUNT
             // 
             this.buttonDISCOUNT.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonDISCOUNT.Location = new System.Drawing.Point(363, 65);
+            this.buttonDISCOUNT.Location = new System.Drawing.Point(362, 113);
             this.buttonDISCOUNT.Name = "buttonDISCOUNT";
             this.buttonDISCOUNT.Size = new System.Drawing.Size(126, 28);
             this.buttonDISCOUNT.TabIndex = 1;
@@ -998,6 +1017,24 @@ namespace rmsid2
             this.panel1.Size = new System.Drawing.Size(241, 110);
             this.panel1.TabIndex = 3;
             // 
+            // Username
+            // 
+            this.Username.AutoSize = true;
+            this.Username.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Username.Location = new System.Drawing.Point(189, 39);
+            this.Username.Name = "Username";
+            this.Username.Size = new System.Drawing.Size(0, 17);
+            this.Username.TabIndex = 3;
+            // 
+            // registerstart
+            // 
+            this.registerstart.AutoSize = true;
+            this.registerstart.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.registerstart.Location = new System.Drawing.Point(190, 13);
+            this.registerstart.Name = "registerstart";
+            this.registerstart.Size = new System.Drawing.Size(0, 17);
+            this.registerstart.TabIndex = 3;
+            // 
             // pictureBox1
             // 
             this.pictureBox1.Image = global::rmsid2.Properties.Resources.logo;
@@ -1049,40 +1086,16 @@ namespace rmsid2
             // 
             this.printcustomerDocument.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printcustomerDocument_PrintPage);
             // 
-            // checkBoxcash
+            // buttonCancelOrder
             // 
-            this.checkBoxcash.AutoSize = true;
-            this.checkBoxcash.Checked = true;
-            this.checkBoxcash.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxcash.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.checkBoxcash.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.checkBoxcash.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBoxcash.Location = new System.Drawing.Point(14, 22);
-            this.checkBoxcash.Name = "checkBoxcash";
-            this.checkBoxcash.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.checkBoxcash.Size = new System.Drawing.Size(92, 17);
-            this.checkBoxcash.TabIndex = 4;
-            this.checkBoxcash.Text = "Cash Payment";
-            this.checkBoxcash.UseVisualStyleBackColor = true;
-            this.checkBoxcash.CheckedChanged += new System.EventHandler(this.checkBoxcash_CheckedChanged);
-            // 
-            // registerstart
-            // 
-            this.registerstart.AutoSize = true;
-            this.registerstart.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.registerstart.Location = new System.Drawing.Point(190, 13);
-            this.registerstart.Name = "registerstart";
-            this.registerstart.Size = new System.Drawing.Size(0, 17);
-            this.registerstart.TabIndex = 3;
-            // 
-            // Username
-            // 
-            this.Username.AutoSize = true;
-            this.Username.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Username.Location = new System.Drawing.Point(189, 39);
-            this.Username.Name = "Username";
-            this.Username.Size = new System.Drawing.Size(0, 17);
-            this.Username.TabIndex = 3;
+            this.buttonCancelOrder.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonCancelOrder.Location = new System.Drawing.Point(367, 35);
+            this.buttonCancelOrder.Name = "buttonCancelOrder";
+            this.buttonCancelOrder.Size = new System.Drawing.Size(120, 28);
+            this.buttonCancelOrder.TabIndex = 1;
+            this.buttonCancelOrder.Text = "Cancel Order";
+            this.buttonCancelOrder.UseVisualStyleBackColor = true;
+            this.buttonCancelOrder.Click += new System.EventHandler(this.buttonCancelOrder_Click);
             // 
             // Dashboard
             // 
@@ -1208,5 +1221,6 @@ namespace rmsid2
         private System.Windows.Forms.CheckBox checkBoxcash;
         private System.Windows.Forms.Label Username;
         private System.Windows.Forms.Label registerstart;
+        private System.Windows.Forms.Button buttonCancelOrder;
     }
 }

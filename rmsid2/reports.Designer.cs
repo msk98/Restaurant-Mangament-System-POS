@@ -132,7 +132,7 @@ namespace rmsid2
             this.groupBox1.Size = new System.Drawing.Size(994, 80);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Customer Detail";
+            this.groupBox1.Text = "Report Detail";
             // 
             // buttonDelete
             // 
@@ -147,20 +147,23 @@ namespace rmsid2
             // dateTimePickerto
             // 
             this.dateTimePickerto.CustomFormat = "DD-MM-YYYY";
+            this.dateTimePickerto.Format = System.Windows.Forms.DateTimePickerFormat.Time;
             this.dateTimePickerto.Location = new System.Drawing.Point(370, 38);
             this.dateTimePickerto.Name = "dateTimePickerto";
             this.dateTimePickerto.Size = new System.Drawing.Size(200, 23);
             this.dateTimePickerto.TabIndex = 8;
+            this.dateTimePickerto.Value = new System.DateTime(2021, 4, 2, 0, 0, 0, 0);
             // 
             // dateTimePickerFrom
             // 
             this.dateTimePickerFrom.CustomFormat = "DD-MM-YYYY";
+            this.dateTimePickerFrom.Format = System.Windows.Forms.DateTimePickerFormat.Time;
             this.dateTimePickerFrom.Location = new System.Drawing.Point(93, 38);
             this.dateTimePickerFrom.MinDate = new System.DateTime(2021, 1, 1, 0, 0, 0, 0);
             this.dateTimePickerFrom.Name = "dateTimePickerFrom";
             this.dateTimePickerFrom.Size = new System.Drawing.Size(200, 23);
             this.dateTimePickerFrom.TabIndex = 8;
-            this.dateTimePickerFrom.Value = new System.DateTime(2021, 3, 23, 18, 12, 27, 0);
+            this.dateTimePickerFrom.Value = new System.DateTime(2021, 4, 2, 0, 0, 0, 0);
             // 
             // button1
             // 

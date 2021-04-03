@@ -44,26 +44,39 @@ namespace rmsid2
 
         private void menuItemsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Products p = new Products();
-            p.ShowDialog();
+            if (dt.user_privelage == "Manager")
+            {
+                Products p = new Products();
+                p.ShowDialog();
+
+            }
         }
 
         private void incredientsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Incredients inc = new Incredients();
-            inc.ShowDialog();
+            if (dt.user_privelage == "Manager")
+            {
+                Incredients inc = new Incredients();
+                inc.ShowDialog();
+            }
         }
 
         private void categoriesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            categories cat = new categories();
-            cat.ShowDialog();
+            if (dt.user_privelage == "Manager")
+            {
+                categories cat = new categories();
+                cat.ShowDialog();
+            }
         }
 
         private void inventoryToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Inventory inven = new Inventory();
-            inven.ShowDialog();
+            if (dt.user_privelage == "Manager")
+            {
+                Inventory inven = new Inventory();
+                inven.ShowDialog();
+            }
         }
 
 
@@ -165,9 +178,9 @@ namespace rmsid2
                 {
                     conn.insertservicetax(OrderId, Int16.Parse(textBoxserCharge.Text));
                 }
-                TakeAwayprintDocument.DefaultPageSettings.PaperSize = new System.Drawing.Printing.PaperSize("prnm", 285, 600);
+                TakeAwayprintDocument.DefaultPageSettings.PaperSize = new System.Drawing.Printing.PaperSize("prnm", 285, 800);
                 TakeAwayprintDocument.Print();
-                printcustomerDocument.DefaultPageSettings.PaperSize = new System.Drawing.Printing.PaperSize("prnm", 285, 600);
+                printcustomerDocument.DefaultPageSettings.PaperSize = new System.Drawing.Printing.PaperSize("prnm", 285, 800);
                 printcustomerDocument.Print();
                 conn.Insertcountinven(OrderId);
                 conn.insertOrder(OrderId);
@@ -190,14 +203,21 @@ namespace rmsid2
 
         private void button5_Click(object sender, EventArgs e)
         {
-            Users user = new Users();
-            user.ShowDialog();
+            if(dt.user_privelage== "Manager")
+            {
+                Users user = new Users();
+                user.ShowDialog();
+            }
+          
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
-            reports rep = new reports();
-            rep.ShowDialog();
+            if (dt.user_privelage == "Manager")
+            {
+                reports rep = new reports();
+                rep.ShowDialog();
+            }
         }
 
         private void checkBoxtax_CheckedChanged(object sender, EventArgs e)
@@ -356,7 +376,7 @@ namespace rmsid2
 
         private void TakeAwayprintDocument_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
         {
-            int y = 0;
+             y = 0;
             var bmp = new Bitmap(rmsid2.Properties.Resources.logo, new Size(180, 70));
             e.Graphics.DrawImage(bmp, new Point(50, y));
             e.Graphics.DrawString("PLOT GPC SHOP #1 GULSHAN E IQBAL BLOCK 4", new Font("monospaced sans serif", 8, FontStyle.Regular), Brushes.Black, new Point(5, y += 80));
@@ -367,21 +387,28 @@ namespace rmsid2
             e.Graphics.DrawString("DATE:" + DateTime.Now, new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(20, y += 20));
             e.Graphics.DrawString("Order No:" + OrderId, new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(20, y += 20));
             e.Graphics.DrawString("Order Type:" + dt.Ordertype, new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(20, y += 20));
+            e.Graphics.DrawString("Order Receipt" , new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(20, y += 20));
+         //   if (dt.Ordertype == "Dine In")
+        //    {
+                e.Graphics.DrawString("Table : " +tableno, new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(20, y += 20));
 
-            e.Graphics.DrawString("Order Receipt" + dt.Ordertype, new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(20, y += 20));
-
-
-            if (dt.Ordertype == "Dine In")
-            {
+        //    }
+         //   if (dt.Ordertype == "Delivery")
+         //   {
                 ArrayList customer = reteievecustomer(OrderId);
                 foreach (Detail c in customer)
                 {
-                    e.Graphics.DrawString("Customer Name:" + c.cust_name, new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(20, y += 20));
-                    e.Graphics.DrawString("Customer No:" + c.cust_phone, new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(20, y += 20));
-                    e.Graphics.DrawString("Customer Address:" + c.address, new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(20, y += 20));
+                 e.Graphics.DrawString("Cust Name:" + c.cust_name, new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(5, y += 20));
+                 e.Graphics.DrawString("Cust No:" + c.cust_phone, new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(5, y += 20));
+                 e.Graphics.DrawString("Cust Address:" + c.address, new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(5, y += 20));
+                 e.Graphics.DrawString("Rider:" + c.deliveryBoy_Name, new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(5, y += 20));
 
-                }
             }
+            // }
+
+            e.Graphics.DrawString("---------------------------------------------------------------------------------", new Font("Arial", 11, FontStyle.Regular), Brushes.Black, new Point(5, y += 20));
+            e.Graphics.DrawString("Order Details", new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(20, y += 20));
+
             e.Graphics.DrawString("Item Name", new Font("monospaced sans serif", 8, FontStyle.Regular), Brushes.Black, new Point(5, y += 20));
             e.Graphics.DrawString("Price", new Font("monospaced sans serif", 8, FontStyle.Regular), Brushes.Black, new Point(100, y));
             e.Graphics.DrawString("Quantity", new Font("monospaced sans serif", 8, FontStyle.Regular), Brushes.Black, new Point(150, y));
@@ -407,6 +434,8 @@ namespace rmsid2
                 connection.Close();
             }
             e.Graphics.DrawString("---------------------------------------------------------------------------------", new Font("Arial", 11, FontStyle.Regular), Brushes.Black, new Point(5, y += 20));
+            e.Graphics.DrawString("Payment Details", new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(20, y += 20));
+
             e.Graphics.DrawString("SubTotal:", new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(10, y += 20));
             e.Graphics.DrawString(textBoxsubtotal.Text, new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(100, y));
             if (checkBoxtax.Checked)
@@ -459,7 +488,7 @@ namespace rmsid2
 
             using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
-                SqlCommand command = new SqlCommand("select cust_name,cust_phone,cust_address from customer inner join customerOrders on customer.cust_id=customer.cust_id inner join temp_orders on customerOrders.Order_id= temp_orders.t_Oid where temp_orders.t_Oid= '" + Oid + "';", connection);
+                SqlCommand command = new SqlCommand("select cust_name,cust_phone,cust_address,DeliveryBoys.d_name from customer  inner join customerOrders on customer.cust_id=customer.cust_id  inner join temp_orders  on customerOrders.Order_id= temp_orders.t_Oid inner join del_orders on del_orders.order_id=customerOrders.Order_id inner join DeliveryBoys  on DeliveryBoys.d_id = del_orders.d_id where temp_orders.t_Oid='" + Oid + "';", connection);
                 connection.Open();
 
                 SqlDataReader reader = command.ExecuteReader();
@@ -468,7 +497,7 @@ namespace rmsid2
                 {
                     while (reader.Read())
                     {
-                        CustomerList.Add(new Detail() { cust_name = (reader["cust_name"].ToString()), cust_phone = (reader["cust_phone"].ToString()), address = (reader["cust_address"].ToString()) });
+                        CustomerList.Add(new Detail() { cust_name = (reader["cust_name"].ToString()), cust_phone = (reader["cust_phone"].ToString()), address = (reader["cust_address"].ToString()),deliveryBoy_Name= reader["cust_address"].ToString() });
                     }
                 }
                 connection.Close();
@@ -492,7 +521,7 @@ namespace rmsid2
             textBoxserCharge.Text = "0.0";
             textBoxNetBill.Text = "0.0";
         }
-
+        int y = 0;
         private void button7_Click(object sender, EventArgs e)
         {
             if (button7.Text == "Open Register")
@@ -502,11 +531,12 @@ namespace rmsid2
                 if (reg.registertext != "")
                     dt.startregister = Int16.Parse(reg.registertext);
                 registerstart.Text = "Register Start: " + (DateTime.Now).ToString();
+               
                 button7.Text = "Close Register";
             }
             else
             {
-                printRegisterDcoumentDocument.DefaultPageSettings.PaperSize = new System.Drawing.Printing.PaperSize("prnm", 285, 600);
+                printRegisterDcoumentDocument.DefaultPageSettings.PaperSize = new System.Drawing.Printing.PaperSize("prnm", 285, y);
                 printRegisterDcoumentDocument.Print();
                 button7.Text = "Open Register";
             }
@@ -515,11 +545,10 @@ namespace rmsid2
 
         private void printRegisterDcoumentDocument_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
         {
-            int y = 0;
+            y = 0;
             Connection conn = new Connection();
             dt.startreg = conn.getregtime(dt.userid);
             conn.endregister(dt.userid);
-
             var bmp = new Bitmap(rmsid2.Properties.Resources.logo, new Size(180, 70));
             e.Graphics.DrawImage(bmp, new Point(50, y));
             e.Graphics.DrawString("PLOT GPC SHOP #1 GULSHAN E IQBAL BLOCK 4", new Font("monospaced sans serif", 8, FontStyle.Regular), Brushes.Black, new Point(5, y += 80));
@@ -536,32 +565,37 @@ namespace rmsid2
             e.Graphics.DrawString("Closing Person:" + dt.username, new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(20, y += 20));
             e.Graphics.DrawString("---------------------------------------------------------------------------------", new Font("Arial", 11, FontStyle.Regular), Brushes.Black, new Point(0, y += 20));
             e.Graphics.DrawString("Sale Summary", new Font("monospaced sans serif", 14, FontStyle.Regular), Brushes.Black, new Point(40, y += 20));
-            foreach (Detail discount in conn.retrievediscounts(DateTime.Now, DateTime.Now, dt.userid))
+            ArrayList discounts = conn.retrievediscounts(DateTime.Now, DateTime.Now, dt.userid);
+            foreach (Detail discount in discounts)
             {
                 e.Graphics.DrawString(discount.DiscountType, new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(20, y += 20));
                 e.Graphics.DrawString(discount.DiscountAmount.ToString(), new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(80, y));
             }
-
             e.Graphics.DrawString("Taxes", new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(20, y += 20));
             e.Graphics.DrawString(conn.retrievedtaxes(dt.startreg, DateTime.Now, dt.userid).ToString(), new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(80, y));
-            e.Graphics.DrawString("Charges", new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(20, y += 20));
-            e.Graphics.DrawString(conn.calculatesercharge(dt.startreg, DateTime.Now, dt.userid).ToString(), new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(80, y));
-            e.Graphics.DrawString("---------------------------------------------------------------------------------", new Font("Arial", 11, FontStyle.Regular), Brushes.Black, new Point(0, y += 20));
+            e.Graphics.DrawString("Extra Charges", new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(20, y += 20));
+            e.Graphics.DrawString(conn.calculatesercharge(dt.startreg, DateTime.Now, dt.userid).ToString(), new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(100, y));
             e.Graphics.DrawString("Net sales", new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(20, y += 20));
+
             e.Graphics.DrawString(conn.calculatenetsale(dt.startreg, DateTime.Now, dt.userid).ToString(), new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(80, y));
+            
+            e.Graphics.DrawString("---------------------------------------------------------------------------------", new Font("Arial", 11, FontStyle.Regular), Brushes.Black, new Point(0, y += 20));
+            e.Graphics.DrawString("Order Details", new Font("monospaced sans serif", 14, FontStyle.Regular), Brushes.Black, new Point(40, y += 20));
+
+            e.Graphics.DrawString("OrderType", new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(10, y += 20));
+            e.Graphics.DrawString("Orders", new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(80, y));
+            e.Graphics.DrawString("Total Amount", new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(120, y));
+
             foreach (Detail order in conn.retrievedOrders(dt.startreg, DateTime.Now, dt.userid))
             {
-                e.Graphics.DrawString("OrderType", new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(10, y += 20));
-                e.Graphics.DrawString("Orders", new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(80, y));
-                e.Graphics.DrawString("Total Amount", new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(120, y));
-                e.Graphics.DrawString(order.OrderType.ToString(), new Font("monospaced sans serif", 9, FontStyle.Regular), Brushes.Black, new Point(10, y += 20));
+                 e.Graphics.DrawString(order.OrderType.ToString(), new Font("monospaced sans serif", 9, FontStyle.Regular), Brushes.Black, new Point(10, y += 20));
                 e.Graphics.DrawString(order.Orders.ToString(), new Font("monospaced sans serif", 9, FontStyle.Regular), Brushes.Black, new Point(80, y));
                 e.Graphics.DrawString(order.netsale.ToString(), new Font("monospaced sans serif", 9, FontStyle.Regular), Brushes.Black, new Point(120, y));
 
             }
-            e.Graphics.DrawString("---------------------------------------------------------------------------------", new Font("Arial", 11, FontStyle.Regular), Brushes.Black, new Point(0, y += 20));
+            ArrayList orderdetails = conn.retrieveUsedInventory(dt.startreg, DateTime.Now, dt.userid);
             e.Graphics.DrawString("Inventory Detail", new Font("monospaced sans serif", 14, FontStyle.Regular), Brushes.Black, new Point(40, y += 20));
-            foreach (Detail Inventory in conn.retrieveUsedInventory(dt.startreg, DateTime.Now, dt.userid))
+            foreach (Detail Inventory in orderdetails)
             {
                 e.Graphics.DrawString("Inventory", new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(10, y += 20));
                 e.Graphics.DrawString("Quanity", new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(120, y));
@@ -569,21 +603,24 @@ namespace rmsid2
                 e.Graphics.DrawString(Inventory.invenqty.ToString(), new Font("monospaced sans serif", 9, FontStyle.Regular), Brushes.Black, new Point(120, y));
             }
             e.Graphics.DrawString("---------------------------------------------------------------------------------", new Font("Arial", 11, FontStyle.Regular), Brushes.Black, new Point(0, y += 20));
-            e.Graphics.DrawString("Order Details", new Font("monospaced sans serif", 14, FontStyle.Regular), Brushes.Black, new Point(40, y += 20));
-            foreach (Detail product in conn.retrievedProducts(dt.startreg, DateTime.Now, dt.userid))
+            e.Graphics.DrawString("Products Details", new Font("monospaced sans serif", 14, FontStyle.Regular), Brushes.Black, new Point(40, y += 20));
+            ArrayList productsdetail = conn.retrievedProducts(dt.startreg, DateTime.Now, dt.userid);
+
+            foreach (Detail product in productsdetail)
             {
                 e.Graphics.DrawString("Product Name", new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(10, y += 20));
                 e.Graphics.DrawString("Quantity", new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(120, y));
                 e.Graphics.DrawString(product.p_name.ToString(), new Font("monospaced sans serif", 9, FontStyle.Regular), Brushes.Black, new Point(10, y += 20));
                 e.Graphics.DrawString(product.p_qty.ToString(), new Font("monospaced sans serif", 9, FontStyle.Regular), Brushes.Black, new Point(120, y));
             }
+            MessageBox.Show(dt.startreg.ToString()+ DateTime.Now.ToString());
             e.Graphics.DrawString("---------------------------------------------------------------------------------", new Font("Arial", 11, FontStyle.Regular), Brushes.Black, new Point(0, y += 20));
 
         }
 
         private void buttonLogout_Click(object sender, EventArgs e)
         {
-            if (button7.Text == "Button Close")
+            if (button7.Text == "Close Register")
             {
                 if (MessageBox.Show("Do you Really want to Logout and Close Register?", "Message", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
@@ -628,7 +665,7 @@ namespace rmsid2
 
         private void Dashboard_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (button7.Text == "Button Close")
+            if (button7.Text == "Close Register")
             {
                 if (MessageBox.Show("Do you Really want to Logout and Close Register?", "Message", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
@@ -656,7 +693,7 @@ namespace rmsid2
 
         private void printcustomerDocument_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
         {
-            int y = 0;
+             y = 0;
             var bmp = new Bitmap(rmsid2.Properties.Resources.logo, new Size(180, 70));
             e.Graphics.DrawImage(bmp, new Point(50, y));
             e.Graphics.DrawString("PLOT GPC SHOP #1 GULSHAN E IQBAL BLOCK 4", new Font("monospaced sans serif", 8, FontStyle.Regular), Brushes.Black, new Point(5, y += 80));
@@ -667,18 +704,28 @@ namespace rmsid2
             e.Graphics.DrawString("DATE:" + DateTime.Now, new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(20, y += 20));
             e.Graphics.DrawString("Order No:" + OrderId, new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(20, y += 20));
             e.Graphics.DrawString("Order Type:" + dt.Ordertype, new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(20, y += 20));
-            e.Graphics.DrawString("Customer Receipt" + dt.Ordertype, new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(20, y += 20));
-            if (dt.Ordertype == "Dine In")
-            {
-                ArrayList customer = reteievecustomer(OrderId);
-                foreach (Detail c in customer)
-                {
-                    e.Graphics.DrawString("Customer Name:" + c.cust_name, new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(20, y += 20));
-                    e.Graphics.DrawString("Customer No:" + c.cust_phone, new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(20, y += 20));
-                    e.Graphics.DrawString("Customer Address:" + c.address, new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(20, y += 20));
+            e.Graphics.DrawString("Customer Receipt", new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(20, y += 20));
+            //   if (dt.Ordertype == "Dine In")
+            //    {
+            e.Graphics.DrawString("Table : " + tableno, new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(20, y += 20));
 
-                }
+            //    }
+            //   if (dt.Ordertype == "Delivery")
+            //   {
+            ArrayList customer = reteievecustomer(OrderId);
+            foreach (Detail c in customer)
+            {
+                e.Graphics.DrawString("Cust Name:" + c.cust_name, new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(5, y += 20));
+                e.Graphics.DrawString("Cust No:" + c.cust_phone, new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(5, y += 20));
+                e.Graphics.DrawString("Cust Address:" + c.address, new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(5, y += 20));
+                e.Graphics.DrawString("Rider:" + c.deliveryBoy_Name, new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(5, y += 20));
+
             }
+            // }
+
+            e.Graphics.DrawString("---------------------------------------------------------------------------------", new Font("Arial", 11, FontStyle.Regular), Brushes.Black, new Point(5, y += 20));
+            e.Graphics.DrawString("Order Details", new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(20, y += 20));
+
             e.Graphics.DrawString("Item Name", new Font("monospaced sans serif", 8, FontStyle.Regular), Brushes.Black, new Point(5, y += 20));
             e.Graphics.DrawString("Price", new Font("monospaced sans serif", 8, FontStyle.Regular), Brushes.Black, new Point(100, y));
             e.Graphics.DrawString("Quantity", new Font("monospaced sans serif", 8, FontStyle.Regular), Brushes.Black, new Point(150, y));
@@ -704,6 +751,8 @@ namespace rmsid2
                 connection.Close();
             }
             e.Graphics.DrawString("---------------------------------------------------------------------------------", new Font("Arial", 11, FontStyle.Regular), Brushes.Black, new Point(5, y += 20));
+            e.Graphics.DrawString("Payment Details", new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(20, y += 20));
+
             e.Graphics.DrawString("SubTotal:", new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(10, y += 20));
             e.Graphics.DrawString(textBoxsubtotal.Text, new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(100, y));
             if (checkBoxtax.Checked)
@@ -1061,6 +1110,31 @@ namespace rmsid2
         private void textBoxcardpay_MouseClick(object sender, MouseEventArgs e)
         {
             textBoxcardpay.Focus();
+        }
+
+        private void buttonCancelOrder_Click(object sender, EventArgs e)
+        {
+            SecretKey sk = new SecretKey();
+            sk.ShowDialog();
+            Connection conn = new Connection();
+            if (sk.textBox != "0")
+            {
+                if (conn.checkSecretKey(Int16.Parse(sk.textBox)) > 0)
+                {
+                    if(OrderId!=0)
+                    {
+                        if(conn.CancelOrder(OrderId))
+                        {
+                            conn.updatetablestats(tableno);
+
+                            conn.delorderItems(OrderId);
+                            conn.delorders(OrderId);
+                            dataGridViewOrderItems.DataSource = null;
+                        }
+                    }
+                }
+            }
+
         }
     }
 }
