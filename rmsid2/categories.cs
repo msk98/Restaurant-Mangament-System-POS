@@ -22,11 +22,11 @@ namespace rmsid2
         private void buttonAdd_Click(object sender, EventArgs e)
         {
             Connection conn = new Connection();
-            if (CatnametextBox.Text != "" && DiscomboBox.SelectedIndex != -1)
+            if (CatnametextBox.Text != "" )
             {
                 
 
-                    if (conn.insertcat(CatnametextBox.Text, DiscomboBox.SelectedIndex))
+                    if (conn.insertcat(CatnametextBox.Text))
                     MessageBox.Show("Inserted");
                 clearFunction();
                 getcat();
@@ -49,17 +49,17 @@ namespace rmsid2
         public void clearFunction()
         {
             CatnametextBox.Text = "";
-            DiscomboBox.SelectedIndex = -1;
+            
         }
 
         private void buttonUpdate_Click(object sender, EventArgs e)
         {
-            if (CatnametextBox.Text != "" && DiscomboBox.SelectedIndex != -1)
+            if (CatnametextBox.Text != "")
             {
                 if (cat_id != 0)
                 {
                     Connection conn = new Connection();
-                    if (conn.updatecat(cat_id, CatnametextBox.Text, DiscomboBox.SelectedIndex))
+                    if (conn.updatecat(cat_id, CatnametextBox.Text))
                     {
                         //    MessageBox.Show("updated");
                       
@@ -82,7 +82,7 @@ namespace rmsid2
 
         private void buttonDelete_Click(object sender, EventArgs e)
         {
-            if (CatnametextBox.Text != "" && DiscomboBox.SelectedIndex != -1)
+            if (CatnametextBox.Text != "" )
             {
                 if (cat_id != 0)
                 {
@@ -116,7 +116,7 @@ namespace rmsid2
                 DataGridViewRow row = CatdataGridView.Rows[e.RowIndex];
                 cat_id = Int16.Parse(row.Cells[0].Value.ToString());
                 CatnametextBox.Text = row.Cells[1].Value.ToString();
-                DiscomboBox.SelectedIndex = Int16.Parse(row.Cells[2].Value.ToString());
+             
               
 
             }

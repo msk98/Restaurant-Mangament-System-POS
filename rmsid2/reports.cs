@@ -173,7 +173,7 @@ namespace rmsid2
             SecretKey sk =new  SecretKey();
             sk.ShowDialog();
             Connection conn = new Connection();
-            if(sk.textBox !="0")
+            if(sk.textBox !="")
             {
                 if (conn.checkSecretKey(Int16.Parse(sk.textBox)) > 0)
                 {

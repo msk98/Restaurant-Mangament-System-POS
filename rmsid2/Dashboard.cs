@@ -23,6 +23,7 @@ namespace rmsid2
             dt.username = un;
             dt.userid = userid;
             Username.Text = "Hello " + dt.username;
+       //     MessageBox.Show(p);
         }
         public Dashboard()
         {
@@ -44,12 +45,16 @@ namespace rmsid2
 
         private void menuItemsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (dt.user_privelage == "Manager")
+           
+            if (String.Compare(dt.user_privelage, "Manager") == 0)
             {
+               
                 Products p = new Products();
                 p.ShowDialog();
 
             }
+            else
+                MessageBox.Show("user not have privilege");
         }
 
         private void incredientsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -59,6 +64,8 @@ namespace rmsid2
                 Incredients inc = new Incredients();
                 inc.ShowDialog();
             }
+            else
+                MessageBox.Show("user not have privilege");
         }
 
         private void categoriesToolStripMenuItem_Click(object sender, EventArgs e)
@@ -67,7 +74,10 @@ namespace rmsid2
             {
                 categories cat = new categories();
                 cat.ShowDialog();
+
             }
+            else
+                MessageBox.Show("user not have privilege");
         }
 
         private void inventoryToolStripMenuItem_Click(object sender, EventArgs e)
@@ -77,6 +87,8 @@ namespace rmsid2
                 Inventory inven = new Inventory();
                 inven.ShowDialog();
             }
+            else
+                MessageBox.Show("user not have privilege");
         }
 
 
@@ -157,7 +169,7 @@ namespace rmsid2
 
         private void ButtonOrdernow_Click(object sender, EventArgs e)
         {
-            if (OrderId != 0)
+            if (OrderId != 0 && Int16.Parse(textBoxreturn.Text) >=0)
             {
                 Connection conn = new Connection();
                 if (checkBoxcard.Checked)
@@ -197,8 +209,13 @@ namespace rmsid2
 
         private void buttonTable_Click(object sender, EventArgs e)
         {
-            Tables Table = new Tables();
-            Table.ShowDialog();
+            if (dt.user_privelage == "Manager")
+            {
+                Tables Table = new Tables();
+                Table.ShowDialog();
+            }
+            else
+                MessageBox.Show("user not have privilege");
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -208,7 +225,8 @@ namespace rmsid2
                 Users user = new Users();
                 user.ShowDialog();
             }
-          
+            else
+                MessageBox.Show("user not have privilege");
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -218,6 +236,8 @@ namespace rmsid2
                 reports rep = new reports();
                 rep.ShowDialog();
             }
+            else
+                MessageBox.Show("user not have privilege");
         }
 
         private void checkBoxtax_CheckedChanged(object sender, EventArgs e)
@@ -244,6 +264,9 @@ namespace rmsid2
                     MessageBox.Show(ee.ToString());
                 }
             }
+            checkBoxcard.Checked = false;
+            checkBoxmultipayment.Checked = false;
+            checkBoxcash.Checked = true;
         }
 
         private void numericUpDowntax_ValueChanged(object sender, EventArgs e)
@@ -268,19 +291,31 @@ namespace rmsid2
                 textBoxserCharge.Text = "0.0";
                 textBoxservicecharge.Enabled = false;
             }
+            checkBoxcard.Checked = false;
+            checkBoxmultipayment.Checked = false;
+            checkBoxcash.Checked = true;
         }
 
         private void buttonDISCOUNT_Click(object sender, EventArgs e)
         {
-            SelectDiscount sd = new SelectDiscount(float.Parse(textBoxtotal.Text), OrderId);
-            sd.ShowDialog();
-            textBoxdiscount.Text = sd.discountamnt;
-            textBoxNetBill.Text = (float.Parse(textBoxtotal.Text) - float.Parse(textBoxdiscount.Text) + float.Parse(textBoxserCharge.Text)).ToString();
+            if (OrderId != 0)
+            {
+                SelectDiscount sd = new SelectDiscount(float.Parse(textBoxtotal.Text), OrderId);
+                sd.ShowDialog();
+                if (sd.discountamnt != "")
+                {
+                    textBoxdiscount.Text = sd.discountamnt;
+                    textBoxNetBill.Text = (float.Parse(textBoxtotal.Text) - float.Parse(textBoxdiscount.Text) + float.Parse(textBoxserCharge.Text)).ToString();
+                }
+                checkBoxcard.Checked = false;
+                checkBoxmultipayment.Checked = false;
+                checkBoxcash.Checked = true;
+            }
         }
 
         private void textBoxservicecharge_TextChanged(object sender, EventArgs e)
         {
-            if (textBoxservicecharge.Text.Length > 0)
+            if (textBoxservicecharge.Text.Length > 0 && OrderId!=0)
             {
                 textBoxNetBill.Text = (float.Parse(textBoxtotal.Text) - float.Parse(textBoxdiscount.Text) + float.Parse(textBoxservicecharge.Text)).ToString();
                 textBoxserCharge.Text = textBoxservicecharge.Text;
@@ -460,18 +495,28 @@ namespace rmsid2
             }
             e.Graphics.DrawString("Net Bill: ", new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(10, y += 20));
             e.Graphics.DrawString(textBoxNetBill.Text, new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(100, y));
-            if (checkBoxmultipayment.Checked && (Int16.Parse(textBoxcashpay.Text) + Int16.Parse(textBoxcardpay.Text)) == Int16.Parse(textBoxNetBill.Text))
+            if (checkBoxmultipayment.Checked)
             {
                 e.Graphics.DrawString("Cash payment: ", new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(10, y += 20));
                 e.Graphics.DrawString(textBoxcashpay.Text, new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(100, y));
                 e.Graphics.DrawString("Card Payment: ", new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(10, y += 20));
                 e.Graphics.DrawString(textBoxcardpay.Text, new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(100, y));
-
+                e.Graphics.DrawString("Return: ", new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(10, y += 20));
+                e.Graphics.DrawString(textBoxreturn.Text, new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(100, y));
             }
-            if (checkBoxcard.Checked && Int16.Parse(textBoxcreditcardpayment.Text) == Int16.Parse(textBoxNetBill.Text))
+            if (checkBoxcard.Checked)
             {
                 e.Graphics.DrawString("Card Payment: ", new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(10, y += 20));
                 e.Graphics.DrawString(textBoxcreditcardpayment.Text, new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(100, y));
+                e.Graphics.DrawString("Return: ", new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(10, y += 20));
+                e.Graphics.DrawString(textBoxreturn.Text, new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(100, y));
+            }
+            if (checkBoxcash.Checked)
+            {
+                e.Graphics.DrawString("Cash Payment: ", new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(10, y += 20));
+                e.Graphics.DrawString(textBoxcashpaying.Text, new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(100, y));
+                e.Graphics.DrawString("Return: ", new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(10, y += 20));
+                e.Graphics.DrawString(textBoxreturn.Text, new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(100, y));
             }
             e.Graphics.DrawString("---------------------------------------------------------------------------------", new Font("Arial", 11, FontStyle.Regular), Brushes.Black, new Point(5, y += 20));
             e.Graphics.DrawString("(ALL PRICES ARE INCLUSIVE OF 13% SST)", new Font("monospaced sans serif", 8, FontStyle.Regular), Brushes.Black, new Point(30, y += 20));
@@ -508,10 +553,11 @@ namespace rmsid2
         public void clearall()
         {
             OrderId = 0;
-            checkBoxcard.Checked = false;
-            checkBoxmultipayment.Checked = false;
+            checkBoxservicecharges.Checked = false;
             checkBoxtax.Checked = false;
             checkBoxcard.Checked = false;
+            checkBoxmultipayment.Checked = false;
+            checkBoxcash.Checked = true;
             textBoxcashpaying.Text = "";
             textBoxreturn.Text = "";
             textBoxsubtotal.Text = "0.0";
@@ -529,15 +575,18 @@ namespace rmsid2
                 register reg = new register(dt.userid);
                 reg.ShowDialog();
                 if (reg.registertext != "")
+                {
                     dt.startregister = Int16.Parse(reg.registertext);
-                registerstart.Text = "Register Start: " + (DateTime.Now).ToString();
-               
-                button7.Text = "Close Register";
+                    registerstart.Text = "Register Start: " + (DateTime.Now).ToString();
+
+                    button7.Text = "Close Register";
+                }
             }
             else
             {
-                printRegisterDcoumentDocument.DefaultPageSettings.PaperSize = new System.Drawing.Printing.PaperSize("prnm", 285, y);
+                printRegisterDcoumentDocument.DefaultPageSettings.PaperSize = new System.Drawing.Printing.PaperSize("prnm", 285, 1000);
                 printRegisterDcoumentDocument.Print();
+                registerstart.Text="Register End: "+ (DateTime.Now).ToString();
                 button7.Text = "Open Register";
             }
 
@@ -548,7 +597,8 @@ namespace rmsid2
             y = 0;
             Connection conn = new Connection();
             dt.startreg = conn.getregtime(dt.userid);
-            conn.endregister(dt.userid);
+
+            conn.endregister(dt.userid,conn.getregid(dt.userid));
             var bmp = new Bitmap(rmsid2.Properties.Resources.logo, new Size(180, 70));
             e.Graphics.DrawImage(bmp, new Point(50, y));
             e.Graphics.DrawString("PLOT GPC SHOP #1 GULSHAN E IQBAL BLOCK 4", new Font("monospaced sans serif", 8, FontStyle.Regular), Brushes.Black, new Point(5, y += 80));
@@ -563,29 +613,40 @@ namespace rmsid2
             e.Graphics.DrawString("Opening Time:" + dt.startreg.ToString(), new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(20, y += 20));
             e.Graphics.DrawString("Closing Time:" + DateTime.Now.ToString("hh:mm:ss tt"), new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(20, y += 20));
             e.Graphics.DrawString("Closing Person:" + dt.username, new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(20, y += 20));
+            e.Graphics.DrawString("Opening Amount:" + dt.startregister.ToString(), new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(20, y += 20));
+
             e.Graphics.DrawString("---------------------------------------------------------------------------------", new Font("Arial", 11, FontStyle.Regular), Brushes.Black, new Point(0, y += 20));
-            e.Graphics.DrawString("Sale Summary", new Font("monospaced sans serif", 14, FontStyle.Regular), Brushes.Black, new Point(40, y += 20));
-            ArrayList discounts = conn.retrievediscounts(DateTime.Now, DateTime.Now, dt.userid);
+            e.Graphics.DrawString("Sale Summary", new Font("monospaced sans serif", 14, FontStyle.Bold), Brushes.Black, new Point(40, y += 20));
+            ArrayList discounts = conn.retrievediscounts(dt.startreg, DateTime.Now, dt.userid);
+            int disc = 0;
             foreach (Detail discount in discounts)
             {
                 e.Graphics.DrawString(discount.DiscountType, new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(20, y += 20));
-                e.Graphics.DrawString(discount.DiscountAmount.ToString(), new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(80, y));
+                disc += discount.DiscountAmount;
+                e.Graphics.DrawString(discount.DiscountAmount.ToString(), new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(150, y));
             }
             e.Graphics.DrawString("Taxes", new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(20, y += 20));
             e.Graphics.DrawString(conn.retrievedtaxes(dt.startreg, DateTime.Now, dt.userid).ToString(), new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(80, y));
-            e.Graphics.DrawString("Extra Charges", new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(20, y += 20));
-            e.Graphics.DrawString(conn.calculatesercharge(dt.startreg, DateTime.Now, dt.userid).ToString(), new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(100, y));
-            e.Graphics.DrawString("Net sales", new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(20, y += 20));
-
-            e.Graphics.DrawString(conn.calculatenetsale(dt.startreg, DateTime.Now, dt.userid).ToString(), new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(80, y));
+            e.Graphics.DrawString("Extra Charges: ", new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(20, y += 20));
+            e.Graphics.DrawString(conn.calculatesercharge(dt.startreg, DateTime.Now, dt.userid).ToString(), new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(150, y));
+            e.Graphics.DrawString("Card payments: ", new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(20, y += 20));
+            e.Graphics.DrawString(conn.calculateCrtaxes(dt.startreg, DateTime.Now, dt.userid).ToString(), new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(150, y));
+            e.Graphics.DrawString("Total sales", new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(20, y += 20));
+            e.Graphics.DrawString(conn.calculatenetsale(dt.startreg, DateTime.Now, dt.userid).ToString(), new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(150, y));
+            e.Graphics.DrawString("Net sales(total+charges+tax+cr pay-discount)", new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(10, y += 20));
             
-            e.Graphics.DrawString("---------------------------------------------------------------------------------", new Font("Arial", 11, FontStyle.Regular), Brushes.Black, new Point(0, y += 20));
-            e.Graphics.DrawString("Order Details", new Font("monospaced sans serif", 14, FontStyle.Regular), Brushes.Black, new Point(40, y += 20));
+            int NetSale = conn.calculatenetsale(dt.startreg, DateTime.Now, dt.userid) + conn.retrievedtaxes(dt.startreg, DateTime.Now, dt.userid)+ conn.calculateCrtaxes(dt.startreg, DateTime.Now, dt.userid)+ conn.calculatesercharge(dt.startreg, DateTime.Now, dt.userid)-disc;
+            e.Graphics.DrawString((NetSale).ToString(), new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(20, y += 20));
+            e.Graphics.DrawString("Cash In Hand(Netsale + Opening Amnt)", new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(20, y += 20));
+            e.Graphics.DrawString((NetSale+dt.startregister).ToString(), new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(20, y += 20));
 
+
+            //  e.Graphics.DrawString(conn.calculatenetsale(dt.startreg, DateTime.Now, dt.userid).ToString(), new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(150, y));
+            e.Graphics.DrawString("------------------------------------------------------------------------------", new Font("Arial", 11, FontStyle.Regular), Brushes.Black, new Point(0, y += 20));
+            e.Graphics.DrawString("Order Details", new Font("monospaced sans serif", 14, FontStyle.Bold), Brushes.Black, new Point(40, y += 20));
             e.Graphics.DrawString("OrderType", new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(10, y += 20));
             e.Graphics.DrawString("Orders", new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(80, y));
             e.Graphics.DrawString("Total Amount", new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(120, y));
-
             foreach (Detail order in conn.retrievedOrders(dt.startreg, DateTime.Now, dt.userid))
             {
                  e.Graphics.DrawString(order.OrderType.ToString(), new Font("monospaced sans serif", 9, FontStyle.Regular), Brushes.Black, new Point(10, y += 20));
@@ -594,27 +655,28 @@ namespace rmsid2
 
             }
             ArrayList orderdetails = conn.retrieveUsedInventory(dt.startreg, DateTime.Now, dt.userid);
-            e.Graphics.DrawString("Inventory Detail", new Font("monospaced sans serif", 14, FontStyle.Regular), Brushes.Black, new Point(40, y += 20));
+            e.Graphics.DrawString("Inventory Detail", new Font("monospaced sans serif", 14, FontStyle.Bold), Brushes.Black, new Point(40, y += 20));
+            e.Graphics.DrawString("Inventory", new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(10, y += 20));
+            e.Graphics.DrawString("Quanity", new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(120, y));
+
             foreach (Detail Inventory in orderdetails)
             {
-                e.Graphics.DrawString("Inventory", new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(10, y += 20));
-                e.Graphics.DrawString("Quanity", new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(120, y));
                 e.Graphics.DrawString(Inventory.invenname.ToString(), new Font("monospaced sans serif", 9, FontStyle.Regular), Brushes.Black, new Point(10, y += 20));
                 e.Graphics.DrawString(Inventory.invenqty.ToString(), new Font("monospaced sans serif", 9, FontStyle.Regular), Brushes.Black, new Point(120, y));
             }
-            e.Graphics.DrawString("---------------------------------------------------------------------------------", new Font("Arial", 11, FontStyle.Regular), Brushes.Black, new Point(0, y += 20));
-            e.Graphics.DrawString("Products Details", new Font("monospaced sans serif", 14, FontStyle.Regular), Brushes.Black, new Point(40, y += 20));
+            e.Graphics.DrawString("-----------------------------------------------------------------------------", new Font("Arial", 11, FontStyle.Regular), Brushes.Black, new Point(0, y += 20));
+            e.Graphics.DrawString("Products Details", new Font("monospaced sans serif", 14, FontStyle.Bold), Brushes.Black, new Point(40, y += 20));
             ArrayList productsdetail = conn.retrievedProducts(dt.startreg, DateTime.Now, dt.userid);
+            e.Graphics.DrawString("Product Name", new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(10, y += 20));
+            e.Graphics.DrawString("Quantity", new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(120, y));
 
             foreach (Detail product in productsdetail)
             {
-                e.Graphics.DrawString("Product Name", new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(10, y += 20));
-                e.Graphics.DrawString("Quantity", new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(120, y));
-                e.Graphics.DrawString(product.p_name.ToString(), new Font("monospaced sans serif", 9, FontStyle.Regular), Brushes.Black, new Point(10, y += 20));
+                 e.Graphics.DrawString(product.p_name.ToString(), new Font("monospaced sans serif", 9, FontStyle.Regular), Brushes.Black, new Point(10, y += 20));
                 e.Graphics.DrawString(product.p_qty.ToString(), new Font("monospaced sans serif", 9, FontStyle.Regular), Brushes.Black, new Point(120, y));
             }
-            MessageBox.Show(dt.startreg.ToString()+ DateTime.Now.ToString());
-            e.Graphics.DrawString("---------------------------------------------------------------------------------", new Font("Arial", 11, FontStyle.Regular), Brushes.Black, new Point(0, y += 20));
+      //      MessageBox.Show(dt.startreg.ToString()+ DateTime.Now.ToString());
+            e.Graphics.DrawString("----------------------------------------------------------------------------", new Font("Arial", 11, FontStyle.Regular), Brushes.Black, new Point(0, y += 20));
 
         }
 
@@ -626,14 +688,19 @@ namespace rmsid2
                 {
 
                     calllastone();
+                    Connection conn = new Connection();
+                    conn.updatelastlogin(dt.username);
                     Login log = new Login();
                     this.Hide();
                     log.ShowDialog();
 
                 }
+
             }
             else
             {
+                Connection conn = new Connection();
+                conn.updatelastlogin(dt.username);
                 Login log = new Login();
                 this.Hide();
                 log.ShowDialog();
@@ -659,8 +726,9 @@ namespace rmsid2
 
                 //More code here
             }
-            printRegisterDcoumentDocument.DefaultPageSettings.PaperSize = new System.Drawing.Printing.PaperSize("prnm", 285, 600);
+            printRegisterDcoumentDocument.DefaultPageSettings.PaperSize = new System.Drawing.Printing.PaperSize("prnm", 285, 1000);
             printRegisterDcoumentDocument.Print();
+            button7.Text = "Open Register";
         }
 
         private void Dashboard_FormClosing(object sender, FormClosingEventArgs e)
@@ -671,9 +739,20 @@ namespace rmsid2
                 {
 
                     calllastone();
+                    Connection conn = new Connection();
+                    conn.updatelastlogin(dt.username);
                     this.Close();
 
                 }
+                else
+                {
+
+                }
+            }
+            else
+            {
+                Connection conn = new Connection();
+                conn.updatelastlogin(dt.username);
             }
 
 
@@ -681,14 +760,25 @@ namespace rmsid2
 
         private void discountToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            disocunts dis = new disocunts();
-            dis.ShowDialog();
+            if (dt.user_privelage == "Manager")
+            {
+                disocunts dis = new disocunts();
+                dis.ShowDialog();
+            }
+            else
+                MessageBox.Show("user not have privilege");
         }
 
         private void buttonriders_Click(object sender, EventArgs e)
         {
-            deliveryboys db = new deliveryboys();
-            db.ShowDialog();
+            if (dt.user_privelage == "Manager")
+            {
+                deliveryboys db = new deliveryboys();
+                db.ShowDialog();
+            }
+            else
+                MessageBox.Show("user not have privilege");
+
         }
 
         private void printcustomerDocument_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
@@ -777,18 +867,28 @@ namespace rmsid2
             }
             e.Graphics.DrawString("Net Bill: ", new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(10, y += 20));
             e.Graphics.DrawString(textBoxNetBill.Text, new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(100, y));
-            if (checkBoxmultipayment.Checked && (Int16.Parse(textBoxcashpay.Text) + Int16.Parse(textBoxcardpay.Text)) == Int16.Parse(textBoxNetBill.Text))
+            if (checkBoxmultipayment.Checked )
             {
                 e.Graphics.DrawString("Cash payment: ", new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(10, y += 20));
                 e.Graphics.DrawString(textBoxcashpay.Text, new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(100, y));
                 e.Graphics.DrawString("Card Payment: ", new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(10, y += 20));
                 e.Graphics.DrawString(textBoxcardpay.Text, new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(100, y));
-
+                e.Graphics.DrawString("Return: ", new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(10, y += 20));
+                e.Graphics.DrawString(textBoxreturn.Text, new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(100, y));
             }
-            if (checkBoxcard.Checked && Int16.Parse(textBoxcreditcardpayment.Text) == Int16.Parse(textBoxNetBill.Text))
+            if (checkBoxcard.Checked )
             {
                 e.Graphics.DrawString("Card Payment: ", new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(10, y += 20));
                 e.Graphics.DrawString(textBoxcreditcardpayment.Text, new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(100, y));
+                e.Graphics.DrawString("Return: ", new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(10, y += 20));
+                e.Graphics.DrawString(textBoxreturn.Text, new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(100, y));
+            }
+            if (checkBoxcash.Checked )
+            {
+                e.Graphics.DrawString("Cash Payment: ", new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(10, y += 20));
+                e.Graphics.DrawString(textBoxcashpaying.Text, new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(100, y));
+                e.Graphics.DrawString("Return: ", new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(10, y += 20));
+                e.Graphics.DrawString(textBoxreturn.Text, new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(100, y));
             }
             e.Graphics.DrawString("---------------------------------------------------------------------------------", new Font("Arial", 11, FontStyle.Regular), Brushes.Black, new Point(5, y += 20));
             e.Graphics.DrawString("(ALL PRICES ARE INCLUSIVE OF 13% SST)", new Font("monospaced sans serif", 8, FontStyle.Regular), Brushes.Black, new Point(30, y += 20));
@@ -1117,24 +1217,36 @@ namespace rmsid2
             SecretKey sk = new SecretKey();
             sk.ShowDialog();
             Connection conn = new Connection();
-            if (sk.textBox != "0")
+            if (sk.textBox != "")
             {
                 if (conn.checkSecretKey(Int16.Parse(sk.textBox)) > 0)
                 {
                     if(OrderId!=0)
                     {
-                        if(conn.CancelOrder(OrderId))
+                        if(conn.InsertCancelOrder(OrderId))
                         {
                             conn.updatetablestats(tableno);
-
+                            conn.insertcancelOrderItems(OrderId);
                             conn.delorderItems(OrderId);
                             conn.delorders(OrderId);
                             dataGridViewOrderItems.DataSource = null;
+                            clearall();
                         }
                     }
                 }
             }
 
+        }
+
+        private void buttoncrep_Click(object sender, EventArgs e)
+        {
+            if (dt.user_privelage == "Manager")
+            {
+                CancelOrders co = new CancelOrders();
+                co.ShowDialog();
+            }
+            else
+                MessageBox.Show("user not have privilege");
         }
     }
 }

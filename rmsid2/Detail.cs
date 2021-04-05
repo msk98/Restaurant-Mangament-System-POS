@@ -16,6 +16,7 @@ namespace rmsid2
         public decimal Total;
         public string Category;
         public string Description;
+        public string prod_disc;
 
         public int SaleID;
         public DateTime SaleTime;

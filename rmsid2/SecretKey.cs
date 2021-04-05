@@ -107,8 +107,13 @@ namespace rmsid2
 
         private void SecretKey_FormClosed(object sender, FormClosedEventArgs e)
         {
-            textBoxsecretkey.Text = "0";
+            textBoxsecretkey.Text = "";
             this.Close();
+        }
+
+        private void SecretKey_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

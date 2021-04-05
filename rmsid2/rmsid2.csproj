@@ -64,6 +64,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CancelOrders.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CancelOrders.Designer.cs">
+      <DependentUpon>CancelOrders.cs</DependentUpon>
+    </Compile>
     <Compile Include="categories.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -152,6 +158,12 @@
     <Compile Include="register.Designer.cs">
       <DependentUpon>register.cs</DependentUpon>
     </Compile>
+    <Compile Include="registerreporting.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="registerreporting.Designer.cs">
+      <DependentUpon>registerreporting.cs</DependentUpon>
+    </Compile>
     <Compile Include="reports.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -188,6 +200,9 @@
     <Compile Include="Users.Designer.cs">
       <DependentUpon>Users.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="CancelOrders.resx">
+      <DependentUpon>CancelOrders.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="categories.resx">
       <DependentUpon>categories.cs</DependentUpon>
     </EmbeddedResource>
@@ -239,6 +254,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="register.resx">
       <DependentUpon>register.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="registerreporting.resx">
+      <DependentUpon>registerreporting.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="reports.resx">
       <DependentUpon>reports.cs</DependentUpon>

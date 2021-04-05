@@ -323,6 +323,7 @@ namespace rmsid2
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "SecretKey";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.SecretKey_FormClosed);
+            this.Load += new System.EventHandler(this.SecretKey_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);

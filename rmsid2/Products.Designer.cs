@@ -43,6 +43,8 @@ namespace rmsid2
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.comboBoxdiscount = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ProductsdataGridView)).BeginInit();
             this.groupBoxaddProducts.SuspendLayout();
@@ -87,10 +89,12 @@ namespace rmsid2
             this.groupBoxaddProducts.Controls.Add(this.buttonDelete);
             this.groupBoxaddProducts.Controls.Add(this.buttonAdd);
             this.groupBoxaddProducts.Controls.Add(this.buttonUpdate);
+            this.groupBoxaddProducts.Controls.Add(this.comboBoxdiscount);
             this.groupBoxaddProducts.Controls.Add(this.catscomboBox);
             this.groupBoxaddProducts.Controls.Add(this.prodPricetextBox);
             this.groupBoxaddProducts.Controls.Add(this.PnametextBox);
             this.groupBoxaddProducts.Controls.Add(this.label2);
+            this.groupBoxaddProducts.Controls.Add(this.label4);
             this.groupBoxaddProducts.Controls.Add(this.label3);
             this.groupBoxaddProducts.Controls.Add(this.label1);
             this.groupBoxaddProducts.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -203,6 +207,26 @@ namespace rmsid2
             this.label1.TabIndex = 0;
             this.label1.Text = "Product Name";
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(37, 169);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(71, 17);
+            this.label4.TabIndex = 0;
+            this.label4.Text = "Discount";
+            // 
+            // comboBoxdiscount
+            // 
+            this.comboBoxdiscount.FormattingEnabled = true;
+            this.comboBoxdiscount.Items.AddRange(new object[] {
+            "Available",
+            "Unavailable"});
+            this.comboBoxdiscount.Location = new System.Drawing.Point(171, 162);
+            this.comboBoxdiscount.Name = "comboBoxdiscount";
+            this.comboBoxdiscount.Size = new System.Drawing.Size(240, 24);
+            this.comboBoxdiscount.TabIndex = 2;
+            // 
             // Products
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -245,5 +269,7 @@ namespace rmsid2
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox prodPricetextBox;
+        private System.Windows.Forms.ComboBox comboBoxdiscount;
+        private System.Windows.Forms.Label label4;
     }
 }

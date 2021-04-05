@@ -51,13 +51,14 @@ namespace rmsid2
         private void buttonAdd_Click(object sender, EventArgs e)
         {
             Connection conn = new Connection();
-            if (PnametextBox.Text != "" && catscomboBox.SelectedIndex != -1 && prodPricetextBox.Text!="")
+            if (PnametextBox.Text != "" && catscomboBox.SelectedIndex != -1 && prodPricetextBox.Text!="" &&comboBoxdiscount.SelectedIndex!=-1)
             {
 
 
-                if (conn.insertprod(Int16.Parse(catscomboBox.SelectedValue.ToString()), PnametextBox.Text, Int16.Parse(prodPricetextBox.Text)))
+                if (conn.insertprod(Int16.Parse(catscomboBox.SelectedValue.ToString()), PnametextBox.Text, Int16.Parse(prodPricetextBox.Text),comboBoxdiscount.SelectedItem.ToString()))
                    MessageBox.Show("Inserted");
                 clear();
+                getprod();
             }
             else
             {
@@ -67,21 +68,21 @@ namespace rmsid2
 
         private void buttonUpdate_Click(object sender, EventArgs e)
         {
-            if (PnametextBox.Text != "" && catscomboBox.SelectedIndex != -1 && prodPricetextBox.Text != "")
+            if (PnametextBox.Text != "" && catscomboBox.SelectedIndex != -1 && prodPricetextBox.Text != "" && comboBoxdiscount.SelectedIndex!=-1)
             {
 
                 if (p_id != 0)
                 {
                     Connection conn = new Connection();
-                    if (conn.updateprod(p_id, PnametextBox.Text, Int16.Parse(prodPricetextBox.Text),Int16.Parse(catscomboBox.SelectedValue.ToString())))
+                    if (conn.updateprod(p_id, PnametextBox.Text, Int16.Parse(prodPricetextBox.Text),Int16.Parse(catscomboBox.SelectedValue.ToString()),comboBoxdiscount.SelectedItem.ToString()))
                     {
                       MessageBox.Show("updated");
-
+                      
 
                     }
 
                     clear();
-              
+                    getprod();
                     p_id = 0;
                 }
                 else
@@ -107,7 +108,9 @@ namespace rmsid2
                     if (conn.delprod(p_id))
                     {
                         clear();
-                      
+                        getprod();
+
+
                     }
                       p_id = 0;
                 }
@@ -127,6 +130,7 @@ namespace rmsid2
         {
             PnametextBox.Text = "";
             prodPricetextBox.Text = "";
+            comboBoxdiscount.SelectedIndex = -1;
             getcat();
             getprod();
         }
@@ -140,6 +144,7 @@ namespace rmsid2
                 p_id = Int16.Parse(row.Cells[0].Value.ToString());
                 PnametextBox.Text = row.Cells[2].Value.ToString();
                 prodPricetextBox.Text = (row.Cells[3].Value.ToString());
+
                 SqlConnection conn = new SqlConnection(ConnectionString);
                 string sqlquery = "select *  from categories where C_id='" + Int16.Parse(row.Cells[1].Value.ToString()) + "'";
                 conn.Open();

@@ -118,14 +118,14 @@ namespace rmsid2
 
             }
         }
-        public bool insertcat(string C_name, int DisAvail)
+        public bool insertcat(string C_name)
         {
             OpenConection();
-            string query = "INSERT INTO categories (C_name,DisAvail) VALUES(@C_name,@DisAvail)";
+            string query = "INSERT INTO categories (C_name) VALUES(@C_name)";
             SqlCommand cmd = new SqlCommand(query, con);
             //Pass values to Parameters
             cmd.Parameters.AddWithValue("@C_name", C_name);
-            cmd.Parameters.AddWithValue("@DisAvail", DisAvail);        
+        //    cmd.Parameters.AddWithValue("@DisAvail", DisAvail);        
             try
             {
                 OpenConection();
@@ -146,17 +146,16 @@ namespace rmsid2
 
             }
         }
-        public bool updatecat(int c_id, string C_name, int DisAvail)
+        public bool updatecat(int c_id, string C_name)
         {
 
             OpenConection();
-            string query = "update  categories set C_name=@C_name,DisAvail=@DisAvail where c_id=@c_id";
+            string query = "update  categories set C_name=@C_namewhere c_id=@c_id";
             SqlCommand cmd = new SqlCommand(query, con);
 
             //Pass values to Parameters
 
             cmd.Parameters.AddWithValue("@C_name", C_name);
-            cmd.Parameters.AddWithValue("@DisAvail", DisAvail);
             cmd.Parameters.AddWithValue("@c_id", c_id);
           
             try
@@ -205,15 +204,16 @@ namespace rmsid2
 
             }
         }
-        public bool insertprod(int C_id, string p_name,int p_price)
+        public bool insertprod(int C_id, string p_name,int p_price,string discountavail)
         {
             OpenConection();
-            string query = "INSERT INTO products (C_id,p_name,p_price) VALUES(@C_id,@p_name,@p_price)";
+            string query = "INSERT INTO products (C_id,p_name,p_price,DisAvail) VALUES(@C_id,@p_name,@p_price,@DisAvail)";
             SqlCommand cmd = new SqlCommand(query, con);
             //Pass values to Parameters
             cmd.Parameters.AddWithValue("@C_id", C_id);
             cmd.Parameters.AddWithValue("@p_name", p_name);
             cmd.Parameters.AddWithValue("@p_price", p_price);
+            cmd.Parameters.AddWithValue("@DisAvail", discountavail);
 
             try
             {
@@ -236,16 +236,17 @@ namespace rmsid2
             }
         }
 
-        public bool updateprod(int p_id, string p_name, int p_price,int C_id)
+        public bool updateprod(int p_id, string p_name, int p_price,int C_id,string DisAvail)
         {
             OpenConection();
-            string query = "update  products set C_id=@C_id,p_name=@p_name,p_price=@p_price where p_id=@p_id";
+            string query = "update  products set C_id=@C_id,p_name=@p_name,p_price=@p_price,DisAvail=@DisAvail where p_id=@p_id";
             SqlCommand cmd = new SqlCommand(query, con);
             //Pass values to Parameters
             cmd.Parameters.AddWithValue("@p_id", p_id);
             cmd.Parameters.AddWithValue("@C_id", C_id);
             cmd.Parameters.AddWithValue("@p_name", p_name);
             cmd.Parameters.AddWithValue("@p_price", p_price);
+            cmd.Parameters.AddWithValue("@DisAvail", DisAvail);
 
             try
             {
@@ -1039,8 +1040,10 @@ namespace rmsid2
             OpenConection();
             int count = 0;
             SqlConnection conn = new SqlConnection(ConnectionString);
-            String sqlQuery = "SELECT COUNT(*) FROM secretkey where secretkey='" + secretKey + "'";
+            String sqlQuery = "SELECT COUNT(*) FROM secretkey where secretkey=@secretKey";
             SqlCommand cmd = new SqlCommand(sqlQuery, conn);
+            cmd.Parameters.AddWithValue("@secretKey", secretKey);
+
             try
             {
                 conn.Open();
@@ -1060,7 +1063,34 @@ namespace rmsid2
         public bool deldateOrders(DateTime stardate ,DateTime enddate)
         {
             OpenConection();
-            string query = "delete from  temp_orderitems  where Dateorder between @startdate and @endate";
+            string query = "delete from  Orders  where Dateorder between @startdate and @endate";
+            SqlCommand cmd = new SqlCommand(query, con);
+            //Pass values to Parameters
+            cmd.Parameters.AddWithValue("@stardate", stardate);
+            cmd.Parameters.AddWithValue("@enddate", enddate);
+
+            try
+            {
+                OpenConection();
+                cmd.ExecuteNonQuery();
+
+                return true;
+            }
+            catch (SqlException e)
+            {
+                MessageBox.Show("Error Generated. Details: " + e.ToString());
+                return false;
+            }
+            finally
+            {
+                CloseConnection();
+
+            }
+        }
+        public bool delcanceldateOrders(DateTime stardate, DateTime enddate)
+        {
+            OpenConection();
+            string query = "delete from  cancelOrders  where Dateorder between @startdate and @endate";
             SqlCommand cmd = new SqlCommand(query, con);
             //Pass values to Parameters
             cmd.Parameters.AddWithValue("@stardate", stardate);
@@ -1199,7 +1229,7 @@ namespace rmsid2
         public bool updateusers(int user_id,string username, string userpass, string privileges)
         {
             OpenConection();
-            string query = "update users set username=@username,user_pass=@userpass ,user_privelage=@privileges where user_id@user_id ";
+            string query = "update users set username=@username,user_pass=@userpass ,user_privelage=@privileges where user_id=@user_id ";
             SqlCommand cmd = new SqlCommand(query, con);
             //Pass values to Parameters
             cmd.Parameters.AddWithValue("@username", username);
@@ -1423,14 +1453,14 @@ namespace rmsid2
 
             }
         }
-        public bool endregister(int userid)
+        public bool endregister(int userid,int endid)
         {
             OpenConection();
-            string query = "INSERT INTO closeregister (userid,closeregister) VALUES(@userid,getDate())";
+            string query = "INSERT INTO closeregister (userid,closeregister,startregisterid) VALUES(@userid,getDate(),@endid)";
             SqlCommand cmd = new SqlCommand(query, con);
             //Pass values to Parameters
             cmd.Parameters.AddWithValue("@userid", userid);
-         
+            cmd.Parameters.AddWithValue("@endid", endid);
             try
             {
                 OpenConection();
@@ -1569,7 +1599,7 @@ namespace rmsid2
 
             using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
-                SqlCommand command = new SqlCommand("select inventory.Inven_Name as InventoryName,isnull(sum(inven_count.incr_qty)/5,0) as Invenqty from inven_count join  incredients on inven_count.incrd_id=incredients.inc_id  join inventory on incredients.Inven_id=inventory.Inven_id join OrderItems  on  OrderItems.p_id= incredients.p_id join Orders on Orders.t_Oid= OrderItems.t_Oid 	join userord usr on usr.order_id = Orders.t_Oid 	where (Orders.Dateorder between @startdate and @enddate) and   usr.user_id =@user_id group by inventory.Inven_Name;", connection);
+                SqlCommand command = new SqlCommand("select  isnull(sum(inven_count.incr_qty),0) as Invenqty,inventory.Inven_Name as InventoryName from inven_count inner join incredients on incredients.inc_id=inven_count.incrd_id inner join inventory on inventory.Inven_id=incredients.Inven_id join Orders on Orders.t_Oid=inven_count.order_id inner join userord on userord.order_id=Orders.t_Oid where Orders.Dateorder between  @startdate and @enddate and userord.user_id=@user_id group by inventory.Inven_Name", connection);
                 command.Parameters.AddWithValue("@startdate", startdate);
                 command.Parameters.AddWithValue("@enddate", enddate);
                 command.Parameters.AddWithValue("@user_id", user_id);
@@ -1724,6 +1754,32 @@ namespace rmsid2
                 return servicecharges;
             }
         }
+        public int calculateCrtaxes(DateTime startdate, DateTime enddate, int user_id)
+        {
+            int servicecharges = 0;
+
+            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            {
+                SqlCommand command = new SqlCommand("select  isnull(sum(CardAmount),0) as CardAmount from CardAmount inner join Orders on Orders.t_Oid=CardAmount.orderid join userord usr on usr.order_id = Orders.t_Oid 	where (Orders.Dateorder between @startdate and @enddate) and   usr.user_id =@user_id", connection);
+                command.Parameters.AddWithValue("@startdate", startdate);
+                command.Parameters.AddWithValue("@enddate", enddate);
+                command.Parameters.AddWithValue("@user_id", user_id);
+                connection.Open();
+
+                SqlDataReader reader = command.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        servicecharges = Int16.Parse(reader["CardAmount"].ToString());
+                    }
+                }
+                connection.Close();
+
+                return servicecharges;
+            }
+        }
         public int calculatenetsale(DateTime startdate, DateTime enddate, int user_id)
         {
             int servicecharges = 0;
@@ -1750,6 +1806,7 @@ namespace rmsid2
                 return servicecharges;
             }
         }
+
         public DateTime getregtime(int user_id)
         {
             DateTime regtime = DateTime.Now;
@@ -1773,6 +1830,31 @@ namespace rmsid2
                 connection.Close();
 
                 return regtime;
+            }
+        }
+        public int getregid(int user_id)
+        {
+            int registerid = 0;
+
+            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            {
+                SqlCommand command = new SqlCommand(" select top 1 registerid from openregister where userid=@user_id order by registerid desc ;", connection);
+
+                command.Parameters.AddWithValue("@user_id", user_id);
+                connection.Open();
+
+                SqlDataReader reader = command.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        registerid = Int16.Parse(reader["registerid"].ToString());
+                    }
+                }
+                connection.Close();
+
+                return registerid;
             }
         }
 
@@ -1867,13 +1949,40 @@ namespace rmsid2
 
         }
 
-        public bool CancelOrder(int OrderId)
+        public bool InsertCancelOrder(int OrderId)
         {
             OpenConection();
             string query = "INSERT INTO cancelOrders(t_Oid, t_tablename,t_ordertype, Dateorder,cancelorder,t_netamnt) SELECT t_Oid, t_tablename,t_ordertype,Dateorder,getDate(),t_netamnt FROM  temp_orders WHERE   t_Oid =@OrderId";
             SqlCommand cmd = new SqlCommand(query, con);
             //Pass values to Parameters
             cmd.Parameters.AddWithValue("@OrderId", OrderId);
+            try
+            {
+                OpenConection();
+                cmd.ExecuteNonQuery();
+
+                return true;
+            }
+            catch (SqlException e)
+            {
+                string err = "Error Generated. Details: " + e.ToString();
+                MessageBox.Show(err);
+
+                return false;
+            }
+            finally
+            {
+                CloseConnection();
+
+            }
+        }
+        public bool insertcancelOrderItems(int Order_id)
+        {
+            OpenConection();
+            string query = "INSERT INTO cancelOrdersItems(t_iName, t_iprice, t_iqty,t_inetprice,t_Oid,p_id) SELECT t_iName, t_iprice, t_iqty,t_inetprice,t_Oid,p_id FROM  temp_orderitems WHERE   t_Oid =@order_id";
+            SqlCommand cmd = new SqlCommand(query, con);
+            //Pass values to Parameters
+            cmd.Parameters.AddWithValue("@order_id", Order_id);
             try
             {
                 OpenConection();

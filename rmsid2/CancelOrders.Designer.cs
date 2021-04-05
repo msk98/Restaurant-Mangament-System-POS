@@ -1,7 +1,7 @@
 ﻿
 namespace rmsid2
 {
-    partial class reports
+    partial class CancelOrders
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,6 @@ namespace rmsid2
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(reports));
             this.buttonClose = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.dataGridVieworderitems = new System.Windows.Forms.DataGridView();
@@ -39,7 +38,6 @@ namespace rmsid2
             this.buttonDelete = new System.Windows.Forms.Button();
             this.dateTimePickerto = new System.Windows.Forms.DateTimePicker();
             this.dateTimePickerFrom = new System.Windows.Forms.DateTimePicker();
-            this.button1 = new System.Windows.Forms.Button();
             this.buttonPrint = new System.Windows.Forms.Button();
             this.buttonSearch = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
@@ -48,9 +46,7 @@ namespace rmsid2
             this.custphone = new System.Windows.Forms.Label();
             this.customerName = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.printReportPreviewDialog = new System.Windows.Forms.PrintPreviewDialog();
             this.printReportDocument = new System.Drawing.Printing.PrintDocument();
-            this.printDocumentOrder = new System.Drawing.Printing.PrintDocument();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridVieworderitems)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -63,7 +59,7 @@ namespace rmsid2
             this.buttonClose.Location = new System.Drawing.Point(929, 508);
             this.buttonClose.Name = "buttonClose";
             this.buttonClose.Size = new System.Drawing.Size(75, 30);
-            this.buttonClose.TabIndex = 7;
+            this.buttonClose.TabIndex = 11;
             this.buttonClose.Text = "Close";
             this.buttonClose.UseVisualStyleBackColor = true;
             this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
@@ -74,15 +70,14 @@ namespace rmsid2
             this.groupBox3.Location = new System.Drawing.Point(528, 128);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(496, 362);
-            this.groupBox3.TabIndex = 5;
+            this.groupBox3.TabIndex = 9;
             this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Order Items Report";
+            this.groupBox3.Text = "Cancel Order Items ";
             // 
             // dataGridVieworderitems
             // 
             this.dataGridVieworderitems.AllowUserToAddRows = false;
             this.dataGridVieworderitems.AllowUserToDeleteRows = false;
-            this.dataGridVieworderitems.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridVieworderitems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridVieworderitems.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridVieworderitems.Location = new System.Drawing.Point(3, 19);
@@ -97,15 +92,14 @@ namespace rmsid2
             this.groupBox2.Location = new System.Drawing.Point(28, 128);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(494, 362);
-            this.groupBox2.TabIndex = 6;
+            this.groupBox2.TabIndex = 10;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Order report";
+            this.groupBox2.Text = "Cancel Order report";
             // 
             // dataGridorders
             // 
             this.dataGridorders.AllowUserToAddRows = false;
             this.dataGridorders.AllowUserToDeleteRows = false;
-            this.dataGridorders.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridorders.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridorders.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridorders.Location = new System.Drawing.Point(3, 19);
@@ -120,7 +114,6 @@ namespace rmsid2
             this.groupBox1.Controls.Add(this.buttonDelete);
             this.groupBox1.Controls.Add(this.dateTimePickerto);
             this.groupBox1.Controls.Add(this.dateTimePickerFrom);
-            this.groupBox1.Controls.Add(this.button1);
             this.groupBox1.Controls.Add(this.buttonPrint);
             this.groupBox1.Controls.Add(this.buttonSearch);
             this.groupBox1.Controls.Add(this.label3);
@@ -132,13 +125,13 @@ namespace rmsid2
             this.groupBox1.Location = new System.Drawing.Point(30, 17);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(994, 80);
-            this.groupBox1.TabIndex = 4;
+            this.groupBox1.TabIndex = 8;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Report Detail";
+            this.groupBox1.Text = "Cancel Orders Detail";
             // 
             // buttonDelete
             // 
-            this.buttonDelete.Location = new System.Drawing.Point(916, 31);
+            this.buttonDelete.Location = new System.Drawing.Point(762, 33);
             this.buttonDelete.Name = "buttonDelete";
             this.buttonDelete.Size = new System.Drawing.Size(74, 30);
             this.buttonDelete.TabIndex = 9;
@@ -167,19 +160,9 @@ namespace rmsid2
             this.dateTimePickerFrom.TabIndex = 8;
             this.dateTimePickerFrom.Value = new System.DateTime(2021, 4, 2, 0, 0, 0, 0);
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(748, 31);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(164, 30);
-            this.button1.TabIndex = 7;
-            this.button1.Text = "Print Selected Order";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.buttonprintselectedorders_Click);
-            // 
             // buttonPrint
             // 
-            this.buttonPrint.Location = new System.Drawing.Point(665, 31);
+            this.buttonPrint.Location = new System.Drawing.Point(675, 33);
             this.buttonPrint.Name = "buttonPrint";
             this.buttonPrint.Size = new System.Drawing.Size(75, 30);
             this.buttonPrint.TabIndex = 7;
@@ -189,7 +172,7 @@ namespace rmsid2
             // 
             // buttonSearch
             // 
-            this.buttonSearch.Location = new System.Drawing.Point(580, 31);
+            this.buttonSearch.Location = new System.Drawing.Point(590, 33);
             this.buttonSearch.Name = "buttonSearch";
             this.buttonSearch.Size = new System.Drawing.Size(75, 30);
             this.buttonSearch.TabIndex = 7;
@@ -221,7 +204,7 @@ namespace rmsid2
             // 
             this.custaddress.AutoSize = true;
             this.custaddress.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.custaddress.Location = new System.Drawing.Point(661, 40);
+            this.custaddress.Location = new System.Drawing.Point(671, 42);
             this.custaddress.Name = "custaddress";
             this.custaddress.Size = new System.Drawing.Size(0, 17);
             this.custaddress.TabIndex = 0;
@@ -254,25 +237,11 @@ namespace rmsid2
             this.label1.TabIndex = 0;
             this.label1.Text = "Date From";
             // 
-            // printReportPreviewDialog
-            // 
-            this.printReportPreviewDialog.AutoScrollMargin = new System.Drawing.Size(0, 0);
-            this.printReportPreviewDialog.AutoScrollMinSize = new System.Drawing.Size(0, 0);
-            this.printReportPreviewDialog.ClientSize = new System.Drawing.Size(400, 300);
-            this.printReportPreviewDialog.Enabled = true;
-            this.printReportPreviewDialog.Icon = ((System.Drawing.Icon)(resources.GetObject("printReportPreviewDialog.Icon")));
-            this.printReportPreviewDialog.Name = "printReportPreviewDialog";
-            this.printReportPreviewDialog.Visible = false;
-            // 
             // printReportDocument
             // 
-            this.printReportDocument.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printReportDocument_PrintPage_1);
+            this.printReportDocument.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printReportDocument_PrintPage);
             // 
-            // printDocumentOrder
-            // 
-            this.printDocumentOrder.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printDocumentOrder_PrintPage);
-            // 
-            // reports
+            // CancelOrders
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -285,9 +254,9 @@ namespace rmsid2
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(4);
-            this.Name = "reports";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "reports";
+            this.Name = "CancelOrders";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.Text = "CancelOrders";
             this.groupBox3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridVieworderitems)).EndInit();
             this.groupBox2.ResumeLayout(false);
@@ -306,8 +275,10 @@ namespace rmsid2
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.DataGridView dataGridorders;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button buttonDelete;
         private System.Windows.Forms.DateTimePicker dateTimePickerto;
         private System.Windows.Forms.DateTimePicker dateTimePickerFrom;
+        private System.Windows.Forms.Button buttonPrint;
         private System.Windows.Forms.Button buttonSearch;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
@@ -315,12 +286,6 @@ namespace rmsid2
         private System.Windows.Forms.Label custphone;
         private System.Windows.Forms.Label customerName;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button buttonPrint;
-        private System.Windows.Forms.Button buttonDelete;
-        private System.Windows.Forms.Button button1;
-        private System.Drawing.Printing.PrintDocument printOrderDocument;
-        private System.Drawing.Printing.PrintDocument printDocumentOrder;
         private System.Drawing.Printing.PrintDocument printReportDocument;
-        private System.Windows.Forms.PrintPreviewDialog printReportPreviewDialog;
     }
 }

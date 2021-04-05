@@ -37,9 +37,7 @@ namespace rmsid2
             this.buttonDelete = new System.Windows.Forms.Button();
             this.buttonAdd = new System.Windows.Forms.Button();
             this.buttonUpdate = new System.Windows.Forms.Button();
-            this.DiscomboBox = new System.Windows.Forms.ComboBox();
             this.CatnametextBox = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBoxCat.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CatdataGridView)).BeginInit();
@@ -84,9 +82,7 @@ namespace rmsid2
             this.groupBoxaddcat.Controls.Add(this.buttonDelete);
             this.groupBoxaddcat.Controls.Add(this.buttonAdd);
             this.groupBoxaddcat.Controls.Add(this.buttonUpdate);
-            this.groupBoxaddcat.Controls.Add(this.DiscomboBox);
             this.groupBoxaddcat.Controls.Add(this.CatnametextBox);
-            this.groupBoxaddcat.Controls.Add(this.label2);
             this.groupBoxaddcat.Controls.Add(this.label1);
             this.groupBoxaddcat.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBoxaddcat.Location = new System.Drawing.Point(568, 22);
@@ -144,17 +140,6 @@ namespace rmsid2
             this.buttonUpdate.UseVisualStyleBackColor = false;
             this.buttonUpdate.Click += new System.EventHandler(this.buttonUpdate_Click);
             // 
-            // DiscomboBox
-            // 
-            this.DiscomboBox.FormattingEnabled = true;
-            this.DiscomboBox.Items.AddRange(new object[] {
-            "Enable",
-            "Disable"});
-            this.DiscomboBox.Location = new System.Drawing.Point(171, 146);
-            this.DiscomboBox.Name = "DiscomboBox";
-            this.DiscomboBox.Size = new System.Drawing.Size(240, 24);
-            this.DiscomboBox.TabIndex = 2;
-            // 
             // CatnametextBox
             // 
             this.CatnametextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -162,15 +147,6 @@ namespace rmsid2
             this.CatnametextBox.Name = "CatnametextBox";
             this.CatnametextBox.Size = new System.Drawing.Size(240, 23);
             this.CatnametextBox.TabIndex = 1;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(34, 146);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(71, 17);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Discount";
             // 
             // label1
             // 
@@ -212,9 +188,7 @@ namespace rmsid2
         private System.Windows.Forms.TextBox cattextBox;
         private System.Windows.Forms.DataGridView CatdataGridView;
         private System.Windows.Forms.GroupBox groupBoxaddcat;
-        private System.Windows.Forms.ComboBox DiscomboBox;
         private System.Windows.Forms.TextBox CatnametextBox;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button buttonClose;
         private System.Windows.Forms.Button buttonDelete;

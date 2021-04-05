@@ -109,7 +109,6 @@ namespace rmsid2
                         int ProductID = Int16.Parse((reader["p_id"].ToString()));
                         string ProductName = (reader["p_name"].ToString());
                         int ProductPrice = Int16.Parse((reader["p_price"].ToString()));
-
                         ProductsList.Add(new Detail() { ID = ProductID, Name = ProductName, Price = ProductPrice });
                     }
                 }
@@ -158,8 +157,9 @@ namespace rmsid2
                         int ProductID = Int16.Parse((reader["p_id"].ToString()));
                         string ProductName = (reader["p_name"].ToString());
                         int ProductPrice = Int16.Parse((reader["p_price"].ToString()));
+                        string prod_disc = reader["dis_avail"].ToString();
 
-                        if(productdataGridView.Rows.Count>0)
+                        if (productdataGridView.Rows.Count>0)
                         {
                             foreach(DataGridViewRow row in productdataGridView.Rows)
                             {
@@ -174,7 +174,7 @@ namespace rmsid2
                         }
                        
                         if(flag!=true)
-                            productdataGridView.Rows.Add(ProductID, ProductName, ProductPrice, 1, ProductPrice * 1);
+                            productdataGridView.Rows.Add(ProductID, ProductName, ProductPrice, 1, ProductPrice * 1, prod_disc);
                         totalamount();
                     }
                 }
@@ -324,6 +324,9 @@ namespace rmsid2
                 }
                
             }
+            e.Graphics.DrawString(det.Ordertype, new Font("monospaced sans serif", 16, FontStyle.Bold), Brushes.Black, new Point(60, y += 20));
+            e.Graphics.DrawString("---------------------------------------------------------------------------------", new Font("Arial", 11, FontStyle.Regular), Brushes.Black, new Point(0, y += 20));
+
             e.Graphics.DrawString("Kitchen Slip", new Font("monospaced sans serif", 16, FontStyle.Bold), Brushes.Black, new Point(60, y += 20));
             e.Graphics.DrawString("Order Id", new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(5, y += 30));
             e.Graphics.DrawString(OrderId.ToString(), new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(150, y));
