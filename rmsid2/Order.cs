@@ -157,7 +157,6 @@ namespace rmsid2
                         int ProductID = Int16.Parse((reader["p_id"].ToString()));
                         string ProductName = (reader["p_name"].ToString());
                         int ProductPrice = Int16.Parse((reader["p_price"].ToString()));
-                        string prod_disc = reader["dis_avail"].ToString();
 
                         if (productdataGridView.Rows.Count>0)
                         {
@@ -174,7 +173,7 @@ namespace rmsid2
                         }
                        
                         if(flag!=true)
-                            productdataGridView.Rows.Add(ProductID, ProductName, ProductPrice, 1, ProductPrice * 1, prod_disc);
+                            productdataGridView.Rows.Add(ProductID, ProductName, ProductPrice, 1, ProductPrice * 1);
                         totalamount();
                     }
                 }

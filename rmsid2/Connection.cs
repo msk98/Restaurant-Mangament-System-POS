@@ -204,16 +204,16 @@ namespace rmsid2
 
             }
         }
-        public bool insertprod(int C_id, string p_name,int p_price,string discountavail)
+        public bool insertprod(int C_id, string p_name,int p_price)
         {
             OpenConection();
-            string query = "INSERT INTO products (C_id,p_name,p_price,DisAvail) VALUES(@C_id,@p_name,@p_price,@DisAvail)";
+            string query = "INSERT INTO products (C_id,p_name,p_price) VALUES(@C_id,@p_name,@p_price)";
             SqlCommand cmd = new SqlCommand(query, con);
             //Pass values to Parameters
             cmd.Parameters.AddWithValue("@C_id", C_id);
             cmd.Parameters.AddWithValue("@p_name", p_name);
             cmd.Parameters.AddWithValue("@p_price", p_price);
-            cmd.Parameters.AddWithValue("@DisAvail", discountavail);
+           
 
             try
             {
@@ -236,17 +236,17 @@ namespace rmsid2
             }
         }
 
-        public bool updateprod(int p_id, string p_name, int p_price,int C_id,string DisAvail)
+        public bool updateprod(int p_id, string p_name, int p_price,int C_id)
         {
             OpenConection();
-            string query = "update  products set C_id=@C_id,p_name=@p_name,p_price=@p_price,DisAvail=@DisAvail where p_id=@p_id";
+            string query = "update  products set C_id=@C_id,p_name=@p_name,p_price=@p_price where p_id=@p_id";
             SqlCommand cmd = new SqlCommand(query, con);
             //Pass values to Parameters
             cmd.Parameters.AddWithValue("@p_id", p_id);
             cmd.Parameters.AddWithValue("@C_id", C_id);
             cmd.Parameters.AddWithValue("@p_name", p_name);
             cmd.Parameters.AddWithValue("@p_price", p_price);
-            cmd.Parameters.AddWithValue("@DisAvail", DisAvail);
+         
 
             try
             {

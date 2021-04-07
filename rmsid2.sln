@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "rmsid2", "rmsid2\rmsid2.csp
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "rmsidsetup", "rmsidsetup\rmsidsetup.vdproj", "{E751E1B0-92D3-44A8-B58D-5471D7D89802}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "RMSidInstallSetup", "RMSidInstallSetup\RMSidInstallSetup.vdproj", "{DA764CB2-1D79-4509-84A9-248C9ACF6131}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,6 +21,8 @@ Global
 		{717536C8-F2B6-48AE-8981-726FAA2228E7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E751E1B0-92D3-44A8-B58D-5471D7D89802}.Debug|Any CPU.ActiveCfg = Debug
 		{E751E1B0-92D3-44A8-B58D-5471D7D89802}.Release|Any CPU.ActiveCfg = Release
+		{DA764CB2-1D79-4509-84A9-248C9ACF6131}.Debug|Any CPU.ActiveCfg = Debug
+		{DA764CB2-1D79-4509-84A9-248C9ACF6131}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

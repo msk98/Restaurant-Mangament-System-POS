@@ -51,11 +51,11 @@ namespace rmsid2
         private void buttonAdd_Click(object sender, EventArgs e)
         {
             Connection conn = new Connection();
-            if (PnametextBox.Text != "" && catscomboBox.SelectedIndex != -1 && prodPricetextBox.Text!="" &&comboBoxdiscount.SelectedIndex!=-1)
+            if (PnametextBox.Text != "" && catscomboBox.SelectedIndex != -1 && prodPricetextBox.Text!="" )
             {
 
 
-                if (conn.insertprod(Int16.Parse(catscomboBox.SelectedValue.ToString()), PnametextBox.Text, Int16.Parse(prodPricetextBox.Text),comboBoxdiscount.SelectedItem.ToString()))
+                if (conn.insertprod(Int16.Parse(catscomboBox.SelectedValue.ToString()), PnametextBox.Text, Int16.Parse(prodPricetextBox.Text)))
                    MessageBox.Show("Inserted");
                 clear();
                 getprod();
@@ -68,17 +68,15 @@ namespace rmsid2
 
         private void buttonUpdate_Click(object sender, EventArgs e)
         {
-            if (PnametextBox.Text != "" && catscomboBox.SelectedIndex != -1 && prodPricetextBox.Text != "" && comboBoxdiscount.SelectedIndex!=-1)
+            if (PnametextBox.Text != "" && catscomboBox.SelectedIndex != -1 && prodPricetextBox.Text != "" )
             {
 
                 if (p_id != 0)
                 {
                     Connection conn = new Connection();
-                    if (conn.updateprod(p_id, PnametextBox.Text, Int16.Parse(prodPricetextBox.Text),Int16.Parse(catscomboBox.SelectedValue.ToString()),comboBoxdiscount.SelectedItem.ToString()))
+                    if (conn.updateprod(p_id, PnametextBox.Text, Int16.Parse(prodPricetextBox.Text),Int16.Parse(catscomboBox.SelectedValue.ToString())))
                     {
                       MessageBox.Show("updated");
-                      
-
                     }
 
                     clear();
@@ -130,7 +128,6 @@ namespace rmsid2
         {
             PnametextBox.Text = "";
             prodPricetextBox.Text = "";
-            comboBoxdiscount.SelectedIndex = -1;
             getcat();
             getprod();
         }

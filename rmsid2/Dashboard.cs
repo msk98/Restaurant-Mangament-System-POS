@@ -445,8 +445,8 @@ namespace rmsid2
             e.Graphics.DrawString("Order Details", new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(20, y += 20));
 
             e.Graphics.DrawString("Item Name", new Font("monospaced sans serif", 8, FontStyle.Regular), Brushes.Black, new Point(5, y += 20));
-            e.Graphics.DrawString("Price", new Font("monospaced sans serif", 8, FontStyle.Regular), Brushes.Black, new Point(100, y));
-            e.Graphics.DrawString("Quantity", new Font("monospaced sans serif", 8, FontStyle.Regular), Brushes.Black, new Point(150, y));
+            e.Graphics.DrawString("Price", new Font("monospaced sans serif", 8, FontStyle.Regular), Brushes.Black, new Point(145, y));
+            e.Graphics.DrawString("Quantity", new Font("monospaced sans serif", 8, FontStyle.Regular), Brushes.Black, new Point(170, y));
             e.Graphics.DrawString("Total", new Font("monospaced sans serif", 8, FontStyle.Regular), Brushes.Black, new Point(220, y));
             using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
@@ -461,8 +461,8 @@ namespace rmsid2
                     {
                         y += 20;
                         e.Graphics.DrawString((reader["ItemName"].ToString()), new Font("monospaced sans serif", 8, FontStyle.Regular), Brushes.Black, new Point(5, y));
-                        e.Graphics.DrawString((reader["UnitPrice"].ToString()), new Font("monospaced sans serif", 8, FontStyle.Regular), Brushes.Black, new Point(100, y));
-                        e.Graphics.DrawString((reader["Quantity"].ToString()), new Font("monospaced sans serif", 8, FontStyle.Regular), Brushes.Black, new Point(150, y));
+                        e.Graphics.DrawString((reader["UnitPrice"].ToString()), new Font("monospaced sans serif", 8, FontStyle.Regular), Brushes.Black, new Point(145, y));
+                        e.Graphics.DrawString((reader["Quantity"].ToString()), new Font("monospaced sans serif", 8, FontStyle.Regular), Brushes.Black, new Point(170, y));
                         e.Graphics.DrawString((reader["TotalPrice"].ToString()), new Font("monospaced sans serif", 8, FontStyle.Regular), Brushes.Black, new Point(220, y));
                     }
                 }
@@ -533,7 +533,7 @@ namespace rmsid2
 
             using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
-                SqlCommand command = new SqlCommand("select cust_name,cust_phone,cust_address,DeliveryBoys.d_name from customer  inner join customerOrders on customer.cust_id=customer.cust_id  inner join temp_orders  on customerOrders.Order_id= temp_orders.t_Oid inner join del_orders on del_orders.order_id=customerOrders.Order_id inner join DeliveryBoys  on DeliveryBoys.d_id = del_orders.d_id where temp_orders.t_Oid='" + Oid + "';", connection);
+                SqlCommand command = new SqlCommand("select cust_name,cust_phone,cust_address,DeliveryBoys.d_name as d_name from customer  inner join customerOrders on customer.cust_id=customer.cust_id  inner join temp_orders  on customerOrders.Order_id= temp_orders.t_Oid inner join del_orders on del_orders.order_id=customerOrders.Order_id inner join DeliveryBoys  on DeliveryBoys.d_id = del_orders.d_id where temp_orders.t_Oid='" + Oid + "';", connection);
                 connection.Open();
 
                 SqlDataReader reader = command.ExecuteReader();
@@ -542,7 +542,7 @@ namespace rmsid2
                 {
                     while (reader.Read())
                     {
-                        CustomerList.Add(new Detail() { cust_name = (reader["cust_name"].ToString()), cust_phone = (reader["cust_phone"].ToString()), address = (reader["cust_address"].ToString()),deliveryBoy_Name= reader["cust_address"].ToString() });
+                        CustomerList.Add(new Detail() { cust_name = (reader["cust_name"].ToString()), cust_phone = (reader["cust_phone"].ToString()), address = (reader["cust_address"].ToString()),deliveryBoy_Name= reader["d_name"].ToString() });
                     }
                 }
                 connection.Close();
@@ -635,7 +635,7 @@ namespace rmsid2
             e.Graphics.DrawString(conn.calculatenetsale(dt.startreg, DateTime.Now, dt.userid).ToString(), new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(150, y));
             e.Graphics.DrawString("Net sales(total+charges+tax+cr pay-discount)", new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(10, y += 20));
             
-            int NetSale = conn.calculatenetsale(dt.startreg, DateTime.Now, dt.userid) + conn.retrievedtaxes(dt.startreg, DateTime.Now, dt.userid)+ conn.calculateCrtaxes(dt.startreg, DateTime.Now, dt.userid)+ conn.calculatesercharge(dt.startreg, DateTime.Now, dt.userid)-disc;
+            int NetSale = conn.calculatenetsale(dt.startreg, DateTime.Now, dt.userid) + conn.retrievedtaxes(dt.startreg, DateTime.Now, dt.userid)+ conn.calculatesercharge(dt.startreg, DateTime.Now, dt.userid)-disc;
             e.Graphics.DrawString((NetSale).ToString(), new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(20, y += 20));
             e.Graphics.DrawString("Cash In Hand(Netsale + Opening Amnt)", new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(20, y += 20));
             e.Graphics.DrawString((NetSale+dt.startregister).ToString(), new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(20, y += 20));
@@ -657,7 +657,7 @@ namespace rmsid2
             ArrayList orderdetails = conn.retrieveUsedInventory(dt.startreg, DateTime.Now, dt.userid);
             e.Graphics.DrawString("Inventory Detail", new Font("monospaced sans serif", 14, FontStyle.Bold), Brushes.Black, new Point(40, y += 20));
             e.Graphics.DrawString("Inventory", new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(10, y += 20));
-            e.Graphics.DrawString("Quanity", new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(120, y));
+            e.Graphics.DrawString("Quantity", new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(120, y));
 
             foreach (Detail Inventory in orderdetails)
             {
@@ -668,12 +668,12 @@ namespace rmsid2
             e.Graphics.DrawString("Products Details", new Font("monospaced sans serif", 14, FontStyle.Bold), Brushes.Black, new Point(40, y += 20));
             ArrayList productsdetail = conn.retrievedProducts(dt.startreg, DateTime.Now, dt.userid);
             e.Graphics.DrawString("Product Name", new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(10, y += 20));
-            e.Graphics.DrawString("Quantity", new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(120, y));
+            e.Graphics.DrawString("Quantity", new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(150, y));
 
             foreach (Detail product in productsdetail)
             {
                  e.Graphics.DrawString(product.p_name.ToString(), new Font("monospaced sans serif", 9, FontStyle.Regular), Brushes.Black, new Point(10, y += 20));
-                e.Graphics.DrawString(product.p_qty.ToString(), new Font("monospaced sans serif", 9, FontStyle.Regular), Brushes.Black, new Point(120, y));
+                e.Graphics.DrawString(product.p_qty.ToString(), new Font("monospaced sans serif", 9, FontStyle.Regular), Brushes.Black, new Point(150, y));
             }
       //      MessageBox.Show(dt.startreg.ToString()+ DateTime.Now.ToString());
             e.Graphics.DrawString("----------------------------------------------------------------------------", new Font("Arial", 11, FontStyle.Regular), Brushes.Black, new Point(0, y += 20));
@@ -817,8 +817,8 @@ namespace rmsid2
             e.Graphics.DrawString("Order Details", new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(20, y += 20));
 
             e.Graphics.DrawString("Item Name", new Font("monospaced sans serif", 8, FontStyle.Regular), Brushes.Black, new Point(5, y += 20));
-            e.Graphics.DrawString("Price", new Font("monospaced sans serif", 8, FontStyle.Regular), Brushes.Black, new Point(100, y));
-            e.Graphics.DrawString("Quantity", new Font("monospaced sans serif", 8, FontStyle.Regular), Brushes.Black, new Point(150, y));
+            e.Graphics.DrawString("Price", new Font("monospaced sans serif", 8, FontStyle.Regular), Brushes.Black, new Point(145, y));
+            e.Graphics.DrawString("Quantity", new Font("monospaced sans serif", 8, FontStyle.Regular), Brushes.Black, new Point(170, y));
             e.Graphics.DrawString("Total", new Font("monospaced sans serif", 8, FontStyle.Regular), Brushes.Black, new Point(220, y));
             using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
@@ -833,8 +833,8 @@ namespace rmsid2
                     {
                         y += 20;
                         e.Graphics.DrawString((reader["ItemName"].ToString()), new Font("monospaced sans serif", 8, FontStyle.Regular), Brushes.Black, new Point(5, y));
-                        e.Graphics.DrawString((reader["UnitPrice"].ToString()), new Font("monospaced sans serif", 8, FontStyle.Regular), Brushes.Black, new Point(100, y));
-                        e.Graphics.DrawString((reader["Quantity"].ToString()), new Font("monospaced sans serif", 8, FontStyle.Regular), Brushes.Black, new Point(150, y));
+                        e.Graphics.DrawString((reader["UnitPrice"].ToString()), new Font("monospaced sans serif", 8, FontStyle.Regular), Brushes.Black, new Point(145, y));
+                        e.Graphics.DrawString((reader["Quantity"].ToString()), new Font("monospaced sans serif", 8, FontStyle.Regular), Brushes.Black, new Point(170, y));
                         e.Graphics.DrawString((reader["TotalPrice"].ToString()), new Font("monospaced sans serif", 8, FontStyle.Regular), Brushes.Black, new Point(220, y));
                     }
                 }
@@ -1247,6 +1247,20 @@ namespace rmsid2
             }
             else
                 MessageBox.Show("user not have privilege");
+        }
+
+        private void buttonregreport_Click(object sender, EventArgs e)
+        {
+            if(dt.user_privelage=="Manager")
+            {
+                registerreporting regrep = new registerreporting();
+                regrep.ShowDialog();
+
+            }
+            else
+            {
+                MessageBox.Show("user not have privilege");
+            }
         }
     }
 }

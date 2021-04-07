@@ -99,7 +99,6 @@ namespace rmsid2
             e.Graphics.DrawString("Closing Time:" + labelclosetime.Text, new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(20, y += 20));
             e.Graphics.DrawString("Closing Person:" + labelusername.Text, new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(20, y += 20));
             e.Graphics.DrawString("Opening Amount:" + labelopeningamount.Text, new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(20, y += 20));
-
             e.Graphics.DrawString("---------------------------------------------------------------------------------", new Font("Arial", 11, FontStyle.Regular), Brushes.Black, new Point(0, y += 20));
             e.Graphics.DrawString("Sale Summary", new Font("monospaced sans serif", 14, FontStyle.Bold), Brushes.Black, new Point(40, y += 20));
             ArrayList discounts = conn.retrievediscounts(DateTime.Parse(labelopeningtime.Text), DateTime.Parse(labelclosetime.Text), Int16.Parse(UserIDlabel.Text));
@@ -111,7 +110,7 @@ namespace rmsid2
                 e.Graphics.DrawString(discount.DiscountAmount.ToString(), new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(150, y));
             }
             e.Graphics.DrawString("Taxes", new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(20, y += 20));
-            e.Graphics.DrawString(conn.retrievedtaxes(DateTime.Parse(labelopeningtime.Text), DateTime.Parse(labelclosetime.Text), Int16.Parse(UserIDlabel.Text)).ToString(), new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(80, y));
+            e.Graphics.DrawString(conn.retrievedtaxes(DateTime.Parse(labelopeningtime.Text), DateTime.Parse(labelclosetime.Text), Int16.Parse(UserIDlabel.Text)).ToString(), new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(150, y));
             e.Graphics.DrawString("Extra Charges: ", new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(20, y += 20));
             e.Graphics.DrawString(conn.calculatesercharge(DateTime.Parse(labelopeningtime.Text), DateTime.Parse(labelclosetime.Text), Int16.Parse(UserIDlabel.Text)).ToString(), new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(150, y));
             e.Graphics.DrawString("Card payments: ", new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(20, y += 20));
@@ -119,13 +118,10 @@ namespace rmsid2
             e.Graphics.DrawString("Total sales", new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(20, y += 20));
             e.Graphics.DrawString(conn.calculatenetsale(DateTime.Parse(labelopeningtime.Text), DateTime.Parse(labelclosetime.Text), Int16.Parse(UserIDlabel.Text)).ToString(), new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(150, y));
             e.Graphics.DrawString("Net sales(total+charges+tax+cr pay-discount)", new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(10, y += 20));
-
-            int NetSale = conn.calculatenetsale(DateTime.Parse(labelopeningtime.Text), DateTime.Parse(labelclosetime.Text), Int16.Parse(UserIDlabel.Text)) + conn.retrievedtaxes(DateTime.Parse(labelopeningtime.Text), DateTime.Parse(labelclosetime.Text), Int16.Parse(UserIDlabel.Text)) + conn.calculateCrtaxes(DateTime.Parse(labelopeningtime.Text), DateTime.Parse(labelclosetime.Text), Int16.Parse(UserIDlabel.Text)) + conn.calculatesercharge(DateTime.Parse(labelopeningtime.Text), DateTime.Parse(labelclosetime.Text), Int16.Parse(UserIDlabel.Text)) - disc;
+            int NetSale = conn.calculatenetsale(DateTime.Parse(labelopeningtime.Text), DateTime.Parse(labelclosetime.Text), Int16.Parse(UserIDlabel.Text)) + conn.retrievedtaxes(DateTime.Parse(labelopeningtime.Text), DateTime.Parse(labelclosetime.Text), Int16.Parse(UserIDlabel.Text)) + conn.calculatesercharge(DateTime.Parse(labelopeningtime.Text), DateTime.Parse(labelclosetime.Text), Int16.Parse(UserIDlabel.Text)) - disc;
             e.Graphics.DrawString((NetSale).ToString(), new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(20, y += 20));
             e.Graphics.DrawString("Cash In Hand(Netsale + Opening Amnt)", new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(20, y += 20));
             e.Graphics.DrawString((NetSale + Int16.Parse(labelopeningamount.Text)).ToString(), new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(20, y += 20));
-
-
             //  e.Graphics.DrawString(conn.calculatenetsale(dt.startreg, DateTime.Now, dt.userid).ToString(), new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(150, y));
             e.Graphics.DrawString("------------------------------------------------------------------------------", new Font("Arial", 11, FontStyle.Regular), Brushes.Black, new Point(0, y += 20));
             e.Graphics.DrawString("Order Details", new Font("monospaced sans serif", 14, FontStyle.Bold), Brushes.Black, new Point(40, y += 20));
@@ -133,8 +129,6 @@ namespace rmsid2
             e.Graphics.DrawString("Orders", new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(80, y));
             e.Graphics.DrawString("Total Amount", new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(120, y));
             ArrayList orderdetails = conn.retrievedOrders(DateTime.Parse(labelopeningtime.Text), DateTime.Parse(labelclosetime.Text), Int16.Parse(UserIDlabel.Text));
-
-
             foreach (Detail order in orderdetails)
             {
                 e.Graphics.DrawString(order.OrderType.ToString(), new Font("monospaced sans serif", 9, FontStyle.Regular), Brushes.Black, new Point(10, y += 20));
@@ -145,7 +139,7 @@ namespace rmsid2
             ArrayList invendetails = conn.retrieveUsedInventory(DateTime.Parse(labelopeningtime.Text), DateTime.Parse(labelclosetime.Text), Int16.Parse(UserIDlabel.Text));
             e.Graphics.DrawString("Inventory Detail", new Font("monospaced sans serif", 14, FontStyle.Bold), Brushes.Black, new Point(40, y += 20));
             e.Graphics.DrawString("Inventory", new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(10, y += 20));
-            e.Graphics.DrawString("Quanity", new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(120, y));
+            e.Graphics.DrawString("Quantity", new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(120, y));
 
             foreach (Detail Inventory in invendetails)
             {
@@ -156,12 +150,12 @@ namespace rmsid2
             e.Graphics.DrawString("Products Details", new Font("monospaced sans serif", 14, FontStyle.Bold), Brushes.Black, new Point(40, y += 20));
             ArrayList productsdetail = conn.retrievedProducts(DateTime.Parse(labelopeningtime.Text), DateTime.Parse(labelclosetime.Text), Int16.Parse(UserIDlabel.Text));
             e.Graphics.DrawString("Product Name", new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(10, y += 20));
-            e.Graphics.DrawString("Quantity", new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(120, y));
+            e.Graphics.DrawString("Quantity", new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(150, y));
 
             foreach (Detail product in productsdetail)
             {
                 e.Graphics.DrawString(product.p_name.ToString(), new Font("monospaced sans serif", 9, FontStyle.Regular), Brushes.Black, new Point(10, y += 20));
-                e.Graphics.DrawString(product.p_qty.ToString(), new Font("monospaced sans serif", 9, FontStyle.Regular), Brushes.Black, new Point(120, y));
+                e.Graphics.DrawString(product.p_qty.ToString(), new Font("monospaced sans serif", 9, FontStyle.Regular), Brushes.Black, new Point(150, y));
             }
             //      MessageBox.Show(dt.startreg.ToString()+ DateTime.Now.ToString());
             e.Graphics.DrawString("----------------------------------------------------------------------------", new Font("Arial", 11, FontStyle.Regular), Brushes.Black, new Point(0, y += 20));

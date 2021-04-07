@@ -241,7 +241,7 @@ namespace rmsid2
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(142, 88);
             this.button6.TabIndex = 0;
-            this.button6.Text = "Report";
+            this.button6.Text = "Orders Reports";
             this.button6.UseVisualStyleBackColor = false;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
@@ -312,6 +312,7 @@ namespace rmsid2
             this.buttonregreport.TabIndex = 2;
             this.buttonregreport.Text = "Register Reporting";
             this.buttonregreport.UseVisualStyleBackColor = false;
+            this.buttonregreport.Click += new System.EventHandler(this.buttonregreport_Click);
             // 
             // button5
             // 
