@@ -14,7 +14,7 @@ namespace rmsid2
     public partial class CustHistory : Form
     {
         int t_id=0,order_id=0;
-        string ConnectionString = "Data Source=DESKTOP-C27B91F;Initial Catalog=rmsid;Integrated Security=True";
+        string ConnectionString = "Server=DESKTOP-C27B91F,1433;Database=rmsid;User Id = saadkhan; Password=saad;  ";
 
         public CustHistory(int c_id)
         {

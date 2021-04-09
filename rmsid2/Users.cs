@@ -22,7 +22,7 @@ namespace rmsid2
         {
             this.Close();
         }
-        string ConnectionString = "Data Source=DESKTOP-C27B91F;Initial Catalog=rmsid;Integrated Security=True";
+        string ConnectionString = "Server=DESKTOP-C27B91F,1433;Database=rmsid;User Id = saadkhan; Password=saad;  ";
         int User_id = 0;
         private void Users_Load(object sender, EventArgs e)
         {

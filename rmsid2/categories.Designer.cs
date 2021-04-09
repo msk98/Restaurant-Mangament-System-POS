@@ -39,6 +39,8 @@ namespace rmsid2
             this.buttonUpdate = new System.Windows.Forms.Button();
             this.CatnametextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.comboBoxdisavail = new System.Windows.Forms.ComboBox();
             this.groupBoxCat.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CatdataGridView)).BeginInit();
             this.groupBoxaddcat.SuspendLayout();
@@ -68,6 +70,7 @@ namespace rmsid2
             // 
             this.CatdataGridView.AllowUserToAddRows = false;
             this.CatdataGridView.AllowUserToDeleteRows = false;
+            this.CatdataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.CatdataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.CatdataGridView.Location = new System.Drawing.Point(12, 86);
             this.CatdataGridView.Name = "CatdataGridView";
@@ -78,11 +81,13 @@ namespace rmsid2
             // 
             // groupBoxaddcat
             // 
+            this.groupBoxaddcat.Controls.Add(this.comboBoxdisavail);
             this.groupBoxaddcat.Controls.Add(this.buttonClose);
             this.groupBoxaddcat.Controls.Add(this.buttonDelete);
             this.groupBoxaddcat.Controls.Add(this.buttonAdd);
             this.groupBoxaddcat.Controls.Add(this.buttonUpdate);
             this.groupBoxaddcat.Controls.Add(this.CatnametextBox);
+            this.groupBoxaddcat.Controls.Add(this.label2);
             this.groupBoxaddcat.Controls.Add(this.label1);
             this.groupBoxaddcat.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBoxaddcat.Location = new System.Drawing.Point(568, 22);
@@ -143,7 +148,7 @@ namespace rmsid2
             // CatnametextBox
             // 
             this.CatnametextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.CatnametextBox.Location = new System.Drawing.Point(171, 109);
+            this.CatnametextBox.Location = new System.Drawing.Point(171, 94);
             this.CatnametextBox.Name = "CatnametextBox";
             this.CatnametextBox.Size = new System.Drawing.Size(240, 23);
             this.CatnametextBox.TabIndex = 1;
@@ -151,11 +156,31 @@ namespace rmsid2
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(34, 111);
+            this.label1.Location = new System.Drawing.Point(22, 96);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(119, 17);
             this.label1.TabIndex = 0;
             this.label1.Text = "Category Name";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(25, 148);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(141, 17);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "Category Discount";
+            // 
+            // comboBoxdisavail
+            // 
+            this.comboBoxdisavail.FormattingEnabled = true;
+            this.comboBoxdisavail.Items.AddRange(new object[] {
+            "Available",
+            "Unavailable"});
+            this.comboBoxdisavail.Location = new System.Drawing.Point(173, 140);
+            this.comboBoxdisavail.Name = "comboBoxdisavail";
+            this.comboBoxdisavail.Size = new System.Drawing.Size(238, 24);
+            this.comboBoxdisavail.TabIndex = 4;
             // 
             // categories
             // 
@@ -194,5 +219,7 @@ namespace rmsid2
         private System.Windows.Forms.Button buttonDelete;
         private System.Windows.Forms.Button buttonAdd;
         private System.Windows.Forms.Button buttonUpdate;
+        private System.Windows.Forms.ComboBox comboBoxdisavail;
+        private System.Windows.Forms.Label label2;
     }
 }

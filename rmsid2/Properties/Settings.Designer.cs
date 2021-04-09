@@ -26,7 +26,7 @@ namespace rmsid2.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=DESKTOP-C27B91F;Initial Catalog=rmsid;Integrated Security=True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Server=DESKTOP-C27B91F,1433;Database=rmsid;User Id = saadkhan; Password=saad; ")]
         public string rmsidConnectionString {
             get {
                 return ((string)(this["rmsidConnectionString"]));

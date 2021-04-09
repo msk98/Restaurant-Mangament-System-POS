@@ -41,11 +41,6 @@ namespace rmsid2
             this.buttonincrease = new System.Windows.Forms.Button();
             this.buttontopp = new System.Windows.Forms.Button();
             this.productdataGridView = new System.Windows.Forms.DataGridView();
-            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Itemname = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Price = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TotalPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.Productpanel = new System.Windows.Forms.FlowLayoutPanel();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
@@ -56,6 +51,12 @@ namespace rmsid2
             this.buttonKOT = new System.Windows.Forms.Button();
             this.kotprintDocument = new System.Drawing.Printing.PrintDocument();
             this.kotprintPreviewDialog = new System.Windows.Forms.PrintPreviewDialog();
+            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Itemname = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Price = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TotalPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Discount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.flowLayoutPanel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -224,7 +225,8 @@ namespace rmsid2
             this.Itemname,
             this.Price,
             this.Quantity,
-            this.TotalPrice});
+            this.TotalPrice,
+            this.Discount});
             this.productdataGridView.Location = new System.Drawing.Point(9, 19);
             this.productdataGridView.Margin = new System.Windows.Forms.Padding(4);
             this.productdataGridView.Name = "productdataGridView";
@@ -234,36 +236,6 @@ namespace rmsid2
             this.productdataGridView.Size = new System.Drawing.Size(459, 379);
             this.productdataGridView.TabIndex = 0;
             this.productdataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.productdataGridView_CellClick);
-            // 
-            // Id
-            // 
-            this.Id.HeaderText = "id";
-            this.Id.Name = "Id";
-            this.Id.ReadOnly = true;
-            // 
-            // Itemname
-            // 
-            this.Itemname.HeaderText = "Item Name";
-            this.Itemname.Name = "Itemname";
-            this.Itemname.ReadOnly = true;
-            // 
-            // Price
-            // 
-            this.Price.HeaderText = "Price";
-            this.Price.Name = "Price";
-            this.Price.ReadOnly = true;
-            // 
-            // Quantity
-            // 
-            this.Quantity.HeaderText = "Quantity";
-            this.Quantity.Name = "Quantity";
-            this.Quantity.ReadOnly = true;
-            // 
-            // TotalPrice
-            // 
-            this.TotalPrice.HeaderText = "Total Price";
-            this.TotalPrice.Name = "TotalPrice";
-            this.TotalPrice.ReadOnly = true;
             // 
             // groupBox2
             // 
@@ -366,6 +338,42 @@ namespace rmsid2
             this.kotprintPreviewDialog.Name = "kotprintPreviewDialog";
             this.kotprintPreviewDialog.Visible = false;
             // 
+            // Id
+            // 
+            this.Id.HeaderText = "id";
+            this.Id.Name = "Id";
+            this.Id.ReadOnly = true;
+            // 
+            // Itemname
+            // 
+            this.Itemname.HeaderText = "Item Name";
+            this.Itemname.Name = "Itemname";
+            this.Itemname.ReadOnly = true;
+            // 
+            // Price
+            // 
+            this.Price.HeaderText = "Price";
+            this.Price.Name = "Price";
+            this.Price.ReadOnly = true;
+            // 
+            // Quantity
+            // 
+            this.Quantity.HeaderText = "Quantity";
+            this.Quantity.Name = "Quantity";
+            this.Quantity.ReadOnly = true;
+            // 
+            // TotalPrice
+            // 
+            this.TotalPrice.HeaderText = "Total Price";
+            this.TotalPrice.Name = "TotalPrice";
+            this.TotalPrice.ReadOnly = true;
+            // 
+            // Discount
+            // 
+            this.Discount.HeaderText = "Discount";
+            this.Discount.Name = "Discount";
+            this.Discount.ReadOnly = true;
+            // 
             // Order
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -406,11 +414,6 @@ namespace rmsid2
         private System.Windows.Forms.DataGridView productdataGridView;
         private System.Windows.Forms.Button buttondel;
         private System.Windows.Forms.Button buttonincrease;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Itemname;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Price;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Quantity;
-        private System.Windows.Forms.DataGridViewTextBoxColumn TotalPrice;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.TextBox textBoxTotalAmount;
         private System.Windows.Forms.Label labelTotalAmount;
@@ -419,5 +422,11 @@ namespace rmsid2
         private System.Drawing.Printing.PrintDocument kotprintDocument;
         private System.Windows.Forms.PrintPreviewDialog kotprintPreviewDialog;
         private System.Windows.Forms.Button buttonClose;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Itemname;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Price;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Quantity;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TotalPrice;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Discount;
     }
 }

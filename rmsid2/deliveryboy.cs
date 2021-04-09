@@ -22,7 +22,7 @@ namespace rmsid2
             dt.userid = userid;
         }
         
-        string ConnectionString = "Data Source=DESKTOP-C27B91F;Initial Catalog=rmsid;Integrated Security=True";
+        string ConnectionString = "Server=DESKTOP-C27B91F,1433;Database=rmsid;User Id = saadkhan; Password=saad;  ";
         Detail dt = new Detail();
         private void buttonClose_Click(object sender, EventArgs e)
         {

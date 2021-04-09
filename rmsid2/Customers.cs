@@ -21,7 +21,7 @@ namespace rmsid2
         Detail dt = new Detail(); 
 
         int c_id = 0;
-        string ConnectionString = "Data Source=DESKTOP-C27B91F;Initial Catalog=rmsid;Integrated Security=True";
+        string ConnectionString = "Server=DESKTOP-C27B91F,1433;Database=rmsid;User Id = saadkhan; Password=saad;  ";
         private void buttonAdd_Click(object sender, EventArgs e)
         {
             Connection conn = new Connection();
@@ -43,17 +43,13 @@ namespace rmsid2
 
         private void textBoxSearchNumber_TextChanged(object sender, EventArgs e)
         {
-            Connection conn = new Connection();
-            SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM customer where cust_phone like '" + textBoxPhoneno.Text + "'%", ConnectionString);
-            DataSet ds = new DataSet();
-            da.Fill(ds, "customers");
-            dataGridViewCustomers.DataSource = ds.Tables["customers"].DefaultView;
+            getcustomer();
         }
 
           public void getcustomer()
         {
             Connection conn = new Connection();
-            SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM customer ", ConnectionString);
+            SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM customer where cust_phone like '" + textBoxSearchNumber.Text + "%'", ConnectionString);
             DataSet ds = new DataSet();
             da.Fill(ds, "customers");
             dataGridViewCustomers.DataSource = ds.Tables["customers"].DefaultView;

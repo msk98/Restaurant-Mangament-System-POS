@@ -17,7 +17,7 @@ namespace rmsid2
         {
             InitializeComponent();
         }
-        string ConnectionString = "Data Source=DESKTOP-C27B91F;Initial Catalog=rmsid;Integrated Security=True";
+        string ConnectionString = "Server=DESKTOP-C27B91F,1433;Database=rmsid;User Id = saadkhan; Password=saad; ";
         int OrderId = 0;
         DateTime StartDate;
         DateTime EndDate;
@@ -128,9 +128,9 @@ namespace rmsid2
             e.Graphics.DrawString("Order Id: " + dataGridorders.SelectedRows[0].Cells[0].Value.ToString(), new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(20, y += 20));
             e.Graphics.DrawString("---------------------------------------------------------------------------------", new Font("Arial", 11, FontStyle.Regular), Brushes.Black, new Point(0, y += 20));
             e.Graphics.DrawString("Item-Name", new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(5, y += 20));
-            e.Graphics.DrawString("Price", new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(100, y));
-            e.Graphics.DrawString("Qty", new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(150, y));
-            e.Graphics.DrawString("Amount", new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(200, y));
+            e.Graphics.DrawString("Price", new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(130, y));
+            e.Graphics.DrawString("Qty", new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(180, y));
+            e.Graphics.DrawString("Amount", new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(220, y));
             e.Graphics.DrawString("---------------------------------------------------------------------------------", new Font("Arial", 11, FontStyle.Regular), Brushes.Black, new Point(0, y += 20));
             using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
@@ -145,8 +145,8 @@ namespace rmsid2
                     {
                         y += 20;
                         e.Graphics.DrawString((reader["ItemName"].ToString()), new Font("monospaced sans serif", 8, FontStyle.Regular), Brushes.Black, new Point(5, y));
-                        e.Graphics.DrawString((reader["UnitPrice"].ToString()), new Font("monospaced sans serif", 8, FontStyle.Regular), Brushes.Black, new Point(100, y));
-                        e.Graphics.DrawString((reader["Quantity"].ToString()), new Font("monospaced sans serif", 8, FontStyle.Regular), Brushes.Black, new Point(150, y));
+                        e.Graphics.DrawString((reader["UnitPrice"].ToString()), new Font("monospaced sans serif", 8, FontStyle.Regular), Brushes.Black, new Point(130, y));
+                        e.Graphics.DrawString((reader["Quantity"].ToString()), new Font("monospaced sans serif", 8, FontStyle.Regular), Brushes.Black, new Point(180, y));
                         e.Graphics.DrawString((reader["TotalPrice"].ToString()), new Font("monospaced sans serif", 8, FontStyle.Regular), Brushes.Black, new Point(220, y));
                     }
                 }

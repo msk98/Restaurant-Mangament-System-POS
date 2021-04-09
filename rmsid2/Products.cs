@@ -17,7 +17,7 @@ namespace rmsid2
         {
             InitializeComponent();
         }
-        string ConnectionString = "Data Source=DESKTOP-C27B91F;Initial Catalog=rmsid;Integrated Security=True";
+        string ConnectionString = "Server=DESKTOP-C27B91F,1433;Database=rmsid;User Id = saadkhan; Password=saad; ";
         int p_id = 0;
         private void Products_Load(object sender, EventArgs e)
         {
@@ -45,6 +45,7 @@ namespace rmsid2
             catscomboBox.DataSource = dt;
             catscomboBox.DisplayMember = "C_name";
             catscomboBox.ValueMember = "C_id";
+       
             sqlcon.Close();
         }
 
@@ -169,7 +170,7 @@ namespace rmsid2
         private void ProdtextBox_TextChanged(object sender, EventArgs e)
         {
             Connection conn = new Connection();
-            SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM products where p_name like '"+ ProdtextBox.Text+"'%", ConnectionString);
+            SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM products where p_name like '%"+ ProdtextBox.Text+"%'", ConnectionString);
             DataSet ds = new DataSet();
             da.Fill(ds, "products");
             ProductsdataGridView.DataSource = ds.Tables["products"].DefaultView;

@@ -25,7 +25,7 @@ namespace rmsid2
             dt.Ordertype = ordertype;
             dt.userid = userid;
         }
-        string ConnectionString = "Data Source=DESKTOP-C27B91F;Initial Catalog=rmsid;Integrated Security=True";
+        string ConnectionString = "Server=DESKTOP-C27B91F,1433;Database=rmsid;User Id = saadkhan; Password=saad;  ";
         int table_id = 0;
         Connection conn = new Connection();
         private void buttonClose_Click(object sender, EventArgs e)

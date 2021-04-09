@@ -17,7 +17,7 @@ namespace rmsid2
         {
             InitializeComponent();
         }
-        string ConnectionString = "Data Source=DESKTOP-C27B91F;Initial Catalog=rmsid;Integrated Security=True";
+        string ConnectionString = "Server=DESKTOP-C27B91F,1433;Database=rmsid;User Id = saadkhan; Password=saad;  ";
         int inven_id = 0;
         private void Inventory_Load(object sender, EventArgs e)
         {

@@ -17,7 +17,7 @@ namespace rmsid2
         public string Category;
         public string Description;
         public string prod_disc;
-
+        public int dis_avail;
         public int SaleID;
         public DateTime SaleTime;
         public int SalesmanID;
@@ -51,7 +51,7 @@ namespace rmsid2
         public string address;
 
         public int startregister;
-
+        public DateTime starttimereg;
 
         public string invenname;
         public int invenqty;

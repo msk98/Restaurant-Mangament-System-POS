@@ -21,7 +21,7 @@ namespace rmsid2
             dt.orderid = OrderId;
         }
         Detail dt = new Detail();
-        string ConnectionString = "Data Source=DESKTOP-C27B91F;Initial Catalog=rmsid;Integrated Security=True";
+        string ConnectionString = "Server=DESKTOP-C27B91F,1433;Database=rmsid;User Id = saadkhan; Password=saad;  ";
         int count = 0;
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
         {

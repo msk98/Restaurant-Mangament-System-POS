@@ -73,6 +73,7 @@ namespace rmsid2
             // 
             this.ProductsdataGridView.AllowUserToAddRows = false;
             this.ProductsdataGridView.AllowUserToDeleteRows = false;
+            this.ProductsdataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.ProductsdataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.ProductsdataGridView.Location = new System.Drawing.Point(20, 89);
             this.ProductsdataGridView.Name = "ProductsdataGridView";

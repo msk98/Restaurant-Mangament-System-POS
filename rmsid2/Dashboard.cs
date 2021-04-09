@@ -23,6 +23,14 @@ namespace rmsid2
             dt.username = un;
             dt.userid = userid;
             Username.Text = "Hello " + dt.username;
+            Connection conn = new Connection();
+            if(conn.RegOpenClose(userid)==1)
+            {
+                button7.Text = "Close Register";
+                registerstart.Text = "Register Start:"+ conn.getregtime(userid) ;
+                dt.starttimereg = conn.getregtime(userid);
+            }
+
        //     MessageBox.Show(p);
         }
         public Dashboard()
@@ -30,7 +38,7 @@ namespace rmsid2
             InitializeComponent();
 
         }
-        string ConnectionString = "Data Source=DESKTOP-C27B91F;Initial Catalog=rmsid;Integrated Security=True";
+        string ConnectionString = "Server=DESKTOP-C27B91F,1433;Database=rmsid;User Id = saadkhan; Password=saad; ";
         DataGridViewRow row;
         int OrderId = 0;
 
@@ -142,13 +150,25 @@ namespace rmsid2
                 textBoxtotal.Text = row.Cells[1].Value.ToString();
                 textBoxNetBill.Text = row.Cells[1].Value.ToString();
                 Connection conn = new Connection();
-                SqlDataAdapter da = new SqlDataAdapter("SELECT t_iName as ItemName,t_iqty as Quantity,t_iprice as UnitPrice,t_inetprice as TotalPrice FROM temp_orderitems where t_Oid='" + OrderId + "'", ConnectionString);
+                SqlDataAdapter da = new SqlDataAdapter("SELECT t_iName as ItemName,t_iqty as Quantity,t_iprice as UnitPrice,t_inetprice as TotalPrice,dis_avail   FROM temp_orderitems where t_Oid='" + OrderId + "'", ConnectionString);
                 DataSet ds = new DataSet();
                 da.Fill(ds, "temp_orderitems");
                 dataGridViewOrderItems.DataSource = ds.Tables["temp_orderitems"].DefaultView;
             }
         }
 
+        public int calamnt()
+        {
+            int sum = 0;
+            for (int i = 0; i < dataGridViewOrderItems.Rows.Count; i++) /////(i till 12 bcoz you have add 12 rows)
+            {
+                if(dataGridViewOrderItems.Rows[i].Cells[4].Value.ToString()=="0")
+                {
+                    sum += Int16.Parse(dataGridViewOrderItems.Rows[i].Cells[3].Value.ToString());
+                }
+            }
+            return sum;
+        }
         private void button4_Click(object sender, EventArgs e)
         {
             if (button7.Text != "Open Register")
@@ -300,7 +320,7 @@ namespace rmsid2
         {
             if (OrderId != 0)
             {
-                SelectDiscount sd = new SelectDiscount(float.Parse(textBoxtotal.Text), OrderId);
+                SelectDiscount sd = new SelectDiscount(calamnt()+float.Parse(textBoxtax.Text), OrderId);
                 sd.ShowDialog();
                 if (sd.discountamnt != "")
                 {
@@ -438,12 +458,11 @@ namespace rmsid2
                  e.Graphics.DrawString("Cust Address:" + c.address, new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(5, y += 20));
                  e.Graphics.DrawString("Rider:" + c.deliveryBoy_Name, new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(5, y += 20));
 
-            }
+                }
             // }
 
             e.Graphics.DrawString("---------------------------------------------------------------------------------", new Font("Arial", 11, FontStyle.Regular), Brushes.Black, new Point(5, y += 20));
             e.Graphics.DrawString("Order Details", new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(20, y += 20));
-
             e.Graphics.DrawString("Item Name", new Font("monospaced sans serif", 8, FontStyle.Regular), Brushes.Black, new Point(5, y += 20));
             e.Graphics.DrawString("Price", new Font("monospaced sans serif", 8, FontStyle.Regular), Brushes.Black, new Point(145, y));
             e.Graphics.DrawString("Quantity", new Font("monospaced sans serif", 8, FontStyle.Regular), Brushes.Black, new Point(170, y));
@@ -497,6 +516,7 @@ namespace rmsid2
             e.Graphics.DrawString(textBoxNetBill.Text, new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(100, y));
             if (checkBoxmultipayment.Checked)
             {
+                e.Graphics.DrawString("Payment Method: Multi Payment ", new Font("monospaced sans serif", 12, FontStyle.Bold), Brushes.Black, new Point(40, y += 20));
                 e.Graphics.DrawString("Cash payment: ", new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(10, y += 20));
                 e.Graphics.DrawString(textBoxcashpay.Text, new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(100, y));
                 e.Graphics.DrawString("Card Payment: ", new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(10, y += 20));
@@ -506,6 +526,8 @@ namespace rmsid2
             }
             if (checkBoxcard.Checked)
             {
+                e.Graphics.DrawString("Payment Method: Card Payment ", new Font("monospaced sans serif", 12, FontStyle.Bold), Brushes.Black, new Point(40, y += 20));
+
                 e.Graphics.DrawString("Card Payment: ", new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(10, y += 20));
                 e.Graphics.DrawString(textBoxcreditcardpayment.Text, new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(100, y));
                 e.Graphics.DrawString("Return: ", new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(10, y += 20));
@@ -513,6 +535,8 @@ namespace rmsid2
             }
             if (checkBoxcash.Checked)
             {
+                e.Graphics.DrawString("Payment Method: Cash Payment ", new Font("monospaced sans serif", 12, FontStyle.Bold), Brushes.Black, new Point(40, y += 20));
+
                 e.Graphics.DrawString("Cash Payment: ", new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(10, y += 20));
                 e.Graphics.DrawString(textBoxcashpaying.Text, new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(100, y));
                 e.Graphics.DrawString("Return: ", new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(10, y += 20));
@@ -570,6 +594,7 @@ namespace rmsid2
         int y = 0;
         private void button7_Click(object sender, EventArgs e)
         {
+            Connection conn = new Connection();
             if (button7.Text == "Open Register")
             {
                 register reg = new register(dt.userid);
@@ -578,7 +603,8 @@ namespace rmsid2
                 {
                     dt.startregister = Int16.Parse(reg.registertext);
                     registerstart.Text = "Register Start: " + (DateTime.Now).ToString();
-
+                    
+                    conn.Updateregopen(dt.userid);
                     button7.Text = "Close Register";
                 }
             }
@@ -587,6 +613,7 @@ namespace rmsid2
                 printRegisterDcoumentDocument.DefaultPageSettings.PaperSize = new System.Drawing.Printing.PaperSize("prnm", 285, 1000);
                 printRegisterDcoumentDocument.Print();
                 registerstart.Text="Register End: "+ (DateTime.Now).ToString();
+                conn.Updateregclose(dt.userid);
                 button7.Text = "Open Register";
             }
 
@@ -686,9 +713,10 @@ namespace rmsid2
             {
                 if (MessageBox.Show("Do you Really want to Logout and Close Register?", "Message", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
-
+                    
                     calllastone();
                     Connection conn = new Connection();
+                    conn.Updateregclose(dt.userid);
                     conn.updatelastlogin(dt.username);
                     Login log = new Login();
                     this.Hide();
@@ -700,6 +728,7 @@ namespace rmsid2
             else
             {
                 Connection conn = new Connection();
+
                 conn.updatelastlogin(dt.username);
                 Login log = new Login();
                 this.Hide();
@@ -740,6 +769,7 @@ namespace rmsid2
 
                     calllastone();
                     Connection conn = new Connection();
+                    conn.Updateregclose(dt.userid);
                     conn.updatelastlogin(dt.username);
                     this.Close();
 
@@ -818,8 +848,8 @@ namespace rmsid2
 
             e.Graphics.DrawString("Item Name", new Font("monospaced sans serif", 8, FontStyle.Regular), Brushes.Black, new Point(5, y += 20));
             e.Graphics.DrawString("Price", new Font("monospaced sans serif", 8, FontStyle.Regular), Brushes.Black, new Point(145, y));
-            e.Graphics.DrawString("Quantity", new Font("monospaced sans serif", 8, FontStyle.Regular), Brushes.Black, new Point(170, y));
-            e.Graphics.DrawString("Total", new Font("monospaced sans serif", 8, FontStyle.Regular), Brushes.Black, new Point(220, y));
+            e.Graphics.DrawString("Quantity", new Font("monospaced sans serif", 8, FontStyle.Regular), Brushes.Black, new Point(190, y));
+            e.Graphics.DrawString("Total", new Font("monospaced sans serif", 8, FontStyle.Regular), Brushes.Black, new Point(230, y));
             using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
                 SqlCommand command = new SqlCommand("SELECT t_iName as ItemName,t_iprice as UnitPrice,t_iqty as Quantity,t_inetprice as TotalPrice FROM temp_orderitems where t_Oid = '" + OrderId + "';", connection);
@@ -834,8 +864,8 @@ namespace rmsid2
                         y += 20;
                         e.Graphics.DrawString((reader["ItemName"].ToString()), new Font("monospaced sans serif", 8, FontStyle.Regular), Brushes.Black, new Point(5, y));
                         e.Graphics.DrawString((reader["UnitPrice"].ToString()), new Font("monospaced sans serif", 8, FontStyle.Regular), Brushes.Black, new Point(145, y));
-                        e.Graphics.DrawString((reader["Quantity"].ToString()), new Font("monospaced sans serif", 8, FontStyle.Regular), Brushes.Black, new Point(170, y));
-                        e.Graphics.DrawString((reader["TotalPrice"].ToString()), new Font("monospaced sans serif", 8, FontStyle.Regular), Brushes.Black, new Point(220, y));
+                        e.Graphics.DrawString((reader["Quantity"].ToString()), new Font("monospaced sans serif", 8, FontStyle.Regular), Brushes.Black, new Point(190, y));
+                        e.Graphics.DrawString((reader["TotalPrice"].ToString()), new Font("monospaced sans serif", 8, FontStyle.Regular), Brushes.Black, new Point(230, y));
                     }
                 }
                 connection.Close();
@@ -869,6 +899,8 @@ namespace rmsid2
             e.Graphics.DrawString(textBoxNetBill.Text, new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(100, y));
             if (checkBoxmultipayment.Checked )
             {
+                e.Graphics.DrawString("Payment Method: Multi Payment ", new Font("monospaced sans serif", 12, FontStyle.Bold), Brushes.Black, new Point(40, y += 20));
+
                 e.Graphics.DrawString("Cash payment: ", new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(10, y += 20));
                 e.Graphics.DrawString(textBoxcashpay.Text, new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(100, y));
                 e.Graphics.DrawString("Card Payment: ", new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(10, y += 20));
@@ -878,6 +910,8 @@ namespace rmsid2
             }
             if (checkBoxcard.Checked )
             {
+                e.Graphics.DrawString("Payment Method: Card Payment ", new Font("monospaced sans serif", 12, FontStyle.Bold), Brushes.Black, new Point(40, y += 20));
+
                 e.Graphics.DrawString("Card Payment: ", new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(10, y += 20));
                 e.Graphics.DrawString(textBoxcreditcardpayment.Text, new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(100, y));
                 e.Graphics.DrawString("Return: ", new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(10, y += 20));
@@ -885,6 +919,8 @@ namespace rmsid2
             }
             if (checkBoxcash.Checked )
             {
+                e.Graphics.DrawString("Payment Method: Cash Payment ", new Font("monospaced sans serif", 12, FontStyle.Bold), Brushes.Black, new Point(40, y += 20));
+
                 e.Graphics.DrawString("Cash Payment: ", new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(10, y += 20));
                 e.Graphics.DrawString(textBoxcashpaying.Text, new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(100, y));
                 e.Graphics.DrawString("Return: ", new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(10, y += 20));
@@ -1262,5 +1298,7 @@ namespace rmsid2
                 MessageBox.Show("user not have privilege");
             }
         }
+
+        
     }
 }

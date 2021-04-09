@@ -44,7 +44,7 @@ namespace rmsid2
             det.table = tablename;
             det.userid = userid;
         }
-        string ConnectionString = "Data Source=DESKTOP-C27B91F;Initial Catalog=rmsid;Integrated Security=True";
+        string ConnectionString = "Server=DESKTOP-C27B91F,1433;Database=rmsid;User Id = saadkhan; Password=saad;  ";
         int row;
         int sum;
 
@@ -75,7 +75,6 @@ namespace rmsid2
             }
         }
 
-      
         private void Order_Load(object sender, EventArgs e)
         {
             ArrayList AllCategories = RetreiveAllCategoriesFromDatabase();
@@ -157,7 +156,7 @@ namespace rmsid2
                         int ProductID = Int16.Parse((reader["p_id"].ToString()));
                         string ProductName = (reader["p_name"].ToString());
                         int ProductPrice = Int16.Parse((reader["p_price"].ToString()));
-
+                        int dis_avail = Int16.Parse((reader["dis_avail"].ToString()));
                         if (productdataGridView.Rows.Count>0)
                         {
                             foreach(DataGridViewRow row in productdataGridView.Rows)
@@ -173,7 +172,7 @@ namespace rmsid2
                         }
                        
                         if(flag!=true)
-                            productdataGridView.Rows.Add(ProductID, ProductName, ProductPrice, 1, ProductPrice * 1);
+                            productdataGridView.Rows.Add(ProductID, ProductName, ProductPrice, 1, ProductPrice * 1, dis_avail);
                         totalamount();
                     }
                 }
@@ -284,7 +283,7 @@ namespace rmsid2
                 conn.updatebill(det.table, Int16.Parse(textBoxTotalAmount.Text));
                 for (int i = 0; i < productdataGridView.Rows.Count; i++)
                 {
-                    conn.inserttempOrdersItems(Convert.ToString(productdataGridView.Rows[i].Cells[1].Value), Int16.Parse(productdataGridView.Rows[i].Cells[2].Value.ToString()), Int16.Parse(productdataGridView.Rows[i].Cells[3].Value.ToString()), Int16.Parse(productdataGridView.Rows[i].Cells[4].Value.ToString()), OrderId, Int16.Parse(productdataGridView.Rows[i].Cells[0].Value.ToString()));
+                    conn.inserttempOrdersItems(Convert.ToString(productdataGridView.Rows[i].Cells[1].Value), Int16.Parse(productdataGridView.Rows[i].Cells[2].Value.ToString()), Int16.Parse(productdataGridView.Rows[i].Cells[3].Value.ToString()), Int16.Parse(productdataGridView.Rows[i].Cells[4].Value.ToString()), OrderId, Int16.Parse(productdataGridView.Rows[i].Cells[0].Value.ToString()), Int16.Parse(productdataGridView.Rows[i].Cells[5].Value.ToString()));
                 }
             }
             else if (conn.checkstatustable(det.table) == 1 && det.Ordertype == "Dine In" )
@@ -297,7 +296,7 @@ namespace rmsid2
                 conn.insertuserorders(det.userid, OrderId);
                 for (int i = 0; i < productdataGridView.Rows.Count; i++)
                 {
-                    conn.inserttempOrdersItems(Convert.ToString(productdataGridView.Rows[i].Cells[1].Value), Int16.Parse(productdataGridView.Rows[i].Cells[2].Value.ToString()), Int16.Parse(productdataGridView.Rows[i].Cells[3].Value.ToString()), Int16.Parse(productdataGridView.Rows[i].Cells[4].Value.ToString()), OrderId, Int16.Parse(productdataGridView.Rows[i].Cells[0].Value.ToString()));
+                    conn.inserttempOrdersItems(Convert.ToString(productdataGridView.Rows[i].Cells[1].Value), Int16.Parse(productdataGridView.Rows[i].Cells[2].Value.ToString()), Int16.Parse(productdataGridView.Rows[i].Cells[3].Value.ToString()), Int16.Parse(productdataGridView.Rows[i].Cells[4].Value.ToString()), OrderId, Int16.Parse(productdataGridView.Rows[i].Cells[0].Value.ToString()), Int16.Parse(productdataGridView.Rows[i].Cells[5].Value.ToString()));
                 }
             }
             else if(det.table=="none" && det.Ordertype=="Delivery")
@@ -307,7 +306,7 @@ namespace rmsid2
                 conn.insertuserorders(det.userid, OrderId);
                 for (int i = 0; i < productdataGridView.Rows.Count; i++)
                 {
-                    conn.inserttempOrdersItems(Convert.ToString(productdataGridView.Rows[i].Cells[1].Value), Int16.Parse(productdataGridView.Rows[i].Cells[2].Value.ToString()), Int16.Parse(productdataGridView.Rows[i].Cells[3].Value.ToString()), Int16.Parse(productdataGridView.Rows[i].Cells[4].Value.ToString()), OrderId, Int16.Parse(productdataGridView.Rows[i].Cells[0].Value.ToString()));
+                    conn.inserttempOrdersItems(Convert.ToString(productdataGridView.Rows[i].Cells[1].Value), Int16.Parse(productdataGridView.Rows[i].Cells[2].Value.ToString()), Int16.Parse(productdataGridView.Rows[i].Cells[3].Value.ToString()), Int16.Parse(productdataGridView.Rows[i].Cells[4].Value.ToString()), OrderId, Int16.Parse(productdataGridView.Rows[i].Cells[0].Value.ToString()), Int16.Parse(productdataGridView.Rows[i].Cells[5].Value.ToString()));
                 }
                 conn.insertCustomerOrder(det.custid,OrderId);
                 conn.insertdeliverorder(det.deliverBoyId, OrderId);
@@ -319,7 +318,7 @@ namespace rmsid2
                 conn.insertuserorders(det.userid, OrderId);
                 for (int i = 0; i <productdataGridView.Rows.Count; i++)
                 {
-                   conn.inserttempOrdersItems(Convert.ToString(productdataGridView.Rows[i].Cells[1].Value), Int16.Parse(productdataGridView.Rows[i].Cells[2].Value.ToString()), Int16.Parse(productdataGridView.Rows[i].Cells[3].Value.ToString()), Int16.Parse(productdataGridView.Rows[i].Cells[4].Value.ToString()), OrderId, Int16.Parse(productdataGridView.Rows[i].Cells[0].Value.ToString()));
+                   conn.inserttempOrdersItems(Convert.ToString(productdataGridView.Rows[i].Cells[1].Value), Int16.Parse(productdataGridView.Rows[i].Cells[2].Value.ToString()), Int16.Parse(productdataGridView.Rows[i].Cells[3].Value.ToString()), Int16.Parse(productdataGridView.Rows[i].Cells[4].Value.ToString()), OrderId, Int16.Parse(productdataGridView.Rows[i].Cells[0].Value.ToString()), Int16.Parse(productdataGridView.Rows[i].Cells[5].Value.ToString()));
                 }
                
             }

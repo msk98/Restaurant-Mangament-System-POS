@@ -17,7 +17,7 @@ namespace rmsid2
         {
             InitializeComponent();
         }
-        string ConnectionString = "Data Source=DESKTOP-C27B91F;Initial Catalog=rmsid;Integrated Security=True";
+        string ConnectionString = "Server=DESKTOP-C27B91F,1433;Database=rmsid;User Id = saadkhan; Password=saad;  ";
         DateTime StartDate, EndDate;
         int OrderId = 0;
         private void buttonPrint_Click(object sender, EventArgs e)

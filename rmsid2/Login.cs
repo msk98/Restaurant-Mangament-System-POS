@@ -29,6 +29,8 @@ namespace rmsid2
             {
                 if (conn.insertlogintime(textBoxusername.Text))
                 {
+                    
+                    
                     Dashboard db = new Dashboard(conn.getprivelage(textBoxusername.Text), textBoxusername.Text, conn.getuser(textBoxusername.Text, textBoxpassword.Text));
                     this.Hide();
                     db.ShowDialog();

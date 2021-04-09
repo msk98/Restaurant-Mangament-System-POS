@@ -17,16 +17,16 @@ namespace rmsid2
         {
             InitializeComponent();
         }
-        string ConnectionString = "Data Source=DESKTOP-C27B91F;Initial Catalog=rmsid;Integrated Security=True";
+        string ConnectionString = "Server=DESKTOP-C27B91F,1433;Database=rmsid;User Id = saadkhan; Password=saad;  ";
         int cat_id = 0;
         private void buttonAdd_Click(object sender, EventArgs e)
         {
             Connection conn = new Connection();
-            if (CatnametextBox.Text != "" )
+            if (CatnametextBox.Text != "" && comboBoxdisavail.SelectedIndex!=-1)
             {
                 
 
-                    if (conn.insertcat(CatnametextBox.Text))
+                    if (conn.insertcat(CatnametextBox.Text,comboBoxdisavail.SelectedIndex))
                     MessageBox.Show("Inserted");
                 clearFunction();
                 getcat();
@@ -49,6 +49,7 @@ namespace rmsid2
         public void clearFunction()
         {
             CatnametextBox.Text = "";
+            comboBoxdisavail.SelectedIndex = -1;
             
         }
 
@@ -59,7 +60,7 @@ namespace rmsid2
                 if (cat_id != 0)
                 {
                     Connection conn = new Connection();
-                    if (conn.updatecat(cat_id, CatnametextBox.Text))
+                    if (conn.updatecat(cat_id, CatnametextBox.Text,comboBoxdisavail.SelectedIndex))
                     {
                         //    MessageBox.Show("updated");
                       
@@ -116,8 +117,8 @@ namespace rmsid2
                 DataGridViewRow row = CatdataGridView.Rows[e.RowIndex];
                 cat_id = Int16.Parse(row.Cells[0].Value.ToString());
                 CatnametextBox.Text = row.Cells[1].Value.ToString();
-             
-              
+                comboBoxdisavail.SelectedIndex = Int16.Parse(row.Cells[2].Value.ToString());
+
 
             }
         }

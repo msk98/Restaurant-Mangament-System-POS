@@ -131,6 +131,8 @@ namespace rmsid2
             // 
             // tableLayoutPanel1
             // 
+            this.tableLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel1.ColumnCount = 8;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
@@ -148,7 +150,6 @@ namespace rmsid2
             this.tableLayoutPanel1.Controls.Add(this.button4, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.button7, 4, 0);
             this.tableLayoutPanel1.Controls.Add(this.buttonregreport, 5, 0);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
@@ -346,7 +347,6 @@ namespace rmsid2
             this.dataGridViewOrderlist.AllowUserToResizeColumns = false;
             this.dataGridViewOrderlist.AllowUserToResizeRows = false;
             this.dataGridViewOrderlist.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewOrderlist.Dock = System.Windows.Forms.DockStyle.Left;
             this.dataGridViewOrderlist.Location = new System.Drawing.Point(0, 94);
             this.dataGridViewOrderlist.Name = "dataGridViewOrderlist";
             this.dataGridViewOrderlist.ReadOnly = true;
