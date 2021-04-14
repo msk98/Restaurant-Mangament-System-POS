@@ -485,6 +485,7 @@ namespace rmsid2
             this.textBoxcreditcardpayment.Name = "textBoxcreditcardpayment";
             this.textBoxcreditcardpayment.Size = new System.Drawing.Size(174, 20);
             this.textBoxcreditcardpayment.TabIndex = 1;
+            this.textBoxcreditcardpayment.Text = "0";
             this.textBoxcreditcardpayment.TextChanged += new System.EventHandler(this.textBoxcreditcardpayment_TextChanged);
             this.textBoxcreditcardpayment.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxcaedpay_KeyPress);
             // 
@@ -545,6 +546,7 @@ namespace rmsid2
             this.textBoxcashpaying.Name = "textBoxcashpaying";
             this.textBoxcashpaying.Size = new System.Drawing.Size(178, 20);
             this.textBoxcashpaying.TabIndex = 1;
+            this.textBoxcashpaying.Text = "0";
             this.textBoxcashpaying.TextChanged += new System.EventHandler(this.textBoxcashpaying_TextChanged);
             this.textBoxcashpaying.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxcashpaying_KeyPress);
             // 
@@ -605,6 +607,7 @@ namespace rmsid2
             this.textBoxcashpay.Name = "textBoxcashpay";
             this.textBoxcashpay.Size = new System.Drawing.Size(178, 23);
             this.textBoxcashpay.TabIndex = 1;
+            this.textBoxcashpay.Text = "0";
             this.textBoxcashpay.MouseClick += new System.Windows.Forms.MouseEventHandler(this.textBoxcashpay_MouseClick);
             this.textBoxcashpay.TextChanged += new System.EventHandler(this.textBoxcashpay_TextChanged);
             this.textBoxcashpay.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxcashpay_KeyPress);
@@ -617,6 +620,7 @@ namespace rmsid2
             this.textBoxcardpay.Name = "textBoxcardpay";
             this.textBoxcardpay.Size = new System.Drawing.Size(178, 23);
             this.textBoxcardpay.TabIndex = 1;
+            this.textBoxcardpay.Text = "0";
             this.textBoxcardpay.MouseClick += new System.Windows.Forms.MouseEventHandler(this.textBoxcardpay_MouseClick);
             this.textBoxcardpay.TextChanged += new System.EventHandler(this.textBoxcardpay_TextChanged);
             this.textBoxcardpay.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxcaedpay_KeyPress);

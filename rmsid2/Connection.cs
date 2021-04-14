@@ -1204,16 +1204,18 @@ namespace rmsid2
 
             }
         }
-        public bool insertusers(string username,string userpass,string privileges)
+        public bool insertusers(string username,string userpass,string privileges,int reg_open)
         {
             OpenConection();
-            string query = "INSERT INTO users (username,user_pass,user_privelage) VALUES(@username,@userpass,@privileges)";
+            string query = "INSERT INTO users (username,user_pass,user_privelage,reg_open) VALUES(@username,@userpass,@privileges,@reg_open)";
             SqlCommand cmd = new SqlCommand(query, con);
             //Pass values to Parameters
 
             cmd.Parameters.AddWithValue("@username", username);
             cmd.Parameters.AddWithValue("@userpass", userpass);
             cmd.Parameters.AddWithValue("@privileges", privileges);
+            cmd.Parameters.AddWithValue("@reg_open", reg_open);
+
             try
             {
                 OpenConection();

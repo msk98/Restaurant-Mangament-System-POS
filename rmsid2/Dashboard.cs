@@ -407,8 +407,8 @@ namespace rmsid2
                 textBoxcashpay.Enabled = false;
                 textBoxcardpay.Enabled = false;
                 checkBoxcash.Checked = true;
-                textBoxcashpay.Text = "";
-                textBoxcardpay.Text = "";
+                textBoxcashpay.Text = "0";
+                textBoxcardpay.Text = "0";
             }
         }
 
@@ -424,7 +424,7 @@ namespace rmsid2
             else
             {
                 textBoxcreditcardpayment.Enabled = false;
-                textBoxcreditcardpayment.Text = "";
+                textBoxcreditcardpayment.Text = "0";
                 checkBoxcash.Checked = true;
             }
         }
@@ -465,7 +465,7 @@ namespace rmsid2
             e.Graphics.DrawString("Order Details", new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(20, y += 20));
             e.Graphics.DrawString("Item Name", new Font("monospaced sans serif", 8, FontStyle.Regular), Brushes.Black, new Point(5, y += 20));
             e.Graphics.DrawString("Price", new Font("monospaced sans serif", 8, FontStyle.Regular), Brushes.Black, new Point(145, y));
-            e.Graphics.DrawString("Quantity", new Font("monospaced sans serif", 8, FontStyle.Regular), Brushes.Black, new Point(170, y));
+            e.Graphics.DrawString("Quantity", new Font("monospaced sans serif", 8, FontStyle.Regular), Brushes.Black, new Point(175, y));
             e.Graphics.DrawString("Total", new Font("monospaced sans serif", 8, FontStyle.Regular), Brushes.Black, new Point(220, y));
             using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
@@ -481,7 +481,7 @@ namespace rmsid2
                         y += 20;
                         e.Graphics.DrawString((reader["ItemName"].ToString()), new Font("monospaced sans serif", 8, FontStyle.Regular), Brushes.Black, new Point(5, y));
                         e.Graphics.DrawString((reader["UnitPrice"].ToString()), new Font("monospaced sans serif", 8, FontStyle.Regular), Brushes.Black, new Point(145, y));
-                        e.Graphics.DrawString((reader["Quantity"].ToString()), new Font("monospaced sans serif", 8, FontStyle.Regular), Brushes.Black, new Point(170, y));
+                        e.Graphics.DrawString((reader["Quantity"].ToString()), new Font("monospaced sans serif", 8, FontStyle.Regular), Brushes.Black, new Point(175, y));
                         e.Graphics.DrawString((reader["TotalPrice"].ToString()), new Font("monospaced sans serif", 8, FontStyle.Regular), Brushes.Black, new Point(220, y));
                     }
                 }
@@ -557,7 +557,7 @@ namespace rmsid2
 
             using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
-                SqlCommand command = new SqlCommand("select cust_name,cust_phone,cust_address,DeliveryBoys.d_name as d_name from customer  inner join customerOrders on customer.cust_id=customer.cust_id  inner join temp_orders  on customerOrders.Order_id= temp_orders.t_Oid inner join del_orders on del_orders.order_id=customerOrders.Order_id inner join DeliveryBoys  on DeliveryBoys.d_id = del_orders.d_id where temp_orders.t_Oid='" + Oid + "';", connection);
+                SqlCommand command = new SqlCommand("select cust_name,cust_phone,cust_address,DeliveryBoys.d_name as d_name from customer  inner join customerOrders on customerOrders.cus_id=customer.cust_id inner join del_orders on del_orders.order_id=customerOrders.Order_id inner join DeliveryBoys  on DeliveryBoys.d_id = del_orders.d_id inner join Orders  on customerOrders.Order_id= Orders.t_Oid where Orders.t_Oid='" + Oid + "';", connection);
                 connection.Open();
 
                 SqlDataReader reader = command.ExecuteReader();
@@ -848,7 +848,7 @@ namespace rmsid2
 
             e.Graphics.DrawString("Item Name", new Font("monospaced sans serif", 8, FontStyle.Regular), Brushes.Black, new Point(5, y += 20));
             e.Graphics.DrawString("Price", new Font("monospaced sans serif", 8, FontStyle.Regular), Brushes.Black, new Point(145, y));
-            e.Graphics.DrawString("Quantity", new Font("monospaced sans serif", 8, FontStyle.Regular), Brushes.Black, new Point(190, y));
+            e.Graphics.DrawString("Quantity", new Font("monospaced sans serif", 8, FontStyle.Regular), Brushes.Black, new Point(180, y));
             e.Graphics.DrawString("Total", new Font("monospaced sans serif", 8, FontStyle.Regular), Brushes.Black, new Point(230, y));
             using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
@@ -864,7 +864,7 @@ namespace rmsid2
                         y += 20;
                         e.Graphics.DrawString((reader["ItemName"].ToString()), new Font("monospaced sans serif", 8, FontStyle.Regular), Brushes.Black, new Point(5, y));
                         e.Graphics.DrawString((reader["UnitPrice"].ToString()), new Font("monospaced sans serif", 8, FontStyle.Regular), Brushes.Black, new Point(145, y));
-                        e.Graphics.DrawString((reader["Quantity"].ToString()), new Font("monospaced sans serif", 8, FontStyle.Regular), Brushes.Black, new Point(190, y));
+                        e.Graphics.DrawString((reader["Quantity"].ToString()), new Font("monospaced sans serif", 8, FontStyle.Regular), Brushes.Black, new Point(180, y));
                         e.Graphics.DrawString((reader["TotalPrice"].ToString()), new Font("monospaced sans serif", 8, FontStyle.Regular), Brushes.Black, new Point(230, y));
                     }
                 }
@@ -945,18 +945,18 @@ namespace rmsid2
             else
             {
                 textBoxcashpaying.Enabled = false;
-                textBoxcashpaying.Text = "";
+                textBoxcashpaying.Text = "0";
             }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (checkBoxcash.Checked)
+            if (checkBoxcash.Checked && textBoxNetBill.Text!="0.0")
             {
                 textBoxcashpaying.Text += "1";
             }
           
-            else if (checkBoxcard.Checked)
+            else if (checkBoxcard.Checked && textBoxNetBill.Text != "0.0")
             {
                 textBoxcreditcardpayment.Text += "1";
             }
@@ -966,12 +966,12 @@ namespace rmsid2
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if (checkBoxcash.Checked)
+            if (checkBoxcash.Checked && textBoxNetBill.Text != "0.0")
             {
                 textBoxcashpaying.Text += "2";
             }
             
-            else if (checkBoxcard.Checked)
+            else if (checkBoxcard.Checked && textBoxNetBill.Text != "0.0")
             {
                 textBoxcreditcardpayment.Text += "4";
             }
@@ -980,12 +980,12 @@ namespace rmsid2
 
         private void button3_Click(object sender, EventArgs e)
         {
-            if (checkBoxcash.Checked)
+            if (checkBoxcash.Checked && textBoxNetBill.Text != "0.0")
             {
                 textBoxcashpaying.Text += "3";
             }
            
-            else if (checkBoxcard.Checked)
+            else if (checkBoxcard.Checked && textBoxNetBill.Text != "0.0")
             {
                 textBoxcreditcardpayment.Text += "3";
             }
@@ -994,12 +994,12 @@ namespace rmsid2
 
         private void button8_Click(object sender, EventArgs e)
         {
-            if (checkBoxcash.Checked)
+            if (checkBoxcash.Checked && textBoxNetBill.Text != "0.0")
             {
                 textBoxcashpaying.Text += "4";
             }
          
-            else if (checkBoxcard.Checked)
+            else if (checkBoxcard.Checked && textBoxNetBill.Text != "0.0")
             {
                 textBoxcreditcardpayment.Text += "4";
             }
@@ -1008,12 +1008,12 @@ namespace rmsid2
 
         private void button9_Click(object sender, EventArgs e)
         {
-            if (checkBoxcash.Checked)
+            if (checkBoxcash.Checked && textBoxNetBill.Text != "0.0")
             {
                 textBoxcashpaying.Text += "5";
             }
            
-            else if (checkBoxcard.Checked)
+            else if (checkBoxcard.Checked && textBoxNetBill.Text != "0.0")
             {
                 textBoxcreditcardpayment.Text += "5";
             }
@@ -1022,12 +1022,12 @@ namespace rmsid2
 
         private void button10_Click(object sender, EventArgs e)
         {
-            if (checkBoxcash.Checked)
+            if (checkBoxcash.Checked && textBoxNetBill.Text != "0.0")
             {
                 textBoxcashpaying.Text += "6";
             }
       
-            else if (checkBoxcard.Checked)
+            else if (checkBoxcard.Checked && textBoxNetBill.Text != "0.0")
             {
                 textBoxcreditcardpayment.Text += "6";
             }
@@ -1036,12 +1036,12 @@ namespace rmsid2
 
         private void button11_Click(object sender, EventArgs e)
         {
-            if (checkBoxcash.Checked)
+            if (checkBoxcash.Checked && textBoxNetBill.Text != "0.0")
             {
                 textBoxcashpaying.Text += "7";
             }
        
-            else if (checkBoxcard.Checked)
+            else if (checkBoxcard.Checked && textBoxNetBill.Text != "0.0")
             {
                 textBoxcreditcardpayment.Text += "7";
             }
@@ -1050,12 +1050,12 @@ namespace rmsid2
 
         private void button13_Click(object sender, EventArgs e)
         {
-            if (checkBoxcash.Checked)
+            if (checkBoxcash.Checked && textBoxNetBill.Text != "0.0")
             {
                 textBoxcashpaying.Text += "8";
             }
           
-            else if (checkBoxcard.Checked)
+            else if (checkBoxcard.Checked && textBoxNetBill.Text != "0.0")
             {
                 textBoxcreditcardpayment.Text += "8";
             }
@@ -1064,12 +1064,12 @@ namespace rmsid2
 
         private void button15_Click(object sender, EventArgs e)
         {
-            if (checkBoxcash.Checked)
+            if (checkBoxcash.Checked && textBoxNetBill.Text != "0.0")
             {
                 textBoxcashpaying.Text += "9";
             }
             
-            else if (checkBoxcard.Checked)
+            else if (checkBoxcard.Checked && textBoxNetBill.Text != "0.0")
             {
                 textBoxcreditcardpayment.Text += "9";
             }
@@ -1078,12 +1078,12 @@ namespace rmsid2
 
         private void button12_Click(object sender, EventArgs e)
         {
-            if (checkBoxcash.Checked)
+            if (checkBoxcash.Checked && textBoxNetBill.Text != "0.0")
             {
                 textBoxcashpaying.Text += "0";
             }
          
-            else if (checkBoxcard.Checked)
+            else if (checkBoxcard.Checked && textBoxNetBill.Text != "0.0")
             {
                 textBoxcreditcardpayment.Text += "0";
             }
@@ -1092,12 +1092,12 @@ namespace rmsid2
 
         private void button14_Click(object sender, EventArgs e)
         {
-            if (checkBoxcash.Checked)
+            if (checkBoxcash.Checked && textBoxNetBill.Text != "0.0")
             {
                 textBoxcashpaying.Text += "00";
             }
            
-            else if (checkBoxcard.Checked)
+            else if (checkBoxcard.Checked && textBoxNetBill.Text != "0.0")
             {
                 textBoxcreditcardpayment.Text += "00";
             }
@@ -1106,41 +1106,41 @@ namespace rmsid2
 
         private void button17_Click(object sender, EventArgs e)
         {
-            if (checkBoxcash.Checked)
+            if (checkBoxcash.Checked && textBoxNetBill.Text != "0.0")
             {
-                textBoxcashpaying.Text += "500";
+                textBoxcashpaying.Text += (Int64.Parse(textBoxcashpay.Text) +500).ToString();
             }
        
-            else if (checkBoxcard.Checked)
+            else if (checkBoxcard.Checked && textBoxNetBill.Text != "0.0")
             {
-                textBoxcreditcardpayment.Text += "500";
+                textBoxcreditcardpayment.Text += (Int64.Parse(textBoxcreditcardpayment.Text) + 500).ToString();
             }
 
         }
 
         private void button18_Click(object sender, EventArgs e)
         {
-            if (checkBoxcash.Checked)
+            if (checkBoxcash.Checked && textBoxNetBill.Text != "0.0")
             {
-                textBoxcashpaying.Text += "1000";
+                textBoxcashpaying.Text += (Int64.Parse(textBoxcashpaying.Text) + 1000).ToString();
             }
           
-            else if (checkBoxcard.Checked)
+            else if (checkBoxcard.Checked && textBoxNetBill.Text != "0.0")
             {
-                textBoxcreditcardpayment.Text += "1000";
+                textBoxcreditcardpayment.Text += (Int64.Parse(textBoxcreditcardpayment.Text) + 1000).ToString();
             }
         }
 
         private void button19_Click(object sender, EventArgs e)
         {
-            if (checkBoxcash.Checked)
+            if (checkBoxcash.Checked && textBoxNetBill.Text != "0.0")
             {
-                textBoxcashpaying.Text += "5000";
+                textBoxcashpaying.Text += (Int64.Parse(textBoxcashpaying.Text) + 5000).ToString();
             }
            
-            else if (checkBoxcard.Checked)
+            else if (checkBoxcard.Checked && textBoxNetBill.Text != "0.0")
             {
-                textBoxcreditcardpayment.Text += "5000";
+                textBoxcreditcardpayment.Text += (Int64.Parse(textBoxcreditcardpayment.Text) + 5000).ToString();
             }
         }
 
@@ -1149,7 +1149,7 @@ namespace rmsid2
             if (checkBoxcash.Checked)
             {
 
-                if (textBoxcashpaying.TextLength > 0)
+                if (textBoxcashpaying.TextLength > 0 && textBoxcashpaying.Text!="0") 
                 {
                     textBoxcashpaying.Text = textBoxcashpaying.Text.Substring(0, (textBoxcashpaying.TextLength - 1));
                 }
@@ -1185,9 +1185,9 @@ namespace rmsid2
 
         private void textBoxcashpaying_TextChanged(object sender, EventArgs e)
         {
-            if (textBoxcashpaying.TextLength > 0)
+            if (textBoxcashpaying.TextLength > 0 && textBoxNetBill.Text!="0.0")
             {
-                textBoxreturn.Text = (Int16.Parse(textBoxcashpaying.Text) - float.Parse(textBoxNetBill.Text)).ToString();
+                textBoxreturn.Text = (Int64.Parse(textBoxcashpaying.Text) - float.Parse(textBoxNetBill.Text)).ToString();
             }
             else
             {
@@ -1198,9 +1198,9 @@ namespace rmsid2
 
         private void textBoxcreditcardpayment_TextChanged(object sender, EventArgs e)
         {
-            if (textBoxcreditcardpayment.TextLength > 0 )
+            if (textBoxcreditcardpayment.TextLength > 0 && textBoxNetBill.Text != "0.0")
             {
-                textBoxreturn.Text = (Int16.Parse(textBoxcreditcardpayment.Text) - float.Parse(textBoxNetBill.Text)).ToString();
+                textBoxreturn.Text = (Int64.Parse(textBoxcreditcardpayment.Text) - float.Parse(textBoxNetBill.Text)).ToString();
             }
             else
             {
@@ -1210,27 +1210,27 @@ namespace rmsid2
 
         private void textBoxcashpay_TextChanged(object sender, EventArgs e)
         {
-            if (textBoxcashpay.TextLength > 0 && textBoxcardpay.TextLength > 0)
+            if (textBoxcashpay.TextLength > 0 && textBoxcardpay.TextLength > 0 && textBoxNetBill.Text != "0.0")
             {
-                textBoxreturn.Text = (Int16.Parse(textBoxcashpay.Text) + Int16.Parse(textBoxcardpay.Text) - float.Parse(textBoxNetBill.Text)).ToString();
+                textBoxreturn.Text = (Int64.Parse(textBoxcashpay.Text) + Int16.Parse(textBoxcardpay.Text) - float.Parse(textBoxNetBill.Text)).ToString();
 
             }
-            else if (textBoxcashpay.TextLength > 0 && textBoxcardpay.TextLength == 0)
-            {
-                textBoxreturn.Text = (Int16.Parse(textBoxcashpay.Text) - float.Parse(textBoxNetBill.Text)).ToString();
+            else if (textBoxcashpay.TextLength > 0 && textBoxcardpay.TextLength == 0 && textBoxNetBill.Text != "0.0")
+            { 
+                textBoxreturn.Text = (Int64.Parse(textBoxcashpay.Text) - float.Parse(textBoxNetBill.Text)).ToString();
             }
-            else if (textBoxcashpay.TextLength == 0 && textBoxcardpay.TextLength == 0)
+            else if (textBoxcashpay.TextLength == 0 && textBoxcardpay.TextLength == 0 )
                 textBoxreturn.Text = "0";
         }
 
         private void textBoxcardpay_TextChanged(object sender, EventArgs e)
         {
-            if (textBoxcashpay.TextLength > 0 && textBoxcardpay.TextLength > 0)
+            if (textBoxcashpay.TextLength > 0 && textBoxcardpay.TextLength > 0 && textBoxNetBill.Text != "0.0")
             {
-                textBoxreturn.Text = (Int16.Parse(textBoxcashpay.Text) + Int16.Parse(textBoxcardpay.Text) - float.Parse(textBoxNetBill.Text)).ToString();
+                textBoxreturn.Text = (Int64.Parse(textBoxcashpay.Text) + Int64.Parse(textBoxcardpay.Text) - float.Parse(textBoxNetBill.Text)).ToString();
 
             }
-            else if (textBoxcashpay.TextLength == 0 && textBoxcardpay.TextLength > 0)
+            else if (textBoxcashpay.TextLength == 0 && textBoxcardpay.TextLength > 0 && textBoxNetBill.Text != "0.0")
             {
                 textBoxreturn.Text = (Int64.Parse(textBoxcardpay.Text) - float.Parse(textBoxNetBill.Text)).ToString();
             }

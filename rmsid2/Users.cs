@@ -42,7 +42,7 @@ namespace rmsid2
             Connection conn = new Connection();
             if (textBoxname.Text.Length > 0 && textBoxpass.Text.Length > 0 && comboBoxpriv.SelectedIndex!=-1)
             {
-                conn.insertusers(textBoxname.Text,textBoxpass.Text,comboBoxpriv.SelectedItem.ToString());
+                conn.insertusers(textBoxname.Text,textBoxpass.Text,comboBoxpriv.SelectedItem.ToString(),0);
                 clear();
                 getusers();
             }
