@@ -1447,7 +1447,7 @@ namespace rmsid2
                 SqlDataReader dr = cmd.ExecuteReader();
                 while (dr.Read())
                 {
-                    count = Int16.Parse(dr["user_id"].ToString());
+                    count = Int16.Parse(dr["reg_open"].ToString());
 
                 }
                 return count;
