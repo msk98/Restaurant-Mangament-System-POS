@@ -516,7 +516,7 @@ namespace rmsid2
             e.Graphics.DrawString(textBoxNetBill.Text, new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(100, y));
             if (checkBoxmultipayment.Checked)
             {
-                e.Graphics.DrawString("Payment Method: Multi Payment ", new Font("monospaced sans serif", 12, FontStyle.Bold), Brushes.Black, new Point(40, y += 20));
+                e.Graphics.DrawString("Payment Method: Multi Payment ", new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(20, y += 20));
                 e.Graphics.DrawString("Cash payment: ", new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(10, y += 20));
                 e.Graphics.DrawString(textBoxcashpay.Text, new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(100, y));
                 e.Graphics.DrawString("Card Payment: ", new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(10, y += 20));
@@ -526,7 +526,7 @@ namespace rmsid2
             }
             if (checkBoxcard.Checked)
             {
-                e.Graphics.DrawString("Payment Method: Card Payment ", new Font("monospaced sans serif", 12, FontStyle.Bold), Brushes.Black, new Point(40, y += 20));
+                e.Graphics.DrawString("Payment Method: Card Payment ", new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(20, y += 20));
 
                 e.Graphics.DrawString("Card Payment: ", new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(10, y += 20));
                 e.Graphics.DrawString(textBoxcreditcardpayment.Text, new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(100, y));
@@ -535,7 +535,7 @@ namespace rmsid2
             }
             if (checkBoxcash.Checked)
             {
-                e.Graphics.DrawString("Payment Method: Cash Payment ", new Font("monospaced sans serif", 12, FontStyle.Bold), Brushes.Black, new Point(40, y += 20));
+                e.Graphics.DrawString("Payment Method: Cash Payment ", new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(20, y += 20));
 
                 e.Graphics.DrawString("Cash Payment: ", new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(10, y += 20));
                 e.Graphics.DrawString(textBoxcashpaying.Text, new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(100, y));
@@ -557,7 +557,7 @@ namespace rmsid2
 
             using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
-                SqlCommand command = new SqlCommand("select cust_name,cust_phone,cust_address,DeliveryBoys.d_name as d_name from customer  inner join customerOrders on customerOrders.cus_id=customer.cust_id inner join del_orders on del_orders.order_id=customerOrders.Order_id inner join DeliveryBoys  on DeliveryBoys.d_id = del_orders.d_id inner join Orders  on customerOrders.Order_id= Orders.t_Oid where Orders.t_Oid='" + Oid + "';", connection);
+                SqlCommand command = new SqlCommand("select cust_name,cust_phone,cust_address,DeliveryBoys.d_name as d_name from customer  inner join customerOrders on customerOrders.cus_id=customer.cust_id inner join del_orders on del_orders.order_id=customerOrders.Order_id inner join DeliveryBoys  on DeliveryBoys.d_id = del_orders.d_id inner join temp_orders  on customerOrders.Order_id= temp_orders.t_Oid where temp_orders.t_Oid='" + Oid + "';", connection);
                 connection.Open();
 
                 SqlDataReader reader = command.ExecuteReader();
@@ -899,7 +899,7 @@ namespace rmsid2
             e.Graphics.DrawString(textBoxNetBill.Text, new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(100, y));
             if (checkBoxmultipayment.Checked )
             {
-                e.Graphics.DrawString("Payment Method: Multi Payment ", new Font("monospaced sans serif", 12, FontStyle.Bold), Brushes.Black, new Point(40, y += 20));
+                e.Graphics.DrawString("Payment Method: Multi Payment ", new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(20, y += 20));
 
                 e.Graphics.DrawString("Cash payment: ", new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(10, y += 20));
                 e.Graphics.DrawString(textBoxcashpay.Text, new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(100, y));
@@ -910,7 +910,7 @@ namespace rmsid2
             }
             if (checkBoxcard.Checked )
             {
-                e.Graphics.DrawString("Payment Method: Card Payment ", new Font("monospaced sans serif", 12, FontStyle.Bold), Brushes.Black, new Point(40, y += 20));
+                e.Graphics.DrawString("Payment Method: Card Payment ", new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(20, y += 20));
 
                 e.Graphics.DrawString("Card Payment: ", new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(10, y += 20));
                 e.Graphics.DrawString(textBoxcreditcardpayment.Text, new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(100, y));
@@ -919,7 +919,7 @@ namespace rmsid2
             }
             if (checkBoxcash.Checked )
             {
-                e.Graphics.DrawString("Payment Method: Cash Payment ", new Font("monospaced sans serif", 12, FontStyle.Bold), Brushes.Black, new Point(40, y += 20));
+                e.Graphics.DrawString("Payment Method: Cash Payment ", new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(20, y += 20));
 
                 e.Graphics.DrawString("Cash Payment: ", new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(10, y += 20));
                 e.Graphics.DrawString(textBoxcashpaying.Text, new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(100, y));
@@ -1108,12 +1108,12 @@ namespace rmsid2
         {
             if (checkBoxcash.Checked && textBoxNetBill.Text != "0.0")
             {
-                textBoxcashpaying.Text += (Int64.Parse(textBoxcashpay.Text) +500).ToString();
+                textBoxcashpaying.Text = (Int64.Parse(textBoxcashpaying.Text) + 500).ToString();
             }
        
             else if (checkBoxcard.Checked && textBoxNetBill.Text != "0.0")
             {
-                textBoxcreditcardpayment.Text += (Int64.Parse(textBoxcreditcardpayment.Text) + 500).ToString();
+                textBoxcreditcardpayment.Text = (Int64.Parse(textBoxcreditcardpayment.Text) + 500).ToString();
             }
 
         }
@@ -1122,12 +1122,12 @@ namespace rmsid2
         {
             if (checkBoxcash.Checked && textBoxNetBill.Text != "0.0")
             {
-                textBoxcashpaying.Text += (Int64.Parse(textBoxcashpaying.Text) + 1000).ToString();
+                textBoxcashpaying.Text = (Int64.Parse(textBoxcashpaying.Text) + 1000).ToString();
             }
           
             else if (checkBoxcard.Checked && textBoxNetBill.Text != "0.0")
             {
-                textBoxcreditcardpayment.Text += (Int64.Parse(textBoxcreditcardpayment.Text) + 1000).ToString();
+                textBoxcreditcardpayment.Text = (Int64.Parse(textBoxcreditcardpayment.Text) + 1000).ToString();
             }
         }
 
@@ -1135,12 +1135,12 @@ namespace rmsid2
         {
             if (checkBoxcash.Checked && textBoxNetBill.Text != "0.0")
             {
-                textBoxcashpaying.Text += (Int64.Parse(textBoxcashpaying.Text) + 5000).ToString();
+                textBoxcashpaying.Text = (Int64.Parse(textBoxcashpaying.Text) + 5000).ToString();
             }
            
             else if (checkBoxcard.Checked && textBoxNetBill.Text != "0.0")
             {
-                textBoxcreditcardpayment.Text += (Int64.Parse(textBoxcreditcardpayment.Text) + 5000).ToString();
+                textBoxcreditcardpayment.Text = (Int64.Parse(textBoxcreditcardpayment.Text) + 5000).ToString();
             }
         }
 
