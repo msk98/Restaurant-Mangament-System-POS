@@ -733,18 +733,19 @@ namespace rmsid2
         }
         public bool insertCustomers(string cust_name, string cust_phone, string cust_address)
         {
-            OpenConection();
-            string query = "INSERT INTO customer (cust_name,cust_phone,cust_address) VALUES(@cust_name,@cust_phone,@cust_address)";
-            SqlCommand cmd = new SqlCommand(query, con);
-            //Pass values to Parameters
-            cmd.Parameters.AddWithValue("@cust_name", cust_name);
-            cmd.Parameters.AddWithValue("@cust_phone", cust_phone);
-            cmd.Parameters.AddWithValue("@cust_address", cust_address);
+            SqlConnection con = new SqlConnection(ConnectionString);
+           
          
 
             try
             {
-                OpenConection();
+                con.Open();
+                string query = "INSERT INTO customer (cust_name,cust_phone,cust_address) VALUES(@cust_name,@cust_phone,@cust_address)";
+                SqlCommand cmd = new SqlCommand(query, con);
+                //Pass values to Parameters
+                cmd.Parameters.AddWithValue("@cust_name", cust_name);
+                cmd.Parameters.AddWithValue("@cust_phone", cust_phone);
+                cmd.Parameters.AddWithValue("@cust_address", cust_address);
                 cmd.ExecuteNonQuery();
 
                 return true;
@@ -758,7 +759,7 @@ namespace rmsid2
             }
             finally
             {
-                CloseConnection();
+                con.Close();
 
             }
         }
