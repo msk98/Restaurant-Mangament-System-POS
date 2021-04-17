@@ -107,7 +107,7 @@ namespace rmsid2
         private void InventextBox_TextChanged(object sender, EventArgs e)
         {
             Connection conn = new Connection();
-            SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM inventory where Inven_Name like'" + InventextBox.Text+"'%", ConnectionString);
+            SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM inventory where Inven_Name like'%" + InventextBox.Text+"%'", ConnectionString);
             DataSet ds = new DataSet();
             da.Fill(ds, "inventory");
             InventorydataGridView.DataSource = ds.Tables["inventory"].DefaultView;

@@ -134,6 +134,7 @@ namespace rmsid2
             // 
             this.dataGridViewCustomers.AllowUserToAddRows = false;
             this.dataGridViewCustomers.AllowUserToDeleteRows = false;
+            this.dataGridViewCustomers.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridViewCustomers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewCustomers.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridViewCustomers.Location = new System.Drawing.Point(3, 19);

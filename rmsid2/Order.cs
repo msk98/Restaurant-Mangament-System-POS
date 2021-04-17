@@ -191,43 +191,13 @@ namespace rmsid2
             }
         }
 
-        private void buttontopp_Click(object sender, EventArgs e)
-        {
-            if (row > 0)
-            {
-                productdataGridView.Rows[row].Selected = false;
-                row = 0;
-                productdataGridView.Rows[row].Selected = true;
-            }
-        }
+      
 
-        private void buttontop_Click(object sender, EventArgs e)
-        {
-            if (row > 0)
-            {
-                productdataGridView.Rows[row].Selected = false;
-                productdataGridView.Rows[--row].Selected = true;
-            }
-        }
+       
 
-        private void buttondown_Click(object sender, EventArgs e)
-        {
-            if (row < productdataGridView.RowCount)
-            {
-                productdataGridView.Rows[row].Selected = false;
-                productdataGridView.Rows[++row].Selected = true;
-            }
-        }
+      
 
-        private void buttonbuttom_Click(object sender, EventArgs e)
-        {
-            if (productdataGridView.Rows.Count > 0)
-            {
-                productdataGridView.Rows[row].Selected = false;
-                productdataGridView.Rows[productdataGridView.Rows.Count - 1].Selected = true;
-                row = productdataGridView.Rows.Count - 1;
-            }
-        }
+      
 
         private void buttondel_Click(object sender, EventArgs e)
         {
@@ -379,6 +349,33 @@ namespace rmsid2
         private void buttonClose_Click(object sender, EventArgs e)
         {
             this.Hide();
+        }
+
+        private void buttonminus_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int selectedIndex = productdataGridView.CurrentCell.RowIndex;
+                if (selectedIndex != -1)
+                {
+
+                   if( productdataGridView.Rows[selectedIndex].Cells[3].Value.ToString()=="1")
+                    {
+                        productdataGridView.Rows.RemoveAt(selectedIndex);
+
+                    }
+                   else
+                    {
+                        productdataGridView.Rows[selectedIndex].Cells[3].Value = Int16.Parse(productdataGridView.Rows[selectedIndex].Cells[3].Value.ToString()) - 1;
+                    }
+                    productdataGridView.Refresh(); // if needed
+                    totalamount();
+                }
+            }
+            catch (InvalidOperationException ex)
+            {
+                //MessageBox.Show(ex.ToString());
+            }
         }
     }
 }

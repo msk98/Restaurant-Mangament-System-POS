@@ -159,5 +159,15 @@ namespace rmsid2.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Sinal_de_menos_svg {
+            get {
+                object obj = ResourceManager.GetObject("Sinal_de_menos.svg", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

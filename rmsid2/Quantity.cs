@@ -109,7 +109,12 @@ namespace rmsid2
 
         private void buttonClear_Click(object sender, EventArgs e)
         {
+            if(textBoxQuantity.Text.Length>0)
             textBoxQuantity.Text = textBoxQuantity.Text.Remove(textBoxQuantity.Text.Length - 1, 1);
+          if(textBoxQuantity.Text.Length==0)
+            {
+                textBoxQuantity.Text = "0";
+            }
 
         }
 

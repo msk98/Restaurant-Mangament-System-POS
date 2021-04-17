@@ -141,6 +141,7 @@ namespace rmsid2
         {
             if (e.RowIndex >= 0)
             {
+                clear();
                 DataGridViewRow row = dataGridViewOrderlist.Rows[e.RowIndex];
                 OrderId = Int16.Parse(row.Cells[0].Value.ToString());
                 tableno = (row.Cells[2].Value.ToString());
@@ -189,24 +190,24 @@ namespace rmsid2
 
         private void ButtonOrdernow_Click(object sender, EventArgs e)
         {
-            if (OrderId != 0 && Int16.Parse(textBoxreturn.Text) >=0)
+            if (OrderId != 0 && Int16.Parse(textBoxreturn.Text) >=0 && textBoxNetBill.Text!="0.0")
             {
                 Connection conn = new Connection();
-                if (checkBoxcard.Checked)
+                if (checkBoxcard.Checked && textBoxcreditcardpayment.Text != "0.0")
                 {
                     conn.insertcrpayment(OrderId, Int16.Parse(textBoxcreditcardpayment.Text));
                 }
-                else if (checkBoxmultipayment.Checked)
+                else if (checkBoxmultipayment.Checked && textBoxcardpay.Text != "0.0")
                 {
                     conn.insertcrpayment(OrderId, Int16.Parse(textBoxcardpay.Text));
 
                 }
-                if (checkBoxtax.Checked)
+                if (checkBoxtax.Checked && textBoxtax.Text != "0.0")
                 {
                     conn.inserttax(OrderId, float.Parse(textBoxtax.Text));
 
                 }
-                if (checkBoxservicecharges.Checked)
+                if (checkBoxservicecharges.Checked && textBoxserCharge.Text!="0.0")
                 {
                     conn.insertservicetax(OrderId, Int16.Parse(textBoxserCharge.Text));
                 }
@@ -591,6 +592,23 @@ namespace rmsid2
             textBoxserCharge.Text = "0.0";
             textBoxNetBill.Text = "0.0";
         }
+        public void clear()
+        {
+            checkBoxservicecharges.Checked = false;
+            checkBoxtax.Checked = false;
+            checkBoxcard.Checked = false;
+            checkBoxmultipayment.Checked = false;
+            checkBoxcash.Checked = true;
+            textBoxcashpaying.Text = "";
+            textBoxreturn.Text = "";
+            textBoxsubtotal.Text = "0.0";
+            textBoxtax.Text = "0.0";
+            textBoxtotal.Text = "0.0";
+            textBoxdiscount.Text = "0.0";
+            textBoxserCharge.Text = "0.0";
+            textBoxNetBill.Text = "0.0";
+            textBoxcashpaying.Text = "0";
+        }
         int y = 0;
         private void button7_Click(object sender, EventArgs e)
         {
@@ -709,14 +727,12 @@ namespace rmsid2
 
         private void buttonLogout_Click(object sender, EventArgs e)
         {
-            if (button7.Text == "Close Register")
-            {
-                if (MessageBox.Show("Do you Really want to Logout and Close Register?", "Message", MessageBoxButtons.YesNo) == DialogResult.Yes)
+          
+                if (MessageBox.Show("Do you Really want to Logout?", "Message", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
-                    
-                    calllastone();
+                    //   calllastone();
                     Connection conn = new Connection();
-                    conn.Updateregclose(dt.userid);
+                   // conn.Updateregclose(dt.userid);
                     conn.updatelastlogin(dt.username);
                     Login log = new Login();
                     this.Hide();
@@ -724,16 +740,7 @@ namespace rmsid2
 
                 }
 
-            }
-            else
-            {
-                Connection conn = new Connection();
-
-                conn.updatelastlogin(dt.username);
-                Login log = new Login();
-                this.Hide();
-                log.ShowDialog();
-            }
+          
 
 
         }
@@ -762,31 +769,10 @@ namespace rmsid2
 
         private void Dashboard_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (button7.Text == "Close Register")
-            {
-                if (MessageBox.Show("Do you Really want to Logout and Close Register?", "Message", MessageBoxButtons.YesNo) == DialogResult.Yes)
-                {
-
-                    calllastone();
-                    Connection conn = new Connection();
-                    conn.Updateregclose(dt.userid);
-                    conn.updatelastlogin(dt.username);
-                    this.Close();
-
-                }
-                else
-                {
-
-                }
-            }
-            else
-            {
+              
                 Connection conn = new Connection();
                 conn.updatelastlogin(dt.username);
-            }
-
-
-        }
+                    }
 
         private void discountToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -1108,12 +1094,16 @@ namespace rmsid2
         {
             if (checkBoxcash.Checked && textBoxNetBill.Text != "0.0")
             {
-                textBoxcashpaying.Text = (Int64.Parse(textBoxcashpaying.Text) + 500).ToString();
+                if(textBoxcashpaying.Text!="0")
+                    textBoxcashpaying.Text = (500).ToString();
+                else
+                    textBoxcashpaying.Text = ( 500).ToString();
+
             }
        
             else if (checkBoxcard.Checked && textBoxNetBill.Text != "0.0")
             {
-                textBoxcreditcardpayment.Text = (Int64.Parse(textBoxcreditcardpayment.Text) + 500).ToString();
+                textBoxcreditcardpayment.Text = ( 500).ToString();
             }
 
         }
@@ -1122,12 +1112,12 @@ namespace rmsid2
         {
             if (checkBoxcash.Checked && textBoxNetBill.Text != "0.0")
             {
-                textBoxcashpaying.Text = (Int64.Parse(textBoxcashpaying.Text) + 1000).ToString();
+                textBoxcashpaying.Text = (1000).ToString();
             }
           
             else if (checkBoxcard.Checked && textBoxNetBill.Text != "0.0")
             {
-                textBoxcreditcardpayment.Text = (Int64.Parse(textBoxcreditcardpayment.Text) + 1000).ToString();
+                textBoxcreditcardpayment.Text = (1000).ToString();
             }
         }
 
@@ -1135,12 +1125,12 @@ namespace rmsid2
         {
             if (checkBoxcash.Checked && textBoxNetBill.Text != "0.0")
             {
-                textBoxcashpaying.Text = (Int64.Parse(textBoxcashpaying.Text) + 5000).ToString();
+                textBoxcashpaying.Text = ( 5000).ToString();
             }
            
             else if (checkBoxcard.Checked && textBoxNetBill.Text != "0.0")
             {
-                textBoxcreditcardpayment.Text = (Int64.Parse(textBoxcreditcardpayment.Text) + 5000).ToString();
+                textBoxcreditcardpayment.Text = ( 5000).ToString();
             }
         }
 
@@ -1185,9 +1175,9 @@ namespace rmsid2
 
         private void textBoxcashpaying_TextChanged(object sender, EventArgs e)
         {
-            if (textBoxcashpaying.TextLength > 0 && textBoxNetBill.Text!="0.0")
+            if (textBoxcashpaying.TextLength > 0 && textBoxNetBill.Text!="0.0" && textBoxcashpaying.Text!="0")
             {
-                textBoxreturn.Text = (Int64.Parse(textBoxcashpaying.Text) - float.Parse(textBoxNetBill.Text)).ToString();
+                textBoxreturn.Text = (float.Parse(textBoxcashpaying.Text) - float.Parse(textBoxNetBill.Text)).ToString();
             }
             else
             {
@@ -1200,7 +1190,7 @@ namespace rmsid2
         {
             if (textBoxcreditcardpayment.TextLength > 0 && textBoxNetBill.Text != "0.0")
             {
-                textBoxreturn.Text = (Int64.Parse(textBoxcreditcardpayment.Text) - float.Parse(textBoxNetBill.Text)).ToString();
+                textBoxreturn.Text = (Int16.Parse(textBoxcreditcardpayment.Text) - float.Parse(textBoxNetBill.Text)).ToString();
             }
             else
             {
@@ -1212,12 +1202,12 @@ namespace rmsid2
         {
             if (textBoxcashpay.TextLength > 0 && textBoxcardpay.TextLength > 0 && textBoxNetBill.Text != "0.0")
             {
-                textBoxreturn.Text = (Int64.Parse(textBoxcashpay.Text) + Int16.Parse(textBoxcardpay.Text) - float.Parse(textBoxNetBill.Text)).ToString();
+                textBoxreturn.Text = (Int16.Parse(textBoxcashpay.Text) + Int16.Parse(textBoxcardpay.Text) - float.Parse(textBoxNetBill.Text)).ToString();
 
             }
             else if (textBoxcashpay.TextLength > 0 && textBoxcardpay.TextLength == 0 && textBoxNetBill.Text != "0.0")
             { 
-                textBoxreturn.Text = (Int64.Parse(textBoxcashpay.Text) - float.Parse(textBoxNetBill.Text)).ToString();
+                textBoxreturn.Text = (Int16.Parse(textBoxcashpay.Text) - float.Parse(textBoxNetBill.Text)).ToString();
             }
             else if (textBoxcashpay.TextLength == 0 && textBoxcardpay.TextLength == 0 )
                 textBoxreturn.Text = "0";
@@ -1227,12 +1217,12 @@ namespace rmsid2
         {
             if (textBoxcashpay.TextLength > 0 && textBoxcardpay.TextLength > 0 && textBoxNetBill.Text != "0.0")
             {
-                textBoxreturn.Text = (Int64.Parse(textBoxcashpay.Text) + Int64.Parse(textBoxcardpay.Text) - float.Parse(textBoxNetBill.Text)).ToString();
+                textBoxreturn.Text = (Int16.Parse(textBoxcashpay.Text) + Int16.Parse(textBoxcardpay.Text) - float.Parse(textBoxNetBill.Text)).ToString();
 
             }
             else if (textBoxcashpay.TextLength == 0 && textBoxcardpay.TextLength > 0 && textBoxNetBill.Text != "0.0")
             {
-                textBoxreturn.Text = (Int64.Parse(textBoxcardpay.Text) - float.Parse(textBoxNetBill.Text)).ToString();
+                textBoxreturn.Text = (Int16.Parse(textBoxcardpay.Text) - float.Parse(textBoxNetBill.Text)).ToString();
             }
             else if (textBoxcashpay.TextLength == 0 && textBoxcardpay.TextLength == 0)
                 textBoxreturn.Text = "0";

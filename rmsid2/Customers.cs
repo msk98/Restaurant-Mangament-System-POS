@@ -18,6 +18,10 @@ namespace rmsid2
             InitializeComponent();
             dt.userid = userid;
         }
+        public Customers()
+        {
+            InitializeComponent();
+        }
         Detail dt = new Detail(); 
 
         int c_id = 0;

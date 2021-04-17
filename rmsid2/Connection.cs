@@ -797,7 +797,7 @@ namespace rmsid2
         public bool delcust(int c_id)
         {
             OpenConection();
-            string query = "delete from  customer  where c_id=@c_id";
+            string query = "delete from  customer  where cust_id=@c_id";
             SqlCommand cmd = new SqlCommand(query, con);
             //Pass values to Parameters
             cmd.Parameters.AddWithValue("@c_id", c_id);

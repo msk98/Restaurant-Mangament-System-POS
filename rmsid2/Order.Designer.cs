@@ -34,13 +34,13 @@ namespace rmsid2
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.catpanel = new System.Windows.Forms.FlowLayoutPanel();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.buttondown = new System.Windows.Forms.Button();
-            this.buttonbuttom = new System.Windows.Forms.Button();
-            this.buttontop = new System.Windows.Forms.Button();
-            this.buttondel = new System.Windows.Forms.Button();
-            this.buttonincrease = new System.Windows.Forms.Button();
-            this.buttontopp = new System.Windows.Forms.Button();
             this.productdataGridView = new System.Windows.Forms.DataGridView();
+            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Itemname = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Price = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TotalPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Discount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.Productpanel = new System.Windows.Forms.FlowLayoutPanel();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
@@ -51,12 +51,9 @@ namespace rmsid2
             this.buttonKOT = new System.Windows.Forms.Button();
             this.kotprintDocument = new System.Drawing.Printing.PrintDocument();
             this.kotprintPreviewDialog = new System.Windows.Forms.PrintPreviewDialog();
-            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Itemname = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Price = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TotalPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Discount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.buttondel = new System.Windows.Forms.Button();
+            this.buttonminus = new System.Windows.Forms.Button();
+            this.buttonincrease = new System.Windows.Forms.Button();
             this.flowLayoutPanel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -98,12 +95,9 @@ namespace rmsid2
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.buttondown);
-            this.groupBox3.Controls.Add(this.buttonbuttom);
-            this.groupBox3.Controls.Add(this.buttontop);
             this.groupBox3.Controls.Add(this.buttondel);
+            this.groupBox3.Controls.Add(this.buttonminus);
             this.groupBox3.Controls.Add(this.buttonincrease);
-            this.groupBox3.Controls.Add(this.buttontopp);
             this.groupBox3.Controls.Add(this.productdataGridView);
             this.groupBox3.Location = new System.Drawing.Point(3, 109);
             this.groupBox3.Name = "groupBox3";
@@ -111,108 +105,6 @@ namespace rmsid2
             this.groupBox3.TabIndex = 3;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Bill";
-            // 
-            // buttondown
-            // 
-            this.buttondown.BackgroundImage = global::rmsid2.Properties.Resources.img_5178211;
-            this.buttondown.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.buttondown.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.buttondown.FlatAppearance.BorderSize = 0;
-            this.buttondown.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
-            this.buttondown.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.buttondown.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.buttondown.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.buttondown.Location = new System.Drawing.Point(474, 257);
-            this.buttondown.Name = "buttondown";
-            this.buttondown.Size = new System.Drawing.Size(78, 38);
-            this.buttondown.TabIndex = 1;
-            this.buttondown.UseVisualStyleBackColor = true;
-            this.buttondown.Click += new System.EventHandler(this.buttondown_Click);
-            // 
-            // buttonbuttom
-            // 
-            this.buttonbuttom.BackgroundImage = global::rmsid2.Properties.Resources.arrow_pointing_down_icon_24;
-            this.buttonbuttom.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.buttonbuttom.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.buttonbuttom.FlatAppearance.BorderSize = 0;
-            this.buttonbuttom.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
-            this.buttonbuttom.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.buttonbuttom.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.buttonbuttom.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.buttonbuttom.Location = new System.Drawing.Point(474, 304);
-            this.buttonbuttom.Name = "buttonbuttom";
-            this.buttonbuttom.Size = new System.Drawing.Size(78, 38);
-            this.buttonbuttom.TabIndex = 1;
-            this.buttonbuttom.UseVisualStyleBackColor = true;
-            this.buttonbuttom.Click += new System.EventHandler(this.buttonbuttom_Click);
-            // 
-            // buttontop
-            // 
-            this.buttontop.BackgroundImage = global::rmsid2.Properties.Resources._94_942845_small_right_angle_on_the_arrow_top_arrow;
-            this.buttontop.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.buttontop.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.buttontop.FlatAppearance.BorderSize = 0;
-            this.buttontop.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
-            this.buttontop.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.buttontop.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.buttontop.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.buttontop.Location = new System.Drawing.Point(474, 116);
-            this.buttontop.Name = "buttontop";
-            this.buttontop.Size = new System.Drawing.Size(78, 38);
-            this.buttontop.TabIndex = 1;
-            this.buttontop.UseVisualStyleBackColor = true;
-            this.buttontop.Click += new System.EventHandler(this.buttontop_Click);
-            // 
-            // buttondel
-            // 
-            this.buttondel.BackgroundImage = global::rmsid2.Properties.Resources.Office__2851_29;
-            this.buttondel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.buttondel.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.buttondel.FlatAppearance.BorderSize = 0;
-            this.buttondel.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
-            this.buttondel.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.buttondel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.buttondel.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.buttondel.Location = new System.Drawing.Point(474, 210);
-            this.buttondel.Name = "buttondel";
-            this.buttondel.Size = new System.Drawing.Size(78, 38);
-            this.buttondel.TabIndex = 1;
-            this.buttondel.UseVisualStyleBackColor = true;
-            this.buttondel.Click += new System.EventHandler(this.buttondel_Click);
-            // 
-            // buttonincrease
-            // 
-            this.buttonincrease.BackgroundImage = global::rmsid2.Properties.Resources.asterick_clipart_8;
-            this.buttonincrease.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.buttonincrease.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.buttonincrease.FlatAppearance.BorderSize = 0;
-            this.buttonincrease.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
-            this.buttonincrease.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.buttonincrease.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.buttonincrease.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.buttonincrease.Location = new System.Drawing.Point(474, 163);
-            this.buttonincrease.Name = "buttonincrease";
-            this.buttonincrease.Size = new System.Drawing.Size(78, 38);
-            this.buttonincrease.TabIndex = 1;
-            this.buttonincrease.UseVisualStyleBackColor = true;
-            this.buttonincrease.Click += new System.EventHandler(this.buttonincrease_Click);
-            // 
-            // buttontopp
-            // 
-            this.buttontopp.BackgroundImage = global::rmsid2.Properties.Resources.images2;
-            this.buttontopp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.buttontopp.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.buttontopp.FlatAppearance.BorderSize = 0;
-            this.buttontopp.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
-            this.buttontopp.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.buttontopp.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.buttontopp.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.buttontopp.Location = new System.Drawing.Point(474, 72);
-            this.buttontopp.Name = "buttontopp";
-            this.buttontopp.Size = new System.Drawing.Size(78, 38);
-            this.buttontopp.TabIndex = 1;
-            this.buttontopp.UseVisualStyleBackColor = true;
-            this.buttontopp.Click += new System.EventHandler(this.buttontopp_Click);
             // 
             // productdataGridView
             // 
@@ -236,6 +128,42 @@ namespace rmsid2
             this.productdataGridView.Size = new System.Drawing.Size(459, 379);
             this.productdataGridView.TabIndex = 0;
             this.productdataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.productdataGridView_CellClick);
+            // 
+            // Id
+            // 
+            this.Id.HeaderText = "id";
+            this.Id.Name = "Id";
+            this.Id.ReadOnly = true;
+            // 
+            // Itemname
+            // 
+            this.Itemname.HeaderText = "Item Name";
+            this.Itemname.Name = "Itemname";
+            this.Itemname.ReadOnly = true;
+            // 
+            // Price
+            // 
+            this.Price.HeaderText = "Price";
+            this.Price.Name = "Price";
+            this.Price.ReadOnly = true;
+            // 
+            // Quantity
+            // 
+            this.Quantity.HeaderText = "Quantity";
+            this.Quantity.Name = "Quantity";
+            this.Quantity.ReadOnly = true;
+            // 
+            // TotalPrice
+            // 
+            this.TotalPrice.HeaderText = "Total Price";
+            this.TotalPrice.Name = "TotalPrice";
+            this.TotalPrice.ReadOnly = true;
+            // 
+            // Discount
+            // 
+            this.Discount.HeaderText = "Discount";
+            this.Discount.Name = "Discount";
+            this.Discount.ReadOnly = true;
             // 
             // groupBox2
             // 
@@ -338,41 +266,56 @@ namespace rmsid2
             this.kotprintPreviewDialog.Name = "kotprintPreviewDialog";
             this.kotprintPreviewDialog.Visible = false;
             // 
-            // Id
+            // buttondel
             // 
-            this.Id.HeaderText = "id";
-            this.Id.Name = "Id";
-            this.Id.ReadOnly = true;
+            this.buttondel.BackgroundImage = global::rmsid2.Properties.Resources.Office__2851_29;
+            this.buttondel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.buttondel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttondel.FlatAppearance.BorderSize = 0;
+            this.buttondel.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
+            this.buttondel.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.buttondel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.buttondel.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.buttondel.Location = new System.Drawing.Point(474, 210);
+            this.buttondel.Name = "buttondel";
+            this.buttondel.Size = new System.Drawing.Size(78, 38);
+            this.buttondel.TabIndex = 1;
+            this.buttondel.UseVisualStyleBackColor = true;
+            this.buttondel.Click += new System.EventHandler(this.buttondel_Click);
             // 
-            // Itemname
+            // buttonminus
             // 
-            this.Itemname.HeaderText = "Item Name";
-            this.Itemname.Name = "Itemname";
-            this.Itemname.ReadOnly = true;
+            this.buttonminus.BackgroundImage = global::rmsid2.Properties.Resources.Sinal_de_menos_svg;
+            this.buttonminus.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.buttonminus.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonminus.FlatAppearance.BorderSize = 0;
+            this.buttonminus.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
+            this.buttonminus.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.buttonminus.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.buttonminus.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.buttonminus.Location = new System.Drawing.Point(473, 119);
+            this.buttonminus.Name = "buttonminus";
+            this.buttonminus.Size = new System.Drawing.Size(78, 38);
+            this.buttonminus.TabIndex = 1;
+            this.buttonminus.UseVisualStyleBackColor = true;
+            this.buttonminus.Click += new System.EventHandler(this.buttonminus_Click);
             // 
-            // Price
+            // buttonincrease
             // 
-            this.Price.HeaderText = "Price";
-            this.Price.Name = "Price";
-            this.Price.ReadOnly = true;
-            // 
-            // Quantity
-            // 
-            this.Quantity.HeaderText = "Quantity";
-            this.Quantity.Name = "Quantity";
-            this.Quantity.ReadOnly = true;
-            // 
-            // TotalPrice
-            // 
-            this.TotalPrice.HeaderText = "Total Price";
-            this.TotalPrice.Name = "TotalPrice";
-            this.TotalPrice.ReadOnly = true;
-            // 
-            // Discount
-            // 
-            this.Discount.HeaderText = "Discount";
-            this.Discount.Name = "Discount";
-            this.Discount.ReadOnly = true;
+            this.buttonincrease.BackgroundImage = global::rmsid2.Properties.Resources.asterick_clipart_8;
+            this.buttonincrease.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.buttonincrease.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonincrease.FlatAppearance.BorderSize = 0;
+            this.buttonincrease.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
+            this.buttonincrease.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.buttonincrease.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.buttonincrease.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.buttonincrease.Location = new System.Drawing.Point(474, 163);
+            this.buttonincrease.Name = "buttonincrease";
+            this.buttonincrease.Size = new System.Drawing.Size(78, 38);
+            this.buttonincrease.TabIndex = 1;
+            this.buttonincrease.UseVisualStyleBackColor = true;
+            this.buttonincrease.Click += new System.EventHandler(this.buttonincrease_Click);
             // 
             // Order
             // 
@@ -407,10 +350,6 @@ namespace rmsid2
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.Button buttonbuttom;
-        private System.Windows.Forms.Button buttontop;
-        private System.Windows.Forms.Button buttondown;
-        private System.Windows.Forms.Button buttontopp;
         private System.Windows.Forms.DataGridView productdataGridView;
         private System.Windows.Forms.Button buttondel;
         private System.Windows.Forms.Button buttonincrease;
@@ -428,5 +367,6 @@ namespace rmsid2
         private System.Windows.Forms.DataGridViewTextBoxColumn Quantity;
         private System.Windows.Forms.DataGridViewTextBoxColumn TotalPrice;
         private System.Windows.Forms.DataGridViewTextBoxColumn Discount;
+        private System.Windows.Forms.Button buttonminus;
     }
 }
