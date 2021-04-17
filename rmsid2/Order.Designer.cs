@@ -121,6 +121,7 @@ namespace rmsid2
             this.Discount});
             this.productdataGridView.Location = new System.Drawing.Point(9, 19);
             this.productdataGridView.Margin = new System.Windows.Forms.Padding(4);
+            this.productdataGridView.MultiSelect = false;
             this.productdataGridView.Name = "productdataGridView";
             this.productdataGridView.ReadOnly = true;
             this.productdataGridView.RowHeadersWidth = 20;

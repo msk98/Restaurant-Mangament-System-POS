@@ -96,6 +96,8 @@ namespace rmsid2
         {
             if(textBoxsecretkey.Text.Length>0)
             textBoxsecretkey.Text= textBoxsecretkey.Text.Remove(textBoxsecretkey.Text.Length - 1, 1);
+            if (textBoxsecretkey.Text.Length == 1)
+                textBoxsecretkey.Text = "";
         }
 
         private void buttonok_Click(object sender, EventArgs e)
@@ -115,5 +117,7 @@ namespace rmsid2
         {
 
         }
+
+      
     }
 }

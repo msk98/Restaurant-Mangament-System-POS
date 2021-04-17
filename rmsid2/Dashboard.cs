@@ -144,6 +144,8 @@ namespace rmsid2
                 clear();
                 DataGridViewRow row = dataGridViewOrderlist.Rows[e.RowIndex];
                 OrderId = Int16.Parse(row.Cells[0].Value.ToString());
+                
+              
                 tableno = (row.Cells[2].Value.ToString());
                 dt.Ordertype = row.Cells[3].Value.ToString();
 
@@ -151,6 +153,7 @@ namespace rmsid2
                 textBoxtotal.Text = row.Cells[1].Value.ToString();
                 textBoxNetBill.Text = row.Cells[1].Value.ToString();
                 Connection conn = new Connection();
+                conn.deldiscountamnt(OrderId);
                 SqlDataAdapter da = new SqlDataAdapter("SELECT t_iName as ItemName,t_iqty as Quantity,t_iprice as UnitPrice,t_inetprice as TotalPrice,dis_avail   FROM temp_orderitems where t_Oid='" + OrderId + "'", ConnectionString);
                 DataSet ds = new DataSet();
                 da.Fill(ds, "temp_orderitems");
@@ -213,8 +216,8 @@ namespace rmsid2
                 }
                 TakeAwayprintDocument.DefaultPageSettings.PaperSize = new System.Drawing.Printing.PaperSize("prnm", 285, 800);
                 TakeAwayprintDocument.Print();
-                printcustomerDocument.DefaultPageSettings.PaperSize = new System.Drawing.Printing.PaperSize("prnm", 285, 800);
-                printcustomerDocument.Print();
+               // printcustomerDocument.DefaultPageSettings.PaperSize = new System.Drawing.Printing.PaperSize("prnm", 285, 800);
+         //       printcustomerDocument.Print();
                 conn.Insertcountinven(OrderId);
                 conn.insertOrder(OrderId);
                 conn.insertOrderItems(OrderId);
@@ -772,7 +775,7 @@ namespace rmsid2
               
                 Connection conn = new Connection();
                 conn.updatelastlogin(dt.username);
-                    }
+        }
 
         private void discountToolStripMenuItem_Click(object sender, EventArgs e)
         {

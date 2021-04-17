@@ -153,6 +153,7 @@ namespace rmsid2
             // 
             this.discountsdataGridView.AllowUserToAddRows = false;
             this.discountsdataGridView.AllowUserToDeleteRows = false;
+            this.discountsdataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.discountsdataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.discountsdataGridView.Location = new System.Drawing.Point(18, 76);
             this.discountsdataGridView.Name = "discountsdataGridView";

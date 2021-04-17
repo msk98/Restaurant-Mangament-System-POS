@@ -78,14 +78,17 @@ namespace rmsid2
         private void buttonClose_Click(object sender, EventArgs e)
         {
             Connection conn = new Connection();
-           
+            conn.deldiscountamnt(dt.orderid);
             if ((radioButtoncash.Checked || radioButtonCode.Checked || radioButtonpercentage.Checked) && textBoxDiscountPrice.Text!="")
-            if (radioButtoncash.Checked)
-                conn.insertdisamnt(dt.orderid, float.Parse(textBoxDiscountPrice.Text), "Cash Discount");
-            else if(radioButtonpercentage.Checked)
-                conn.insertdisamnt(dt.orderid, float.Parse(textBoxDiscountPrice.Text), "Percentage Discount");
-            else
-                conn.insertdisamnt(dt.orderid, float.Parse(textBoxDiscountPrice.Text), dt.DiscountType);
+            {
+                if (radioButtoncash.Checked)
+                    conn.insertdisamnt(dt.orderid, float.Parse(textBoxDiscountPrice.Text), "Cash Discount");
+                else if (radioButtonpercentage.Checked)
+                    conn.insertdisamnt(dt.orderid, float.Parse(textBoxDiscountPrice.Text), "Percentage Discount");
+                else
+                    conn.insertdisamnt(dt.orderid, float.Parse(textBoxDiscountPrice.Text), dt.DiscountType);
+            }
+          
             this.Close();
         }
         public void getdiscounts()

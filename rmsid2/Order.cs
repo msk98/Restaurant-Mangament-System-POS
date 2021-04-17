@@ -203,9 +203,10 @@ namespace rmsid2
         {
             try
             {
-                int selectedIndex = productdataGridView.CurrentCell.RowIndex;
-                if (selectedIndex != -1)
+               
+                if (productdataGridView.Rows.Count > 0)
                 {
+                    int selectedIndex = productdataGridView.CurrentCell.RowIndex;
                     productdataGridView.Rows.RemoveAt(selectedIndex);
                     productdataGridView.Refresh(); // if needed
                     totalamount();
@@ -219,7 +220,7 @@ namespace rmsid2
 
         private void buttonincrease_Click(object sender, EventArgs e)
         {
-            if (productdataGridView.SelectedRows.Count != -1)
+            if (productdataGridView.SelectedRows.Count != -1 && productdataGridView.Rows.Count > 0)
             {
                 Quantity qty = new Quantity();
                 qty.ShowDialog();
@@ -355,11 +356,11 @@ namespace rmsid2
         {
             try
             {
-                int selectedIndex = productdataGridView.CurrentCell.RowIndex;
-                if (selectedIndex != -1)
+                if ( productdataGridView.Rows.Count>0)
                 {
+                    int selectedIndex = productdataGridView.CurrentCell.RowIndex;
 
-                   if( productdataGridView.Rows[selectedIndex].Cells[3].Value.ToString()=="1")
+                    if ( productdataGridView.Rows[selectedIndex].Cells[3].Value.ToString()=="1")
                     {
                         productdataGridView.Rows.RemoveAt(selectedIndex);
 
@@ -367,10 +368,12 @@ namespace rmsid2
                    else
                     {
                         productdataGridView.Rows[selectedIndex].Cells[3].Value = Int16.Parse(productdataGridView.Rows[selectedIndex].Cells[3].Value.ToString()) - 1;
+                        productdataGridView.Rows[selectedIndex].Cells[4].Value = Int16.Parse(productdataGridView.Rows[selectedIndex].Cells[2].Value.ToString()) * Int16.Parse(productdataGridView.Rows[selectedIndex].Cells[3].Value.ToString());
                     }
-                    productdataGridView.Refresh(); // if needed
-                    totalamount();
+                   
                 }
+                productdataGridView.Refresh(); // if needed
+                totalamount();
             }
             catch (InvalidOperationException ex)
             {
