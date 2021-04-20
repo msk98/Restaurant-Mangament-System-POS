@@ -16,7 +16,9 @@ namespace rmsid2
         public Inventory()
         {
             InitializeComponent();
+
         }
+   
         string ConnectionString = "Server=DESKTOP-C27B91F,1433;Database=rmsid;User Id = saadkhan; Password=saad;  ";
         int inven_id = 0;
         private void Inventory_Load(object sender, EventArgs e)

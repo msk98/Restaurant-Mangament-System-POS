@@ -631,10 +631,12 @@ namespace rmsid2
             }
             else
             {
+                calllastone();
                 printRegisterDcoumentDocument.DefaultPageSettings.PaperSize = new System.Drawing.Printing.PaperSize("prnm", 285, 1000);
                 printRegisterDcoumentDocument.Print();
                 registerstart.Text="Register End: "+ (DateTime.Now).ToString();
                 conn.Updateregclose(dt.userid);
+              
                 button7.Text = "Open Register";
             }
 
@@ -1291,7 +1293,52 @@ namespace rmsid2
                 MessageBox.Show("user not have privilege");
             }
         }
+        int amount;
+        string ItemName;
+        private void dataGridViewOrderItems_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && dataGridViewOrderItems.SelectedRows.Count > 0)
+            {
+               // DataGridViewRow row1 = dataGridViewOrderlist.Rows[e.RowIndex];
+                 amount = Int16.Parse(dataGridViewOrderItems.CurrentRow.Cells[3].Value.ToString());
+                 ItemName = dataGridViewOrderItems.CurrentRow.Cells[0].Value.ToString();
 
-        
+            }
+        }
+
+        private void buttondel_Click(object sender, EventArgs e)
+        {
+            int rows = this.dataGridViewOrderItems.CurrentCell.RowIndex;
+            if (dataGridViewOrderItems.SelectedRows.Count > 0)
+            {
+            
+                Connection conn = new Connection();
+                if (conn.checkorderitems(OrderId) == 1)
+                {
+                    conn.deleteorderitem(OrderId, ItemName);
+                    conn.deleteorders(OrderId);
+                    clearall();
+                }
+                else
+                {
+                    conn.deleteorderitem(OrderId, ItemName);
+                    conn.updateOrderAmount(OrderId, amount);
+
+                    textBoxsubtotal.Text = (Int16.Parse(textBoxNetBill.Text) - amount).ToString();
+                    textBoxtotal.Text = (Int16.Parse(textBoxNetBill.Text) - amount).ToString();
+                    textBoxNetBill.Text = (Int16.Parse(textBoxNetBill.Text) - amount).ToString();
+                    checkBoxtax.Checked = false;
+                    textBoxdiscount.Text = "0.0";
+                    textBoxserCharge.Text = "0.0";
+                }
+
+                conn.deldiscountamnt(OrderId);
+
+                dataGridViewOrderItems.Rows.RemoveAt(dataGridViewOrderItems.SelectedRows[0].Index);
+                dataGridViewOrderlist.Refresh();
+                dataGridViewOrderItems.Refresh();
+                
+            }
+        }
     }
 }

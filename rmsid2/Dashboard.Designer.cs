@@ -115,6 +115,7 @@ namespace rmsid2
             this.TakeAwayprintDocument = new System.Drawing.Printing.PrintDocument();
             this.printRegisterDcoumentDocument = new System.Drawing.Printing.PrintDocument();
             this.printcustomerDocument = new System.Drawing.Printing.PrintDocument();
+            this.button20 = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewOrderlist)).BeginInit();
@@ -367,6 +368,7 @@ namespace rmsid2
             this.dataGridViewOrderItems.ReadOnly = true;
             this.dataGridViewOrderItems.Size = new System.Drawing.Size(235, 473);
             this.dataGridViewOrderItems.TabIndex = 0;
+            this.dataGridViewOrderItems.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewOrderItems_CellClick);
             // 
             // timerfunc
             // 
@@ -400,6 +402,7 @@ namespace rmsid2
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.groupBox4);
+            this.groupBox1.Controls.Add(this.button20);
             this.groupBox1.Controls.Add(this.button5);
             this.groupBox1.Controls.Add(this.textBoxreturn);
             this.groupBox1.Controls.Add(this.buttonTable);
@@ -1130,6 +1133,20 @@ namespace rmsid2
             // 
             this.printcustomerDocument.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printcustomerDocument_PrintPage);
             // 
+            // button20
+            // 
+            this.button20.BackColor = System.Drawing.SystemColors.Control;
+            this.button20.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button20.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.button20.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button20.Location = new System.Drawing.Point(361, 117);
+            this.button20.Name = "button20";
+            this.button20.Size = new System.Drawing.Size(126, 25);
+            this.button20.TabIndex = 0;
+            this.button20.Text = "Delete";
+            this.button20.UseVisualStyleBackColor = false;
+            this.button20.Click += new System.EventHandler(this.buttondel_Click);
+            // 
             // Dashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1257,5 +1274,6 @@ namespace rmsid2
         private System.Windows.Forms.Button buttonCancelOrder;
         private System.Windows.Forms.Button buttoncrep;
         private System.Windows.Forms.Button buttonregreport;
+        private System.Windows.Forms.Button button20;
     }
 }

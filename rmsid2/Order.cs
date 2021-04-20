@@ -191,14 +191,6 @@ namespace rmsid2
             }
         }
 
-      
-
-       
-
-      
-
-      
-
         private void buttondel_Click(object sender, EventArgs e)
         {
             try

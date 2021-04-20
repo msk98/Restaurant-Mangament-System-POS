@@ -12,6 +12,7 @@ namespace rmsid2
 {
     class Connection
     {
+        //DESKTOP-C27B91F
         string ConnectionString = "Server=DESKTOP-C27B91F,1433;Database=rmsid;User Id = saadkhan; Password=saad; ";
         SqlConnection con;
         public void OpenConection()
@@ -2019,6 +2020,35 @@ namespace rmsid2
             }
 
         }
+        public bool updateOrderAmount(int orderid,int amount)
+        {
+            OpenConection();
+            string query = "update temp_orders set t_netamnt=t_netamnt-@amount where t_Oid=@orderid;";
+            SqlCommand cmd = new SqlCommand(query, con);
+            //Pass values to Parameters
+            cmd.Parameters.AddWithValue("@orderid", orderid);
+            cmd.Parameters.AddWithValue("@amount", amount);
+            try
+            {
+                OpenConection();
+                cmd.ExecuteNonQuery();
+
+                return true;
+            }
+            catch (SqlException e)
+            {
+                string err = "Error Generated. Details: " + e.ToString();
+                MessageBox.Show(err);
+
+                return false;
+            }
+            finally
+            {
+                CloseConnection();
+
+            }
+
+        }
         public bool deleterider(int del_id)
         {
             OpenConection();
@@ -2049,7 +2079,38 @@ namespace rmsid2
             }
 
         }
+        public bool deleteorderitem(int o_id,string itemname)
+        {
+            OpenConection();
+            string query = "delete from temp_orderitems where t_Oid=@o_id and t_iName=@itemname ";
+            SqlCommand cmd = new SqlCommand(query, con);
+            //Pass values to Parameters
 
+            cmd.Parameters.AddWithValue("@o_id", o_id);
+            cmd.Parameters.AddWithValue("@itemname", itemname);
+
+
+            try
+            {
+                OpenConection();
+                cmd.ExecuteNonQuery();
+
+                return true;
+            }
+            catch (SqlException e)
+            {
+                string err = "Error Generated. Details: " + e.ToString();
+                MessageBox.Show(err);
+
+                return false;
+            }
+            finally
+            {
+                CloseConnection();
+
+            }
+
+        }
         public bool InsertCancelOrder(int OrderId)
         {
             OpenConection();
@@ -2103,6 +2164,61 @@ namespace rmsid2
                 CloseConnection();
 
             }
+        }
+        public int checkorderitems(int order)
+        {
+            OpenConection();
+            int count = 0;
+            SqlConnection conn = new SqlConnection(ConnectionString);
+            String sqlQuery = "SELECT COUNT(*) FROM temp_orderitems where t_name='" + order + "' and t_status=0";
+            SqlCommand cmd = new SqlCommand(sqlQuery, conn);
+            try
+            {
+                conn.Open();
+                //Since return type is System.Object, a typecast is must
+                count = (Int32)cmd.ExecuteScalar();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return count;
+        }
+        public bool deleteorders(int o_id)
+        {
+            OpenConection();
+            string query = "delete from temp_orders where t_Oid=@o_id  ";
+            SqlCommand cmd = new SqlCommand(query, con);
+            //Pass values to Parameters
+
+            cmd.Parameters.AddWithValue("@o_id", o_id);
+          
+
+
+            try
+            {
+                OpenConection();
+                cmd.ExecuteNonQuery();
+
+                return true;
+            }
+            catch (SqlException e)
+            {
+                string err = "Error Generated. Details: " + e.ToString();
+                MessageBox.Show(err);
+
+                return false;
+            }
+            finally
+            {
+                CloseConnection();
+
+            }
+
         }
     }
 }
