@@ -233,25 +233,10 @@ namespace rmsid2
 
         private void buttonTable_Click(object sender, EventArgs e)
         {
-            if (dt.user_privelage == "Manager")
-            {
-                Tables Table = new Tables();
-                Table.ShowDialog();
-            }
-            else
-                MessageBox.Show("user not have privilege");
+          
         }
 
-        private void button5_Click(object sender, EventArgs e)
-        {
-            if(dt.user_privelage== "Manager")
-            {
-                Users user = new Users();
-                user.ShowDialog();
-            }
-            else
-                MessageBox.Show("user not have privilege");
-        }
+ 
 
         private void button6_Click(object sender, EventArgs e)
         {
@@ -792,13 +777,7 @@ namespace rmsid2
 
         private void buttonriders_Click(object sender, EventArgs e)
         {
-            if (dt.user_privelage == "Manager")
-            {
-                deliveryboys db = new deliveryboys();
-                db.ShowDialog();
-            }
-            else
-                MessageBox.Show("user not have privilege");
+          
 
         }
 
@@ -1339,6 +1318,45 @@ namespace rmsid2
                 dataGridViewOrderItems.Refresh();
                 
             }
+
+        }
+
+        private void tablesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (dt.user_privelage == "Manager")
+            {
+                Tables Table = new Tables();
+                Table.ShowDialog();
+            }
+            else
+                MessageBox.Show("user not have privilege");
+        }
+
+        private void ridersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (dt.user_privelage == "Manager")
+            {
+                deliveryboys db = new deliveryboys();
+                db.ShowDialog();
+            }
+            else
+                MessageBox.Show("user not have privilege");
+        }
+
+        private void usersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (dt.user_privelage == "Manager")
+            {
+                Users user = new Users();
+                user.ShowDialog();
+            }
+            else
+                MessageBox.Show("user not have privilege");
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -13,6 +13,7 @@ namespace rmsid2
     class Connection
     {
         //DESKTOP-C27B91F
+        //DESKTOP-C27B91F
         string ConnectionString = "Server=DESKTOP-C27B91F,1433;Database=rmsid;User Id = saadkhan; Password=saad; ";
         SqlConnection con;
         public void OpenConection()
