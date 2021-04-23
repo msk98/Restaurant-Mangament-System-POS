@@ -1750,6 +1750,31 @@ namespace rmsid2
                 return inventorylist;
             }
         }
+        public ArrayList retrievedealitems( int deal_id)
+        {
+            ArrayList dealitemlist = new ArrayList();
+
+            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            {
+                SqlCommand command = new SqlCommand("select p.p_name as ProductName,d.qty as qty from  products p inner join DealsDetail d on p.p_id=d.p_id where d.deal_id=@deal_id", connection);
+              
+                command.Parameters.AddWithValue("@deal_id", deal_id);
+                connection.Open();
+
+                SqlDataReader reader = command.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        dealitemlist.Add(new Detail() { dealitemname = reader["ProductName"].ToString(), dealitemqty = Int16.Parse((reader["qty"].ToString())) });
+                    }
+                }
+                connection.Close();
+
+                return dealitemlist;
+            }
+        }
         public ArrayList retrievediscounts(DateTime startdate, DateTime enddate, int user_id)
         {
             ArrayList discountList = new ArrayList();

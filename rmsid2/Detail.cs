@@ -74,5 +74,9 @@ namespace rmsid2
 
         public int orderno;
         public string orderstatus;
+
+
+        public string dealitemname;
+        public int dealitemqty;
     }
 }

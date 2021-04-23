@@ -487,7 +487,7 @@ namespace rmsid2
             e.Graphics.DrawString("Total", new Font("monospaced sans serif", 8, FontStyle.Regular), Brushes.Black, new Point(220, y));
             using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
-                SqlCommand command = new SqlCommand("SELECT t_iName as ItemName,t_iprice as UnitPrice,t_iqty as Quantity,t_inetprice as TotalPrice FROM temp_orderitems where t_Oid = '" + OrderId + "';", connection);
+                SqlCommand command = new SqlCommand("SELECT t_iName as ItemName,t_iprice as UnitPrice,t_iqty as Quantity,t_inetprice as TotalPrice,p_id FROM temp_orderitems where t_Oid = '" + OrderId + "';", connection);
                 connection.Open();
 
                 SqlDataReader reader = command.ExecuteReader();
@@ -501,6 +501,15 @@ namespace rmsid2
                         e.Graphics.DrawString((reader["UnitPrice"].ToString()), new Font("monospaced sans serif", 8, FontStyle.Regular), Brushes.Black, new Point(145, y));
                         e.Graphics.DrawString((reader["Quantity"].ToString()), new Font("monospaced sans serif", 8, FontStyle.Regular), Brushes.Black, new Point(175, y));
                         e.Graphics.DrawString((reader["TotalPrice"].ToString()), new Font("monospaced sans serif", 8, FontStyle.Regular), Brushes.Black, new Point(220, y));
+                        Connection conn = new Connection();
+                        ArrayList dealitems = conn.retrievedealitems(Int16.Parse(reader["p_id"].ToString()));
+                        foreach (Detail c in dealitems)
+                        {
+                            e.Graphics.DrawString(c.dealitemname.ToString(), new Font("monospaced sans serif", 8, FontStyle.Regular), Brushes.Black, new Point(5, y+=20));
+                            e.Graphics.DrawString(c.dealitemqty.ToString(), new Font("monospaced sans serif", 8, FontStyle.Regular), Brushes.Black, new Point(175, y));
+
+                        }
+
                     }
                 }
                 connection.Close();
@@ -878,6 +887,14 @@ namespace rmsid2
                         e.Graphics.DrawString((reader["UnitPrice"].ToString()), new Font("monospaced sans serif", 8, FontStyle.Regular), Brushes.Black, new Point(145, y));
                         e.Graphics.DrawString((reader["Quantity"].ToString()), new Font("monospaced sans serif", 8, FontStyle.Regular), Brushes.Black, new Point(180, y));
                         e.Graphics.DrawString((reader["TotalPrice"].ToString()), new Font("monospaced sans serif", 8, FontStyle.Regular), Brushes.Black, new Point(230, y));
+                        Connection conn = new Connection();
+                        ArrayList dealitems = conn.retrievedealitems(Int16.Parse(reader["p_id"].ToString()));
+                        foreach (Detail c in dealitems)
+                        {
+                            e.Graphics.DrawString(c.dealitemname.ToString(), new Font("monospaced sans serif", 8, FontStyle.Regular), Brushes.Black, new Point(5, y += 20));
+                            e.Graphics.DrawString(c.dealitemqty.ToString(), new Font("monospaced sans serif", 8, FontStyle.Regular), Brushes.Black, new Point(175, y));
+
+                        }
                     }
                 }
                 connection.Close();
