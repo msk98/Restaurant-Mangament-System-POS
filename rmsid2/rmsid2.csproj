@@ -105,6 +105,12 @@
     <Compile Include="Dashboard.Designer.cs">
       <DependentUpon>Dashboard.cs</DependentUpon>
     </Compile>
+    <Compile Include="Deals.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Deals.Designer.cs">
+      <DependentUpon>Deals.cs</DependentUpon>
+    </Compile>
     <Compile Include="deliveryboy.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -230,6 +236,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dashboard.resx">
       <DependentUpon>Dashboard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Deals.resx">
+      <DependentUpon>Deals.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="deliveryboy.resx">
       <DependentUpon>deliveryboy.cs</DependentUpon>

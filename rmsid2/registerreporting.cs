@@ -115,6 +115,9 @@ namespace rmsid2
             e.Graphics.DrawString(conn.calculatesercharge(DateTime.Parse(labelopeningtime.Text), DateTime.Parse(labelclosetime.Text), Int16.Parse(UserIDlabel.Text)).ToString(), new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(150, y));
             e.Graphics.DrawString("Card payments: ", new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(20, y += 20));
             e.Graphics.DrawString(conn.calculateCrtaxes(DateTime.Parse(labelopeningtime.Text), DateTime.Parse(labelclosetime.Text), Int16.Parse(UserIDlabel.Text)).ToString(), new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(150, y));
+            e.Graphics.DrawString("Delivery Charges: ", new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(20, y += 20));
+            e.Graphics.DrawString(conn.calculateDeliveryCharges(DateTime.Parse(labelopeningtime.Text), DateTime.Parse(labelclosetime.Text), Int16.Parse(UserIDlabel.Text)).ToString(), new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(150, y));
+
             e.Graphics.DrawString("Total sales", new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(20, y += 20));
             e.Graphics.DrawString(conn.calculatenetsale(DateTime.Parse(labelopeningtime.Text), DateTime.Parse(labelclosetime.Text), Int16.Parse(UserIDlabel.Text)).ToString(), new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(150, y));
             e.Graphics.DrawString("Net sales(total+charges+tax+cr pay-discount)", new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(10, y += 20));

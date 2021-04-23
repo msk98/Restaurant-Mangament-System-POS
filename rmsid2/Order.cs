@@ -27,7 +27,12 @@ namespace rmsid2
             det.table = "none";
             det.userid = userid;
         }
-     
+        public Order(int OrderId,string status)
+        {
+            InitializeComponent();
+            det.orderno = OrderId;
+            det.orderstatus = status;
+        }
         public Order( string ordertype, int c_id,int del_id,string tablename, int userid)
         {
             InitializeComponent();
@@ -239,9 +244,17 @@ namespace rmsid2
             int OrderId=0;
             int y = 0;
             Connection conn = new Connection();
-            if(conn.checkstatustable(det.table)==0  && det.Ordertype == "Dine In" )
+            if(det.orderstatus=="update")
             {
-                MessageBox.Show("update");
+                conn.updateOrderAmnt(det.orderno, Int16.Parse(textBoxTotalAmount.Text));
+                for (int i = 0; i < productdataGridView.Rows.Count; i++)
+                {
+                    conn.inserttempOrdersItems(Convert.ToString(productdataGridView.Rows[i].Cells[1].Value), Int16.Parse(productdataGridView.Rows[i].Cells[2].Value.ToString()), Int16.Parse(productdataGridView.Rows[i].Cells[3].Value.ToString()), Int16.Parse(productdataGridView.Rows[i].Cells[4].Value.ToString()), det.orderno, Int16.Parse(productdataGridView.Rows[i].Cells[0].Value.ToString()), Int16.Parse(productdataGridView.Rows[i].Cells[5].Value.ToString()));
+                }
+            }
+          else  if(conn.checkstatustable(det.table)==0  && det.Ordertype == "Dine In" )
+            {
+              //  MessageBox.Show("update");
                 OrderId= conn.getOrderNo(det.table);
                 conn.updatebill(det.table, Int16.Parse(textBoxTotalAmount.Text));
                 for (int i = 0; i < productdataGridView.Rows.Count; i++)
@@ -251,7 +264,7 @@ namespace rmsid2
             }
             else if (conn.checkstatustable(det.table) == 1 && det.Ordertype == "Dine In" )
             {
-                MessageBox.Show("insert");
+            //    MessageBox.Show("insert");
 
                 conn.updatetablestatus(det.table);
                 conn.inserttempOrders(Int16.Parse(textBoxTotalAmount.Text), det.Ordertype, det.table);

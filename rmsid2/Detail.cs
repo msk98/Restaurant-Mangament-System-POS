@@ -71,5 +71,8 @@ namespace rmsid2
 
         public DateTime startreg;
         public DateTime endreg;
+
+        public int orderno;
+        public string orderstatus;
     }
 }

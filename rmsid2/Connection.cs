@@ -13,7 +13,7 @@ namespace rmsid2
     class Connection
     {
         //DESKTOP-C27B91F
-        //DESKTOP-C27B91F
+     
         string ConnectionString = "Server=DESKTOP-C27B91F,1433;Database=rmsid;User Id = saadkhan; Password=saad; ";
         SqlConnection con;
         public void OpenConection()
@@ -1437,6 +1437,34 @@ namespace rmsid2
 
             }
         }
+        public bool insertdelCharges(int orderid, int DeliveryCharges)
+        {
+            OpenConection();
+            string query = "INSERT INTO DeliveryCharges (order_id,DeliveryCharges) VALUES(@orderid,@DeliveryCharges)";
+            SqlCommand cmd = new SqlCommand(query, con);
+            //Pass values to Parameters
+            cmd.Parameters.AddWithValue("@orderid", orderid);
+            cmd.Parameters.AddWithValue("@DeliveryCharges", DeliveryCharges);
+            try
+            {
+                OpenConection();
+                cmd.ExecuteNonQuery();
+
+                return true;
+            }
+            catch (SqlException e)
+            {
+                string err = "Error Generated. Details: " + e.ToString();
+                MessageBox.Show(err);
+
+                return false;
+            }
+            finally
+            {
+                CloseConnection();
+
+            }
+        }
         public int RegOpenClose (int userid)
         {
             int count =-1;
@@ -1883,6 +1911,32 @@ namespace rmsid2
                 return servicecharges;
             }
         }
+        public int calculateDeliveryCharges(DateTime startdate, DateTime enddate, int user_id)
+        {
+            int delcharges = 0;
+
+            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            {
+                SqlCommand command = new SqlCommand("select  isnull(sum(dc.DeliveryCharges),0) as DeliveryCharges from DeliveryCharges dc inner join Orders on Orders.t_Oid=dc.order_id join userord usr on usr.order_id = Orders.t_Oid 	where (Orders.Dateorder between @startdate and @enddate) and   usr.user_id =@user_id", connection);
+                command.Parameters.AddWithValue("@startdate", startdate);
+                command.Parameters.AddWithValue("@enddate", enddate);
+                command.Parameters.AddWithValue("@user_id", user_id);
+                connection.Open();
+
+                SqlDataReader reader = command.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        delcharges = Int16.Parse(reader["DeliveryCharges"].ToString());
+                    }
+                }
+                connection.Close();
+
+                return delcharges;
+            }
+        }
         public int calculatenetsale(DateTime startdate, DateTime enddate, int user_id)
         {
             int servicecharges = 0;
@@ -2050,6 +2104,35 @@ namespace rmsid2
             }
 
         }
+        public bool updateOrderAmnt(int orderid, int amount)
+        {
+            OpenConection();
+            string query = "update temp_orders set t_netamnt=t_netamnt+@amount where t_Oid=@orderid;";
+            SqlCommand cmd = new SqlCommand(query, con);
+            //Pass values to Parameters
+            cmd.Parameters.AddWithValue("@orderid", orderid);
+            cmd.Parameters.AddWithValue("@amount", amount);
+            try
+            {
+                OpenConection();
+                cmd.ExecuteNonQuery();
+
+                return true;
+            }
+            catch (SqlException e)
+            {
+                string err = "Error Generated. Details: " + e.ToString();
+                MessageBox.Show(err);
+
+                return false;
+            }
+            finally
+            {
+                CloseConnection();
+
+            }
+
+        }
         public bool deleterider(int del_id)
         {
             OpenConection();
@@ -2171,7 +2254,7 @@ namespace rmsid2
             OpenConection();
             int count = 0;
             SqlConnection conn = new SqlConnection(ConnectionString);
-            String sqlQuery = "SELECT COUNT(*) FROM temp_orderitems where t_name='" + order + "' and t_status=0";
+            String sqlQuery = "SELECT COUNT(*) FROM temp_orderitems where t_Oid='" + order + "'";
             SqlCommand cmd = new SqlCommand(sqlQuery, conn);
             try
             {
@@ -2220,6 +2303,89 @@ namespace rmsid2
 
             }
 
+        }
+        public bool Insertdealitem(int p_id, int p_cat_id,int deal_id,int qty )
+        {
+            OpenConection();
+            string query = "insert into DealsDetail(p_id,p_cat_id,deal_id,qty) values (@p_id,@p_cat_id,@deal_id,@qty) ";
+
+            SqlCommand cmd = new SqlCommand(query, con);
+            //Pass values to Parameters
+            cmd.Parameters.AddWithValue("@p_id", p_id);
+            cmd.Parameters.AddWithValue("@p_cat_id", p_cat_id);
+            cmd.Parameters.AddWithValue("@deal_id", deal_id);
+            cmd.Parameters.AddWithValue("@qty", qty);
+
+            try
+            {
+                OpenConection();
+                cmd.ExecuteNonQuery();
+                return true;
+            }
+            catch (SqlException e)
+            {
+                string err = "Error Generated. Details: " + e.ToString();
+                MessageBox.Show(err);
+
+                return false;
+            }
+            finally
+            {
+                CloseConnection();
+            }
+        }
+        public bool updatedealitem(int deal_id, int qty,int p_id)
+        {
+            OpenConection();
+            string query = "update  DealsDetail set qty=@qty where deal_id=@deal_id and p_id=@p_id;";
+
+            SqlCommand cmd = new SqlCommand(query, con);
+            //Pass values to Parameters         
+            cmd.Parameters.AddWithValue("@deal_id", deal_id);
+            cmd.Parameters.AddWithValue("@p_id", p_id);
+            cmd.Parameters.AddWithValue("@qty", qty);
+            try
+            {
+                OpenConection();
+                cmd.ExecuteNonQuery();
+                return true;
+            }
+            catch (SqlException e)
+            {
+                string err = "Error Generated. Details: " + e.ToString();
+                MessageBox.Show(err);
+                return false;
+            }
+            finally
+            {
+                CloseConnection();
+            }
+        }
+        public bool deletedealitem(int deal_id, int p_id)
+        {
+            OpenConection();
+            string query = "Delete from  DealsDetail  where deal_id=@deal_id and p_id=@p_id;";
+
+            SqlCommand cmd = new SqlCommand(query, con);
+            //Pass values to Parameters         
+            cmd.Parameters.AddWithValue("@deal_id", deal_id);
+            cmd.Parameters.AddWithValue("@p_id", p_id);
+            try
+            {
+                OpenConection();
+                cmd.ExecuteNonQuery();
+                return true;
+            }
+            catch (SqlException e)
+            {
+                string err = "Error Generated. Details: " + e.ToString();
+                MessageBox.Show(err);
+                return false;
+            }
+            finally
+            {
+                CloseConnection();
+            }
         }
     }
 }

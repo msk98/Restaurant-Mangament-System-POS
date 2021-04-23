@@ -218,5 +218,11 @@ namespace rmsid2
             da.Fill(ds, "Products");
             IncredientdataGridView.DataSource = ds.Tables["Products"].DefaultView;
         }
+
+        private void buttondeals_Click(object sender, EventArgs e)
+        {
+            Deals deal = new Deals();
+            deal.ShowDialog();
+        }
     }
 }

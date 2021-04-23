@@ -214,6 +214,10 @@ namespace rmsid2
                 {
                     conn.insertservicetax(OrderId, Int16.Parse(textBoxserCharge.Text));
                 }
+                if(checkBoxdelchar.Checked && deliveryChargestextBox.Text!="0.0")
+                {
+                    conn.insertdelCharges(OrderId, Int16.Parse(deliveryChargestextBox.Text));
+                }
                 TakeAwayprintDocument.DefaultPageSettings.PaperSize = new System.Drawing.Printing.PaperSize("prnm", 285, 800);
                 TakeAwayprintDocument.Print();
                // printcustomerDocument.DefaultPageSettings.PaperSize = new System.Drawing.Printing.PaperSize("prnm", 285, 800);
@@ -248,7 +252,32 @@ namespace rmsid2
             else
                 MessageBox.Show("user not have privilege");
         }
+        private void checkBoxdelchar_CheckedChanged(object sender, EventArgs e)
+        {
+            dt.Ordertype = dt.Ordertype.Replace(" ", String.Empty);
+            
+            if (checkBoxdelchar.Checked && dt.Ordertype == "Delivery" && textBoxNetBill.Text!="0.0" )
+            {
+              textBoxNetBill.Text = (float.Parse(textBoxNetBill.Text) - float.Parse(textBoxservicecharge.Text) + float.Parse(textBoxdiscount.Text) + 100).ToString();
+                deliveryChargestextBox.Text = "100";
+                textBoxdevcharges.Enabled = true;
+            }
+            else if(checkBoxdelchar.Checked==false && textBoxNetBill.Text != "0.0" && dt.Ordertype == "Delivery")
+            {
+                textBoxNetBill.Text = (float.Parse(textBoxNetBill.Text) - float.Parse(textBoxservicecharge.Text) + float.Parse(textBoxdiscount.Text)-100).ToString();
+                textBoxdevcharges.Text = "100";
+                deliveryChargestextBox.Text = "0.0";
+                textBoxdevcharges.Enabled = false;
 
+            }
+            else
+            {
+                checkBoxdelchar.Checked = false;
+            }
+            checkBoxcard.Checked = false;
+            checkBoxmultipayment.Checked = false;
+            checkBoxcash.Checked = false;
+        }
         private void checkBoxtax_CheckedChanged(object sender, EventArgs e)
         {
             if (checkBoxtax.Checked && textBoxsubtotal.Text != "0.0")
@@ -489,10 +518,17 @@ namespace rmsid2
                 e.Graphics.DrawString(textBoxtotal.Text, new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(100, y));
 
             }
+            //deliveryChargestextBox
             if (textBoxdiscount.Text != "0.0")
             {
                 e.Graphics.DrawString("Discount: ", new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(10, y += 20));
                 e.Graphics.DrawString(textBoxdiscount.Text, new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(100, y));
+
+            }
+            if (deliveryChargestextBox.Text != "0.0")
+            {
+                e.Graphics.DrawString("Delivery Charges: ", new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(10, y += 20));
+                e.Graphics.DrawString(deliveryChargestextBox.Text, new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(100, y));
 
             }
             if (checkBoxservicecharges.Checked)
@@ -570,6 +606,8 @@ namespace rmsid2
             checkBoxtax.Checked = false;
             checkBoxcard.Checked = false;
             checkBoxmultipayment.Checked = false;
+            checkBoxdelchar.Checked = false;
+
             checkBoxcash.Checked = true;
             textBoxcashpaying.Text = "";
             textBoxreturn.Text = "";
@@ -586,6 +624,7 @@ namespace rmsid2
             checkBoxtax.Checked = false;
             checkBoxcard.Checked = false;
             checkBoxmultipayment.Checked = false;
+            checkBoxdelchar.Checked = false;
             checkBoxcash.Checked = true;
             textBoxcashpaying.Text = "";
             textBoxreturn.Text = "";
@@ -666,6 +705,9 @@ namespace rmsid2
             e.Graphics.DrawString(conn.calculatesercharge(dt.startreg, DateTime.Now, dt.userid).ToString(), new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(150, y));
             e.Graphics.DrawString("Card payments: ", new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(20, y += 20));
             e.Graphics.DrawString(conn.calculateCrtaxes(dt.startreg, DateTime.Now, dt.userid).ToString(), new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(150, y));
+            e.Graphics.DrawString("Delivery Charges: ", new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(20, y += 20));
+            e.Graphics.DrawString(conn.calculateDeliveryCharges(dt.startreg, DateTime.Now, dt.userid).ToString(), new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(150, y));
+
             e.Graphics.DrawString("Total sales", new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(20, y += 20));
             e.Graphics.DrawString(conn.calculatenetsale(dt.startreg, DateTime.Now, dt.userid).ToString(), new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(150, y));
             e.Graphics.DrawString("Net sales(total+charges+tax+cr pay-discount)", new Font("monospaced sans serif", 9, FontStyle.Bold), Brushes.Black, new Point(10, y += 20));
@@ -857,6 +899,12 @@ namespace rmsid2
             {
                 e.Graphics.DrawString("Discount: ", new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(10, y += 20));
                 e.Graphics.DrawString(textBoxdiscount.Text, new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(100, y));
+
+            }
+            if (deliveryChargestextBox.Text != "0.0")
+            {
+                e.Graphics.DrawString("Delivery Charges: ", new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(10, y += 20));
+                e.Graphics.DrawString(deliveryChargestextBox.Text, new Font("monospaced sans serif", 8, FontStyle.Bold), Brushes.Black, new Point(100, y));
 
             }
             if (checkBoxservicecharges.Checked)
@@ -1285,41 +1333,7 @@ namespace rmsid2
             }
         }
 
-        private void buttondel_Click(object sender, EventArgs e)
-        {
-            int rows = this.dataGridViewOrderItems.CurrentCell.RowIndex;
-            if (dataGridViewOrderItems.SelectedRows.Count > 0)
-            {
-            
-                Connection conn = new Connection();
-                if (conn.checkorderitems(OrderId) == 1)
-                {
-                    conn.deleteorderitem(OrderId, ItemName);
-                    conn.deleteorders(OrderId);
-                    clearall();
-                }
-                else
-                {
-                    conn.deleteorderitem(OrderId, ItemName);
-                    conn.updateOrderAmount(OrderId, amount);
-
-                    textBoxsubtotal.Text = (Int16.Parse(textBoxNetBill.Text) - amount).ToString();
-                    textBoxtotal.Text = (Int16.Parse(textBoxNetBill.Text) - amount).ToString();
-                    textBoxNetBill.Text = (Int16.Parse(textBoxNetBill.Text) - amount).ToString();
-                    checkBoxtax.Checked = false;
-                    textBoxdiscount.Text = "0.0";
-                    textBoxserCharge.Text = "0.0";
-                }
-
-                conn.deldiscountamnt(OrderId);
-
-                dataGridViewOrderItems.Rows.RemoveAt(dataGridViewOrderItems.SelectedRows[0].Index);
-                dataGridViewOrderlist.Refresh();
-                dataGridViewOrderItems.Refresh();
-                
-            }
-
-        }
+      
 
         private void tablesToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -1354,9 +1368,68 @@ namespace rmsid2
                 MessageBox.Show("user not have privilege");
         }
 
-        private void groupBox1_Enter(object sender, EventArgs e)
+        private void buttonDeleteItem_Click(object sender, EventArgs e)
         {
+            int rows = this.dataGridViewOrderItems.CurrentCell.RowIndex;
+            if (dataGridViewOrderItems.SelectedRows.Count > 0)
+            {
 
+                Connection conn = new Connection();
+                if (conn.checkorderitems(OrderId) == 1)
+                {
+                    conn.deleteorderitem(OrderId, ItemName);
+                    conn.deleteorders(OrderId);
+                    clearall();
+                }
+                else
+                {
+                    conn.deleteorderitem(OrderId, ItemName);
+                    conn.updateOrderAmount(OrderId, amount);
+
+                    textBoxsubtotal.Text = (Int16.Parse(textBoxNetBill.Text) - amount).ToString();
+                    textBoxtotal.Text = (Int16.Parse(textBoxNetBill.Text) - amount).ToString();
+                    textBoxNetBill.Text = (Int16.Parse(textBoxNetBill.Text) - amount).ToString();
+                    checkBoxtax.Checked = false;
+                    textBoxdiscount.Text = "0.0";
+                    textBoxserCharge.Text = "0.0";
+                }
+
+                conn.deldiscountamnt(OrderId);
+
+                dataGridViewOrderItems.Rows.RemoveAt(dataGridViewOrderItems.SelectedRows[0].Index);
+                dataGridViewOrderlist.Refresh();
+                dataGridViewOrderItems.Refresh();
+
+            }
+        }
+
+        private void buttonupdatord_Click(object sender, EventArgs e)
+        {
+            
+            if (button7.Text != "Open Register")
+            {
+                dataGridViewOrderItems.DataSource = null;
+                dataGridViewOrderItems.Refresh();
+                clear();
+                Order ord = new Order(OrderId, "update");
+                ord.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Register is not Open");
+            }
+         
+        }
+
+        private void textBoxdevcharges_TextChanged(object sender, EventArgs e)
+        {
+            if (textBoxdevcharges.Text.Length > 0 && OrderId != 0)
+            {
+            if (textBoxdevcharges.Text.Length > 0 && OrderId != 0)
+                textBoxNetBill.Text = (float.Parse(textBoxtotal.Text) - float.Parse(textBoxdiscount.Text) + float.Parse(textBoxservicecharge.Text)+float.Parse(textBoxdevcharges.Text)).ToString();
+                deliveryChargestextBox.Text = textBoxdevcharges.Text;
+
+            }
         }
     }
 }

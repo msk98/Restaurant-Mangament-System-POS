@@ -45,6 +45,7 @@ namespace rmsid2
             this.IncredientdataGridView = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.cattextBox = new System.Windows.Forms.TextBox();
+            this.buttondeals = new System.Windows.Forms.Button();
             this.groupBoxaddProducts.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.IncredientdataGridView)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -54,6 +55,7 @@ namespace rmsid2
             // 
             this.groupBoxaddProducts.Controls.Add(this.buttonClose);
             this.groupBoxaddProducts.Controls.Add(this.buttonDelete);
+            this.groupBoxaddProducts.Controls.Add(this.buttondeals);
             this.groupBoxaddProducts.Controls.Add(this.buttonAdd);
             this.groupBoxaddProducts.Controls.Add(this.buttonUpdate);
             this.groupBoxaddProducts.Controls.Add(this.comboBoxIncredients);
@@ -223,6 +225,18 @@ namespace rmsid2
             this.cattextBox.TabIndex = 1;
             this.cattextBox.TextChanged += new System.EventHandler(this.cattextBox_TextChanged);
             // 
+            // buttondeals
+            // 
+            this.buttondeals.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.buttondeals.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.buttondeals.Location = new System.Drawing.Point(40, 289);
+            this.buttondeals.Name = "buttondeals";
+            this.buttondeals.Size = new System.Drawing.Size(141, 27);
+            this.buttondeals.TabIndex = 3;
+            this.buttondeals.Text = "Create Deals";
+            this.buttondeals.UseVisualStyleBackColor = false;
+            this.buttondeals.Click += new System.EventHandler(this.buttondeals_Click);
+            // 
             // Incredients
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -266,5 +280,6 @@ namespace rmsid2
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox comboBoxIncredients;
         private System.Windows.Forms.ComboBox comboBoxproduct;
+        private System.Windows.Forms.Button buttondeals;
     }
 }

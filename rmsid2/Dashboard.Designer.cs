@@ -59,7 +59,7 @@ namespace rmsid2
             this.checkBoxcard = new System.Windows.Forms.CheckBox();
             this.textBoxcreditcardpayment = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
-            this.button20 = new System.Windows.Forms.Button();
+            this.buttonDeleteItem = new System.Windows.Forms.Button();
             this.textBoxreturn = new System.Windows.Forms.TextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.checkBoxcash = new System.Windows.Forms.CheckBox();
@@ -85,7 +85,7 @@ namespace rmsid2
             this.buttonDISCOUNT = new System.Windows.Forms.Button();
             this.textBoxtax = new System.Windows.Forms.TextBox();
             this.textBoxNetBill = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.deliveryChargestextBox = new System.Windows.Forms.TextBox();
             this.textBoxtotal = new System.Windows.Forms.TextBox();
             this.textBoxserCharge = new System.Windows.Forms.TextBox();
             this.textBoxsubtotal = new System.Windows.Forms.TextBox();
@@ -121,6 +121,7 @@ namespace rmsid2
             this.TakeAwayprintDocument = new System.Drawing.Printing.PrintDocument();
             this.printRegisterDcoumentDocument = new System.Drawing.Printing.PrintDocument();
             this.printcustomerDocument = new System.Drawing.Printing.PrintDocument();
+            this.buttonupdatord = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewOrderlist)).BeginInit();
@@ -198,62 +199,62 @@ namespace rmsid2
             // menuItemsToolStripMenuItem
             // 
             this.menuItemsToolStripMenuItem.Name = "menuItemsToolStripMenuItem";
-            this.menuItemsToolStripMenuItem.Size = new System.Drawing.Size(155, 24);
+            this.menuItemsToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
             this.menuItemsToolStripMenuItem.Text = "Menu Items";
             this.menuItemsToolStripMenuItem.Click += new System.EventHandler(this.menuItemsToolStripMenuItem_Click);
             // 
             // incredientsToolStripMenuItem
             // 
             this.incredientsToolStripMenuItem.Name = "incredientsToolStripMenuItem";
-            this.incredientsToolStripMenuItem.Size = new System.Drawing.Size(155, 24);
+            this.incredientsToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
             this.incredientsToolStripMenuItem.Text = "Ingredients";
             this.incredientsToolStripMenuItem.Click += new System.EventHandler(this.incredientsToolStripMenuItem_Click);
             // 
             // categoriesToolStripMenuItem
             // 
             this.categoriesToolStripMenuItem.Name = "categoriesToolStripMenuItem";
-            this.categoriesToolStripMenuItem.Size = new System.Drawing.Size(155, 24);
+            this.categoriesToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
             this.categoriesToolStripMenuItem.Text = "Categories";
             this.categoriesToolStripMenuItem.Click += new System.EventHandler(this.categoriesToolStripMenuItem_Click);
             // 
             // inventoryToolStripMenuItem
             // 
             this.inventoryToolStripMenuItem.Name = "inventoryToolStripMenuItem";
-            this.inventoryToolStripMenuItem.Size = new System.Drawing.Size(155, 24);
+            this.inventoryToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
             this.inventoryToolStripMenuItem.Text = "Inventory";
             this.inventoryToolStripMenuItem.Click += new System.EventHandler(this.inventoryToolStripMenuItem_Click);
             // 
             // discountToolStripMenuItem
             // 
             this.discountToolStripMenuItem.Name = "discountToolStripMenuItem";
-            this.discountToolStripMenuItem.Size = new System.Drawing.Size(155, 24);
+            this.discountToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
             this.discountToolStripMenuItem.Text = "Discounts";
             this.discountToolStripMenuItem.Click += new System.EventHandler(this.discountToolStripMenuItem_Click);
             // 
             // dealsToolStripMenuItem
             // 
             this.dealsToolStripMenuItem.Name = "dealsToolStripMenuItem";
-            this.dealsToolStripMenuItem.Size = new System.Drawing.Size(155, 24);
+            this.dealsToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
             this.dealsToolStripMenuItem.Text = "Deals";
             // 
             // tablesToolStripMenuItem
             // 
             this.tablesToolStripMenuItem.Name = "tablesToolStripMenuItem";
-            this.tablesToolStripMenuItem.Size = new System.Drawing.Size(155, 24);
+            this.tablesToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
             this.tablesToolStripMenuItem.Text = "Tables";
             this.tablesToolStripMenuItem.Click += new System.EventHandler(this.tablesToolStripMenuItem_Click);
             // 
             // ridersToolStripMenuItem
             // 
             this.ridersToolStripMenuItem.Name = "ridersToolStripMenuItem";
-            this.ridersToolStripMenuItem.Size = new System.Drawing.Size(155, 24);
+            this.ridersToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
             this.ridersToolStripMenuItem.Text = "Riders";
             this.ridersToolStripMenuItem.Click += new System.EventHandler(this.ridersToolStripMenuItem_Click);
             // 
             // usersToolStripMenuItem
             // 
             this.usersToolStripMenuItem.Name = "usersToolStripMenuItem";
-            this.usersToolStripMenuItem.Size = new System.Drawing.Size(155, 24);
+            this.usersToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
             this.usersToolStripMenuItem.Text = "Users";
             this.usersToolStripMenuItem.Click += new System.EventHandler(this.usersToolStripMenuItem_Click);
             // 
@@ -402,7 +403,8 @@ namespace rmsid2
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.groupBox4);
-            this.groupBox1.Controls.Add(this.button20);
+            this.groupBox1.Controls.Add(this.buttonupdatord);
+            this.groupBox1.Controls.Add(this.buttonDeleteItem);
             this.groupBox1.Controls.Add(this.textBoxreturn);
             this.groupBox1.Controls.Add(this.groupBox3);
             this.groupBox1.Controls.Add(this.label10);
@@ -421,7 +423,7 @@ namespace rmsid2
             this.groupBox1.Controls.Add(this.buttonDISCOUNT);
             this.groupBox1.Controls.Add(this.textBoxtax);
             this.groupBox1.Controls.Add(this.textBoxNetBill);
-            this.groupBox1.Controls.Add(this.textBox1);
+            this.groupBox1.Controls.Add(this.deliveryChargestextBox);
             this.groupBox1.Controls.Add(this.textBoxtotal);
             this.groupBox1.Controls.Add(this.textBoxserCharge);
             this.groupBox1.Controls.Add(this.textBoxsubtotal);
@@ -454,7 +456,6 @@ namespace rmsid2
             this.groupBox1.Size = new System.Drawing.Size(493, 587);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
             // groupBox4
             // 
@@ -504,19 +505,19 @@ namespace rmsid2
             this.label12.TabIndex = 2;
             this.label12.Text = "Card Payment";
             // 
-            // button20
+            // buttonDeleteItem
             // 
-            this.button20.BackColor = System.Drawing.SystemColors.Control;
-            this.button20.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button20.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.button20.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button20.Location = new System.Drawing.Point(225, 303);
-            this.button20.Name = "button20";
-            this.button20.Size = new System.Drawing.Size(126, 25);
-            this.button20.TabIndex = 0;
-            this.button20.Text = "Delete Item";
-            this.button20.UseVisualStyleBackColor = false;
-            this.button20.Click += new System.EventHandler(this.buttondel_Click);
+            this.buttonDeleteItem.BackColor = System.Drawing.SystemColors.Control;
+            this.buttonDeleteItem.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonDeleteItem.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.buttonDeleteItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonDeleteItem.Location = new System.Drawing.Point(225, 303);
+            this.buttonDeleteItem.Name = "buttonDeleteItem";
+            this.buttonDeleteItem.Size = new System.Drawing.Size(126, 25);
+            this.buttonDeleteItem.TabIndex = 0;
+            this.buttonDeleteItem.Text = "Delete Item";
+            this.buttonDeleteItem.UseVisualStyleBackColor = false;
+            this.buttonDeleteItem.Click += new System.EventHandler(this.buttonDeleteItem_Click);
             // 
             // textBoxreturn
             // 
@@ -710,8 +711,8 @@ namespace rmsid2
             this.textBoxdevcharges.Name = "textBoxdevcharges";
             this.textBoxdevcharges.Size = new System.Drawing.Size(178, 26);
             this.textBoxdevcharges.TabIndex = 1;
-            this.textBoxdevcharges.Text = "0";
-            this.textBoxdevcharges.TextChanged += new System.EventHandler(this.textBoxservicecharge_TextChanged);
+            this.textBoxdevcharges.Text = "100";
+            this.textBoxdevcharges.TextChanged += new System.EventHandler(this.textBoxdevcharges_TextChanged);
             this.textBoxdevcharges.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxservicecharge_KeyPress);
             // 
             // textBoxservicecharge
@@ -729,7 +730,7 @@ namespace rmsid2
             // buttonLogout
             // 
             this.buttonLogout.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonLogout.Location = new System.Drawing.Point(406, 550);
+            this.buttonLogout.Location = new System.Drawing.Point(409, 547);
             this.buttonLogout.Name = "buttonLogout";
             this.buttonLogout.Size = new System.Drawing.Size(78, 25);
             this.buttonLogout.TabIndex = 1;
@@ -740,7 +741,6 @@ namespace rmsid2
             // checkBoxdelchar
             // 
             this.checkBoxdelchar.AutoSize = true;
-            this.checkBoxdelchar.Enabled = false;
             this.checkBoxdelchar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.checkBoxdelchar.Location = new System.Drawing.Point(233, 227);
             this.checkBoxdelchar.Name = "checkBoxdelchar";
@@ -749,7 +749,7 @@ namespace rmsid2
             this.checkBoxdelchar.TabIndex = 4;
             this.checkBoxdelchar.Text = "Delivery Charges";
             this.checkBoxdelchar.UseVisualStyleBackColor = true;
-            this.checkBoxdelchar.CheckedChanged += new System.EventHandler(this.checkBoxservicecharges_CheckedChanged);
+            this.checkBoxdelchar.CheckedChanged += new System.EventHandler(this.checkBoxdelchar_CheckedChanged);
             // 
             // checkBoxservicecharges
             // 
@@ -777,7 +777,7 @@ namespace rmsid2
             // 
             // textBoxdiscount
             // 
-            this.textBoxdiscount.Location = new System.Drawing.Point(141, 41);
+            this.textBoxdiscount.Location = new System.Drawing.Point(24, 206);
             this.textBoxdiscount.Name = "textBoxdiscount";
             this.textBoxdiscount.ReadOnly = true;
             this.textBoxdiscount.Size = new System.Drawing.Size(100, 23);
@@ -824,14 +824,14 @@ namespace rmsid2
             this.textBoxNetBill.TabIndex = 3;
             this.textBoxNetBill.Text = "0.0";
             // 
-            // textBox1
+            // deliveryChargestextBox
             // 
-            this.textBox1.Location = new System.Drawing.Point(20, 208);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(100, 23);
-            this.textBox1.TabIndex = 3;
-            this.textBox1.Text = "0.0";
+            this.deliveryChargestextBox.Location = new System.Drawing.Point(142, 47);
+            this.deliveryChargestextBox.Name = "deliveryChargestextBox";
+            this.deliveryChargestextBox.ReadOnly = true;
+            this.deliveryChargestextBox.Size = new System.Drawing.Size(100, 23);
+            this.deliveryChargestextBox.TabIndex = 3;
+            this.deliveryChargestextBox.Text = "0.0";
             // 
             // textBoxtotal
             // 
@@ -864,7 +864,7 @@ namespace rmsid2
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(137, 19);
+            this.label4.Location = new System.Drawing.Point(22, 184);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(87, 17);
             this.label4.TabIndex = 2;
@@ -874,7 +874,7 @@ namespace rmsid2
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(18, 182);
+            this.label11.Location = new System.Drawing.Point(140, 22);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(132, 17);
             this.label11.TabIndex = 2;
@@ -1194,6 +1194,20 @@ namespace rmsid2
             // 
             this.printcustomerDocument.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printcustomerDocument_PrintPage);
             // 
+            // buttonupdatord
+            // 
+            this.buttonupdatord.BackColor = System.Drawing.SystemColors.Control;
+            this.buttonupdatord.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonupdatord.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.buttonupdatord.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonupdatord.Location = new System.Drawing.Point(357, 303);
+            this.buttonupdatord.Name = "buttonupdatord";
+            this.buttonupdatord.Size = new System.Drawing.Size(126, 25);
+            this.buttonupdatord.TabIndex = 0;
+            this.buttonupdatord.Text = "Update Order";
+            this.buttonupdatord.UseVisualStyleBackColor = false;
+            this.buttonupdatord.Click += new System.EventHandler(this.buttonupdatord_Click);
+            // 
             // Dashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1318,14 +1332,15 @@ namespace rmsid2
         private System.Windows.Forms.Button buttonCancelOrder;
         private System.Windows.Forms.Button buttoncrep;
         private System.Windows.Forms.Button buttonregreport;
-        private System.Windows.Forms.Button button20;
+        private System.Windows.Forms.Button buttonDeleteItem;
         private System.Windows.Forms.ToolStripMenuItem dealsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem tablesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ridersToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem usersToolStripMenuItem;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox deliveryChargestextBox;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TextBox textBoxdevcharges;
         private System.Windows.Forms.CheckBox checkBoxdelchar;
+        private System.Windows.Forms.Button buttonupdatord;
     }
 }
